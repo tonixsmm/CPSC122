@@ -9,9 +9,16 @@ int main(){
 
     morseEnglishArrays(morseStrings, englishStrings);
     chooseMode(mode, fileNameRead, fileNameWrite);
-    openFile(inFile, outFile, fileNameRead, fileNameWrite);
 
-    
+    // mode = "-t";
+    // fileNameRead = "morse.txt";
+    // fileNameWrite = "english.txt";
+
+    openFile(inFile, outFile, fileNameRead, fileNameWrite);
+    processFile(inFile, outFile, morseStrings, englishStrings, mode);
+
+    inFile.close();
+    outFile.close();
 
     return 0;
 }
