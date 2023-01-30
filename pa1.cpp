@@ -84,7 +84,6 @@ void morseEnglishArrays(string morseStrings[91], char englishStrings[91]){
     morseStrings[39] = ".----.";
     morseStrings[40] = "-.--.";
     morseStrings[41] = "-.--.-";
-    morseStrings[42] = "-..-";
     morseStrings[43] = ".-.-.";
     morseStrings[44] = "--..--";
     morseStrings[45] = "-....-";
@@ -94,10 +93,6 @@ void morseEnglishArrays(string morseStrings[91], char englishStrings[91]){
     morseStrings[59] = "-.-.-.";
     morseStrings[61] = "-...-";
     morseStrings[63] = "..--..";
-
-    // line feed
-    morseStrings[10] = '\n';
-    
 }
 
 void searchReplace(ofstream& outFile, string morseStrings[91], char englishStrings[91], string mode, string word, char character){
@@ -109,9 +104,10 @@ void searchReplace(ofstream& outFile, string morseStrings[91], char englishStrin
         }
     }
     if (mode == "-t"){
-        for (int i = 0; i < 91; i++){
-            if (word == morseStrings[i]){
-                outFile << (char)tolower(englishStrings[i]);
+        for (int i = 32; i < 91; i++){
+            if (word == morseStrings[i] && word != ""){
+                // outFile << (char)tolower(englishStrings[i]);
+                outFile << englishStrings[i];
             }
         }
     }
@@ -172,7 +168,7 @@ void processFile(ifstream& inFile, ofstream& outFile, string morseStrings[91], c
             charCount = englishToMorse(inFile, outFile, morseStrings, englishStrings);
             outFile << '\n';
             endLine++;
-    }
+        }
     outFile << "Total characters converted successfully (including newline and white spaces): " << charCount + endLine - 1 << endl;
     }
     if (mode == "-t"){
@@ -181,7 +177,6 @@ void processFile(ifstream& inFile, ofstream& outFile, string morseStrings[91], c
             outFile << '\n';
             endLine++;
         }
-        
+    outFile << "Total characters converted successfully (including newline and white spaces): " << charCount + endLine - 1 << endl;   
     }
-    
 }

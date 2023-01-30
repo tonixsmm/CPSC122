@@ -17,6 +17,10 @@ int main(){
     openFile(inFile, outFile, fileNameRead, fileNameWrite);
     processFile(inFile, outFile, morseStrings, englishStrings, mode);
 
+    // for (int i = 0; i < 91; i++){
+    //     cout << englishStrings[i] << " " << morseStrings[i] << endl;
+    // }
+
     inFile.close();
     outFile.close();
 
