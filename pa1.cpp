@@ -154,8 +154,8 @@ int morseToEnglish(ifstream& inFile, ofstream& outFile, string morseStrings[91],
                 outFile << " ";
             }
             searchReplace(outFile, morseStrings, englishStrings, "-t", word, '\0');
+            charCount++;
         }
-        charCount += line.length();
     }
     return charCount;
 }
@@ -177,6 +177,6 @@ void processFile(ifstream& inFile, ofstream& outFile, string morseStrings[91], c
             outFile << '\n';
             endLine++;
         }
-    outFile << "Total characters converted successfully (including newline and white spaces): " << charCount + endLine - 1 << endl;   
+    outFile << "Total characters converted successfully (including newline and white spaces): " << charCount - endLine + 1 << endl;   
     }
 }
