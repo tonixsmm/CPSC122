@@ -2,6 +2,6 @@
 
 int main(){
     vector<int> vec;
-    createVector(vec, 6);
+    createVector(vec, 30, 1, 1);
     printVector(vec);
 }

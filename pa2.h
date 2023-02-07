@@ -7,7 +7,8 @@
 
 using namespace std;
 
-void createVector(vector<int>& vec, int size);
+void createVector(vector<int>& vec, int size, bool sorting, bool desc);
 void printVector(vector<int> vec);
+vector<int> selectionSort(vector<int> vec);
 
 #endif
