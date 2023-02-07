@@ -129,3 +129,8 @@ vector<int> insertionSort(vector<int> vec){
     }
     return sortedVec;
 }
+
+void sortAnalysis(vector<int> vec){
+    auto start = high_resolution_clock::now();
+    auto stop = high_resolution_clock::now();
+}
