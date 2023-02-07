@@ -26,7 +26,7 @@ void swap(int& a, int& b){
 }
 
 bool sortedChecking(vector<int> vec){
-    int count = 0;
+    long count = 0;
     for (int i = 1; i < vec.size(); i++){
         if (vec[i - 1] <= vec[i]){
             count++;
@@ -41,7 +41,7 @@ bool sortedChecking(vector<int> vec){
 }
 
 vector<int> selectionSort(vector<int> vec){
-    int count = 0;
+    long count = 0;
     vector<int>& sortedVec = vec; // also this?
     int minValue, minIndex; // is this 1 or 2 ops?
     count += 2; // assuming 1
@@ -130,7 +130,15 @@ vector<int> insertionSort(vector<int> vec){
     return sortedVec;
 }
 
-void sortAnalysis(vector<int> vec){
+int sortAnalysis(vector<int> vec){
     auto start = high_resolution_clock::now();
+
+    // sort function goes here
+    sort(vec.begin(), vec.end());
+
     auto stop = high_resolution_clock::now();
+
+    auto duration = duration_cast<microseconds>(stop - start);
+    
+    return duration.count();
 }
