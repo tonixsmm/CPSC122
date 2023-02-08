@@ -44,35 +44,19 @@ vector<int> selectionSort(vector<int> vec){
     long count = 0;
     vector<int>& sortedVec = vec; // also this?
     int minValue, minIndex; // is this 1 or 2 ops?
-    count += 2; // assuming 1
-    count++; // int i = 0
+    
     for (int i = 0; i < (sortedVec.size() - 1); i++){
-        count++; // i < sortedVec.size() - 1 true
         minIndex = i;
         minValue = sortedVec[i];
-        count += 2; // two above
-        count++; // for initial j
+
         for (int j = i + 1; j < sortedVec.size(); j++){
-            count++; // for j < () true
-            count++; // for if statement
             if (sortedVec[j] <= minValue){
                 minValue = sortedVec[j];
                 minIndex = j;
-                count += 2; // for two of these
             }
-            count++; // for j++
         }
         swap(sortedVec[minIndex], sortedVec[i]);
-        count++; // for swap
-        count++; // for i++ 
-
-        if (sortedChecking(sortedVec) == true){
-            break;
-        }
     }
-    count++; // for j < () false
-    count++; // for i < () false
-    count++; // for return vec
     cout << "Counter: " << count << endl;
     return vec;
 }
@@ -81,30 +65,17 @@ vector<int> bubbleSort(vector<int> vec){
     vector<int> sortedVec = vec;
     int maxValue, maxIndex;
     int count = 0;
-    count += 2; // for variable initialization
-    count++; // initialize maxValue
 
     for (maxValue = sortedVec.size() - 1; maxValue > 0; maxValue--){
-        count++; // maxValue > 0 true
-        count++; // initialize maxIndex
         for (maxIndex = 0; maxIndex < maxValue; maxIndex++){
-            count++; // if loop condition is true
-            count++; // if statement
             if (sortedVec[maxIndex] > sortedVec[maxIndex + 1]){
-                count++; // swap
                 swap(sortedVec[maxIndex], sortedVec[maxIndex + 1]);
             }
-            count++; // maxIndex++
         }
-        count++; // maxValue--
-
         if (sortedChecking(sortedVec) == true){
             break;
         }
     }
-    count++; // maxIndex < maxValue false
-    count++; // maxValue > 0
-    count++; // return sortedVec
     cout << "Count: " << count << endl;
     return sortedVec;
 }
