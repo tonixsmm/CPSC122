@@ -1,1 +1,13 @@
-Vector configuration, Seconds, # Data Comparisons, # Loop Comparisons, # Data Assignments, # Loop Assignments, # Other, # Total
+Vector configuration,Seconds,# Data Comparisons,# Loop Comparisons,# Data Assignments,# Loop Assignments,# Other,# Total
+Sorted N = 500,0,0,0,0,0,0,0
+Sorted N = 1000,0,0,0,0,0,0,0
+Sorted N = 5000,0,0,0,0,0,0,0
+Sorted N = 10000,0,0,0,0,0,0,0
+Descending sorted N = 500,0,0,0,0,0,0,0
+Descending sorted N = 1000,0,0,0,0,0,0,0
+Descending sorted N = 5000,0,0,0,0,0,0,0
+Descending sorted N = 10000,2,0,0,0,0,0,0
+Random N = 500,0,0,0,0,0,0,0
+Random N = 1000,0,0,0,0,0,0,0
+Random N = 5000,0,0,0,0,0,0,0
+Random N = 10000,1,0,0,0,0,0,0
