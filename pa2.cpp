@@ -1,6 +1,6 @@
 #include "pa2.h"
 
-vector<int> createVector(vector<int>& vec, int size, bool sorting, bool desc){
+void createVector(vector<int>& vec, int size, bool sorting, bool desc){
     for (int i = 0; i < size; i++){
         vec.push_back(rand() % size);
     }
@@ -10,7 +10,6 @@ vector<int> createVector(vector<int>& vec, int size, bool sorting, bool desc){
     else if (sorting == 1){
         sort(vec.begin(), vec.end());
     }
-    return vec;
 }
 
 void printVector(vector<int> vec){
@@ -105,7 +104,7 @@ vector<int> insertionSort(vector<int> vec){
 int algorithmAnalysis(vector<int> vec500, vector<int> vec1000, vector<int> vec5000, vector<int> vec10000, string sortType){
     auto start = high_resolution_clock::now();
 
-    
+
 
     auto stop = high_resolution_clock::now();
 
@@ -115,9 +114,13 @@ int algorithmAnalysis(vector<int> vec500, vector<int> vec1000, vector<int> vec50
 }
 
 void driverFunction(vector<int> vec, string sortType){
-    int vectorSize[4] = {500, 1000, 5000, 10000};
-
     if (sortType == "selection"){
-
+        selectionSort(vec);
+    }
+    else if (sortType == "bubble"){
+        bubbleSort(vec);
+    }
+    else if (sortType == "insertion"){
+        insertionSort(vec);
     }
 }

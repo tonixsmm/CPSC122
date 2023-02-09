@@ -9,7 +9,7 @@
 using namespace std;
 using namespace std::chrono;
 
-vector<int> createVector(vector<int> vec, int size, bool sorting, bool desc);
+void createVector(vector<int>& vec, int size, bool sorting, bool desc);
 void printVector(vector<int> vec);
 void swap(int& a, int& b);
 bool sortedChecking(vector<int> vec);
