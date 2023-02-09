@@ -1,0 +1,34 @@
+{
+  "tests": [
+    {
+      "name": "Compile code",
+      "run": "mkdir build; cd build; cmake ..; make;",
+      "timeout": 5,
+      "points": 0
+    },
+    {
+      "name": "Test1_Task1.Computations",
+      "run": "cd build; ./test/runTests --gtest_filter=Test1_Task1.Computations",
+      "timeout": 5,
+      "points": 10
+    },
+    {
+      "name": "Test2_Task2.FindLotteryTicket",
+      "run": "cd build; ./test/runTests --gtest_filter=Test2_Task2.FindLotteryTicket",
+      "timeout": 5,
+      "points": 10
+    },
+    {
+      "name": "Test3_Task3.CreateWordsArray",
+      "run": "cd build; ./test/runTests --gtest_filter=Test3_Task3.CreateWordsArray",
+      "timeout": 5,
+      "points": 10
+    },
+    {
+      "name": "Test4_Task3.GenerateRandomSentence",
+      "run": "cd build; ./test/runTests --gtest_filter=Test4_Task3.GenerateRandomSentence",
+      "timeout": 5,
+      "points": 10
+    }
+  ]
+}

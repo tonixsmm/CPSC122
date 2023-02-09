@@ -1,0 +1,22 @@
+name: GitHub Classroom Workflow
+
+on: [push]
+
+permissions:
+  checks: write
+  actions: read
+  contents: read
+
+jobs:
+  build:
+    name: Autograding
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone repo
+        uses: actions/checkout@v2
+      - name: Validate test file
+        run: |
+          wget -O test/OfficialTest.cpp https://raw.githubusercontent.com/GonzagaCPSC122/PA3StarterCode/master/test/Test.cpp; if cmp "test/OfficialTest.cpp" "test/Test.cpp"; then echo "The files match"; exit 0; fi; echo "The files are different"; exit 1;
+      - name: Test code
+        if: always()
+        uses: education/autograding@v1
