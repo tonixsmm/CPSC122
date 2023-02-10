@@ -6,6 +6,7 @@
 #include <vector>
 #include <algorithm>
 #include <fstream>
+#include<iomanip>
 
 using namespace std;
 using namespace std::chrono;
@@ -16,7 +17,7 @@ void createVector(vector<int>& vec, int size, bool sorting, bool desc);
 void printVector(vector<int> vec);
 void swap(int& a, int& b);
 bool sortedChecking(vector<int> vec);
-void driverFunction(vector<int>& vec, ofstream& outFile, string sortType, string vecType);
+void algorithmAnalysis(ofstream& outFileSelection, ofstream& outFileBubble, ofstream& outFileInsertion, string sortType);
 vector<int> selectionSort(vector<int> vec);
 vector<int> bubbleSort(vector<int> vec);
 vector<int> insertionSort(vector<int> vec);

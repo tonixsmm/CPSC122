@@ -5,6 +5,7 @@ void openFile(ofstream& outFile, string fileName){
 
     if (outFile.is_open()){
         cout << "Successfully opened " << fileName << endl;
+        outFile << "Vector configuration,Seconds,# Data Comparisons,# Loop Comparisons,# Data Assignments,# Loop Assignments,# Other,# Total" << endl;
     }
     else{
         cout << "Failed to open " << fileName << endl;
@@ -111,57 +112,66 @@ vector<int> insertionSort(vector<int> vec){
     return sortedVec;
 }
 
-void driverFunction(vector<int>& vec, ofstream& outFile, string sortType, string vecType){
-    int numDataComparisons = 0, numloopComparisons = 0, numdataAssignments = 0, numloopAssignments = 0, numOther = 0, total = 0;
+void algorithmAnalysis(ofstream& outFileSelection, ofstream& outFileBubble, ofstream& outFileInsertion, string sortType){
+    int numDataComparisons = 0, numLoopComparisons = 0, numDataAssignments = 0, numLoopAssignments = 0, numOther = 0, total = 0;
+    double numSeconds = 0.0;
+    int vecSize[4] = {500, 1000, 5000, 10000};
+    string sortAlgo[3] = {"Selection", "Bubble", "Insertion"};
+    string sortMethod;
+    vector<int> vec;
 
-    if (sortType == "selection"){
-        // Execution time
-        auto start = high_resolution_clock::now();
-        selectionSort(vec);
-        auto stop = high_resolution_clock::now();
-        auto duration = duration_cast<seconds>(stop - start);
-
-        // Print out
-        outFile << vecType;
-        outFile << "," << duration.count();
-        outFile << "," << numDataComparisons;
-        outFile << "," << numloopComparisons;
-        outFile << "," << numdataAssignments;
-        outFile << "," << numloopAssignments;
-        outFile << "," << numOther;
-        outFile << "," << total << endl;
-    }
-    else if (sortType == "bubble"){
-        auto start = high_resolution_clock::now();
-        bubbleSort(vec);
-        auto stop = high_resolution_clock::now();
-        auto duration = duration_cast<seconds>(stop - start);
-
-        // Print out
-        outFile << vecType;
-        outFile << "," << duration.count();
-        outFile << "," << numDataComparisons;
-        outFile << "," << numloopComparisons;
-        outFile << "," << numdataAssignments;
-        outFile << "," << numloopAssignments;
-        outFile << "," << numOther;
-        outFile << "," << total << endl;
-    }
-    else if (sortType == "insertion"){
-        auto start = high_resolution_clock::now();
-        insertionSort(vec);
-        auto stop = high_resolution_clock::now();
-        auto duration = duration_cast<seconds>(stop - start);
-
-        // Print out
-        outFile << vecType;
-        outFile << "," << duration.count();
-        outFile << "," << numDataComparisons;
-        outFile << "," << numloopComparisons;
-        outFile << "," << numdataAssignments;
-        outFile << "," << numloopAssignments;
-        outFile << "," << numOther;
-        outFile << "," << total << endl;
+    for (int i = 0; i < 4; i++){
+        // Create vector
+        if (sortType == "Sorted"){
+            createVector(vec, vecSize[i], 1, 0);
+            sortMethod = "Sorted N=";
+        }
+        if (sortType == "DescSorted"){
+            createVector(vec, vecSize[i], 1, 1);
+            sortMethod = "Descending sorted N=";
+        }
+        if (sortType == "Random"){
+            createVector(vec, vecSize[i], 0, 0);
+            sortMethod = "Random N=";
+        }
+        for (int j = 0; j < 3; j++){
+            // Calculate execution time
+            if (sortAlgo[j] == "Selection"){
+                auto start = high_resolution_clock::now();
+                selectionSort(vec);
+                auto stop = high_resolution_clock::now();
+                auto duration = duration_cast<seconds>(stop - start);
+                numSeconds = duration.count();
+            }
+            if (sortAlgo[j] == "Bubble"){
+                auto start = high_resolution_clock::now();
+                bubbleSort(vec);
+                auto stop = high_resolution_clock::now();
+                auto duration = duration_cast<seconds>(stop - start);
+                numSeconds = duration.count();
+            }
+            if (sortAlgo[j] == "Insertion"){
+                auto start = high_resolution_clock::now();
+                insertionSort(vec);
+                auto stop = high_resolution_clock::now();
+                auto duration = duration_cast<microseconds>(stop - start);
+                numSeconds = duration.count();
+            }
+            
+            // Write to file
+            if (sortAlgo[j] == "Selection"){
+                outFileSelection << sortMethod << vecSize[i] << "," << fixed << setprecision(2) << numSeconds << "," << numDataComparisons << "," << numLoopComparisons;
+                outFileSelection << "," << numDataAssignments << "," << numLoopAssignments << "," << numOther << "," << total << endl;
+            }
+            if (sortAlgo[j] == "Bubble"){
+                outFileBubble << sortMethod << vecSize[i] << "," << fixed << setprecision(2) << numSeconds << "," << numDataComparisons << "," << numLoopComparisons;
+                outFileBubble << "," << numDataAssignments << "," << numLoopAssignments << "," << numOther << "," << total << endl;
+            }
+            if (sortAlgo[j] == "Insertion"){
+                outFileInsertion << sortMethod << vecSize[i] << "," << fixed << setprecision(2) << numSeconds << "," << numDataComparisons << "," << numLoopComparisons;
+                outFileInsertion << "," << numDataAssignments << "," << numLoopAssignments << "," << numOther << "," << total << endl;
+            }
+        }
     }
 }
 
