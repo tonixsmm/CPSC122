@@ -1,3 +1,11 @@
+/*
+Name: Tony Nguyen
+Class: CPSC 122 01
+Date: February 20, 2022
+Programming Assignment: PA2
+Description: This program implements several sorting algorithm to compare for efficiency
+*/
+
 #ifndef PA2_H
 #define PA2_H
 
@@ -14,7 +22,6 @@ using namespace std::chrono;
 void openFile(ofstream& outFile, string fileName);
 void closeFile(ofstream& outFile);
 void createVector(vector<int>& vec, int size, bool sorting, bool desc);
-void printVector(vector<int> vec);
 void swap(int& a, int& b);
 bool sortedChecking(vector<int> vec);
 void algorithmAnalysis(ofstream& outFileSelection, ofstream& outFileBubble, ofstream& outFileInsertion, string sortType);
