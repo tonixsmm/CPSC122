@@ -53,67 +53,117 @@ bool sortedChecking(vector<int> vec){
     }
 }
 
-vector<int> selectionSort(vector<int> vec){
-    long count = 0;
-    vector<int>& sortedVec = vec; // also this?
-    int minValue, minIndex; // is this 1 or 2 ops?
+void selectionSort(vector<int> vec, long& dataComparisons, long& loopControlComparisons, long& dataAssignments, long& loopControlAssignments, long& other, long& total){
+    int minValue, minIndex;
+    other += 2; // for initialization of minIndex and minValue
     
-    for (int i = 0; i < (sortedVec.size() - 1); i++){
+    loopControlAssignments++; // for int i = 0
+    for (int i = 0; i < (vec.size() - 1); i++){
+        loopControlComparisons++; // for boolean condition evaluates to true
+        loopControlAssignments++; // for i++
+
         minIndex = i;
-        minValue = sortedVec[i];
+        other++; // for minIndex assignment
 
-        for (int j = i + 1; j < sortedVec.size(); j++){
-            if (sortedVec[j] <= minValue){
-                minValue = sortedVec[j];
+        minValue = vec[i];
+        dataAssignments++; // for minValue assignment
+
+        loopControlAssignments++; // for int j = i + 1
+        for (int j = i + 1; j < vec.size(); j++){
+            loopControlComparisons++; // for boolean condition evaluates to true
+            loopControlAssignments++; // for j++
+
+            dataComparisons++; // for comparison of vec[j] and minValue
+            if (vec[j] <= minValue){
+
+                minValue = vec[j];
+                dataAssignments++; // for minValue assignment
+
                 minIndex = j;
+                other++; // for minIndex assignment
             }
         }
-        swap(sortedVec[minIndex], sortedVec[i]);
-    }
-    return vec;
-}
-
-vector<int> bubbleSort(vector<int> vec){
-    vector<int> sortedVec = vec;
-    int maxValue, maxIndex;
-    int count = 0;
-
-    for (maxValue = sortedVec.size() - 1; maxValue > 0; maxValue--){
-        for (maxIndex = 0; maxIndex < maxValue; maxIndex++){
-            if (sortedVec[maxIndex] > sortedVec[maxIndex + 1]){
-                swap(sortedVec[maxIndex], sortedVec[maxIndex + 1]);
-            }
-        }
-        if (sortedChecking(sortedVec) == true){
-            break;
-        }
-    }
-    return sortedVec;
-}
-
-vector<int> insertionSort(vector<int> vec){
-    vector<int> sortedVec = vec;
-    int j, value;
-
-    for (int i = 1; i < sortedVec.size(); i++){
-        value = sortedVec[i];
-        j = i - 1;
+        loopControlComparisons++; // for boolean condition evaluates to false
         
-        while (j >= 0 && value < sortedVec[j]){
-            sortedVec[j + 1] = sortedVec[j];
-            j--;
-        }
-        sortedVec[j + 1] = value;
+        swap(vec[minIndex], vec[i]);
+        dataAssignments += 3; // for swap function, which has three operations
+    }
+    loopControlComparisons++; // for boolean condition evaluates to false
 
-        if (sortedChecking(sortedVec) == true){
+    total = dataComparisons + loopControlComparisons + dataAssignments + loopControlAssignments + other;
+}
+
+void bubbleSort(vector<int> vec, long& dataComparisons, long& loopControlComparisons, long& dataAssignments, long& loopControlAssignments, long& other, long& total){
+    int maxValue, maxIndex;
+    other += 2; // for initialization of maxIndex and maxValue
+
+    loopControlAssignments++; // for int maxValue = vec.size() - 1
+    for (maxValue = vec.size() - 1; maxValue > 0; maxValue--){
+        loopControlComparisons++; // for boolean condition evaluates to true
+        loopControlAssignments++; // for maxValue--
+
+        loopControlAssignments++; // for int maxIndex = 0
+        for (maxIndex = 0; maxIndex < maxValue; maxIndex++){
+            loopControlComparisons++; // for boolean condition evaluates to true
+            loopControlAssignments++; // for maxIndex++
+
+            dataComparisons++; // for comparison of vec[maxIndex] and vec[maxIndex + 1]
+            if (vec[maxIndex] > vec[maxIndex + 1]){
+
+                swap(vec[maxIndex], vec[maxIndex + 1]);
+                dataAssignments += 3; // for swap function, which has three operations
+            }
+        }
+        loopControlComparisons++; // for boolean condition evaluates to false
+
+        dataComparisons++; // for comparison of sortedChecking(vec) and true
+        if (sortedChecking(vec) == true){
+            
             break;
+            other++; // for break statement
         }
     }
-    return sortedVec;
+    loopControlComparisons++; // for boolean condition evaluates to false
+
+    total = dataComparisons + loopControlComparisons + dataAssignments + loopControlAssignments + other;
+}
+
+void insertionSort(vector<int> vec, long& dataComparisons, long& loopControlComparisons, long& dataAssignments, long& loopControlAssignments, long& other, long& total){
+    int j, value;
+    other += 2; // for initialization of j and value
+
+    loopControlAssignments++; // for int i = 1
+    for (int i = 1; i < vec.size(); i++){
+        loopControlComparisons++; // for boolean condition evaluates to true
+        loopControlAssignments++; // for i++
+
+        value = vec[i];
+        dataAssignments++; // for value assignment
+
+        j = i - 1;
+        other++; // for j assignment
+        
+        while (j >= 0 && value < vec[j]){
+            loopControlComparisons += 2; // for boolean conditions evaluate to true
+
+            vec[j + 1] = vec[j];
+            dataAssignments++; // for vec[j + 1] assignment
+
+            j--;
+            loopControlAssignments++; // for j--
+        }
+        loopControlComparisons += 2; // for boolean conditions evaluate to false
+
+        vec[j + 1] = value;
+        dataAssignments++; // for vec[j + 1] assignment
+    }
+    loopControlComparisons++; // for boolean condition evaluates to false
+
+    total = dataComparisons + loopControlComparisons + dataAssignments + loopControlAssignments + other;
 }
 
 void algorithmAnalysis(ofstream& outFileSelection, ofstream& outFileBubble, ofstream& outFileInsertion, string sortType){
-    int numDataComparisons = 0, numLoopComparisons = 0, numDataAssignments = 0, numLoopAssignments = 0, numOther = 0, total = 0;
+    long dataComparisons = 0, loopControlComparisons = 0, dataAssignments = 0, loopControlAssignments = 0, other = 0, total = 0;
     double numSeconds = 0.0;
     int vecSize[4] = {500, 1000, 5000, 10000};
     string sortAlgo[3] = {"Selection", "Bubble", "Insertion"};
@@ -138,21 +188,21 @@ void algorithmAnalysis(ofstream& outFileSelection, ofstream& outFileBubble, ofst
             // Calculate execution time
             if (sortAlgo[j] == "Selection"){
                 auto start = high_resolution_clock::now();
-                selectionSort(vec);
+                selectionSort(vec, dataComparisons, loopControlComparisons, dataAssignments, loopControlAssignments, other, total);
                 auto stop = high_resolution_clock::now();
                 auto duration = duration_cast<seconds>(stop - start);
                 numSeconds = duration.count();
             }
             if (sortAlgo[j] == "Bubble"){
                 auto start = high_resolution_clock::now();
-                bubbleSort(vec);
+                bubbleSort(vec, dataComparisons, loopControlComparisons, dataAssignments, loopControlAssignments, other, total);
                 auto stop = high_resolution_clock::now();
                 auto duration = duration_cast<seconds>(stop - start);
                 numSeconds = duration.count();
             }
             if (sortAlgo[j] == "Insertion"){
                 auto start = high_resolution_clock::now();
-                insertionSort(vec);
+                insertionSort(vec, dataComparisons, loopControlComparisons, dataAssignments, loopControlAssignments, other, total);
                 auto stop = high_resolution_clock::now();
                 auto duration = duration_cast<microseconds>(stop - start);
                 numSeconds = duration.count();
@@ -160,16 +210,16 @@ void algorithmAnalysis(ofstream& outFileSelection, ofstream& outFileBubble, ofst
             
             // Write to file
             if (sortAlgo[j] == "Selection"){
-                outFileSelection << sortMethod << vecSize[i] << "," << fixed << setprecision(2) << numSeconds << "," << numDataComparisons << "," << numLoopComparisons;
-                outFileSelection << "," << numDataAssignments << "," << numLoopAssignments << "," << numOther << "," << total << endl;
+                outFileSelection << sortMethod << vecSize[i] << "," << fixed << setprecision(2) << numSeconds << "," << dataComparisons << "," << loopControlComparisons;
+                outFileSelection << "," << dataAssignments << "," << loopControlAssignments << "," << other << "," << total << endl;
             }
             if (sortAlgo[j] == "Bubble"){
-                outFileBubble << sortMethod << vecSize[i] << "," << fixed << setprecision(2) << numSeconds << "," << numDataComparisons << "," << numLoopComparisons;
-                outFileBubble << "," << numDataAssignments << "," << numLoopAssignments << "," << numOther << "," << total << endl;
+                outFileBubble << sortMethod << vecSize[i] << "," << fixed << setprecision(2) << numSeconds << "," << dataComparisons << "," << loopControlComparisons;
+                outFileBubble << "," << dataAssignments << "," << loopControlAssignments << "," << other << "," << total << endl;
             }
             if (sortAlgo[j] == "Insertion"){
-                outFileInsertion << sortMethod << vecSize[i] << "," << fixed << setprecision(2) << numSeconds << "," << numDataComparisons << "," << numLoopComparisons;
-                outFileInsertion << "," << numDataAssignments << "," << numLoopAssignments << "," << numOther << "," << total << endl;
+                outFileInsertion << sortMethod << vecSize[i] << "," << fixed << setprecision(2) << numSeconds << "," << dataComparisons << "," << loopControlComparisons;
+                outFileInsertion << "," << dataAssignments << "," << loopControlAssignments << "," << other << "," << total << endl;
             }
         }
     }

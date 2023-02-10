@@ -5,6 +5,7 @@ int main(){
     ofstream outFileBubble;
     ofstream outFileInsertion;
 
+    // Open files
     openFile(outFileSelection, "selection_sort_results.csv");
     openFile(outFileBubble, "bubble_sort_results.csv");
     openFile(outFileInsertion, "insertion_sort_results.csv");

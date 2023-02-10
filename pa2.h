@@ -18,8 +18,8 @@ void printVector(vector<int> vec);
 void swap(int& a, int& b);
 bool sortedChecking(vector<int> vec);
 void algorithmAnalysis(ofstream& outFileSelection, ofstream& outFileBubble, ofstream& outFileInsertion, string sortType);
-vector<int> selectionSort(vector<int> vec);
-vector<int> bubbleSort(vector<int> vec);
-vector<int> insertionSort(vector<int> vec);
+void selectionSort(vector<int> vec, long& numDataComparisons, long& numLoopComparisons, long& numDataAssignments, long& numLoopAssignments, long& numOther, long& total);
+void bubbleSort(vector<int> vec, long& numDataComparisons, long& numLoopComparisons, long& numDataAssignments, long& numLoopAssignments, long& numOther, long& total);
+void insertionSort(vector<int> vec, long& numDataComparisons, long& numLoopComparisons, long& numDataAssignments, long& numLoopAssignments, long& numOther, long& total);
 
 #endif
