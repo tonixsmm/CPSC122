@@ -86,19 +86,36 @@ Function: sortedChecking()
  * Pre: None
  * Post: None
 */
-bool sortedChecking(vector<int> vec){
+bool sortedChecking(vector<int> vec, long& dataComparisons, long& loopControlComparisons, long& dataAssignments, long& loopControlAssignments, long& other, long& total){
     long count = 0;
+    other++; // for initialization of count
+
+    loopControlAssignments++; // for int i = 1
     for (int i = 1; i < vec.size(); i++){
+        loopControlComparisons++; // for boolean condition evaluates to true
+        loopControlAssignments++; // for i++
+
+        dataComparisons++; // for vec[i - 1] <= vec[i]
         if (vec[i - 1] <= vec[i]){
+            
             count++;
+            other++; // for count++
         }
     }
+    loopControlComparisons++; // for boolean condition evaluates to false
+
+    dataComparisons++; // for count == (vec.size() - 1)
     if (count == (vec.size() - 1)){
         return true;
+        other++; // for return true
     }
     else {
         return false;
+        other++; // for return false
     }
+
+    // Calculate the total operations
+    total = dataComparisons + loopControlComparisons + dataAssignments + loopControlAssignments + other;
 }
 
 /*
@@ -165,6 +182,7 @@ Function: bubbleSort()
  * Note: Adapted from Gaddis
 */
 void bubbleSort(vector<int> vec, long& dataComparisons, long& loopControlComparisons, long& dataAssignments, long& loopControlAssignments, long& other, long& total){
+    long dataComparisonSortedChecking = 0, loopControlComparisonSortedChecking = 0, dataAssignmentSortedChecking = 0, loopControlAssignmentsSortedChecking = 0, otherSortedChecking = 0, totalSortedChecking = 0;
     int maxValue, maxIndex;
     other += 2; // for initialization of maxIndex and maxValue
 
@@ -188,10 +206,19 @@ void bubbleSort(vector<int> vec, long& dataComparisons, long& loopControlCompari
         loopControlComparisons++; // for boolean condition evaluates to false
 
         dataComparisons++; // for comparison of sortedChecking(vec) and true
-        if (sortedChecking(vec) == true){
+        if (sortedChecking(vec, dataComparisonSortedChecking, loopControlComparisonSortedChecking, dataAssignmentSortedChecking, loopControlAssignmentsSortedChecking, otherSortedChecking, totalSortedChecking) == true){
             
-            break;
+            // Add the counts from sortedChecking()
+            dataComparisons += dataComparisonSortedChecking;
+            loopControlComparisons += loopControlComparisonSortedChecking;
+            dataAssignments += dataAssignmentSortedChecking;
+            loopControlAssignments += loopControlAssignmentsSortedChecking;
+            other += otherSortedChecking;
+            total += totalSortedChecking;
+
             other++; // for break statement
+            loopControlComparisons--; // If bubble sort exits early, then there is no need for a false evaluation of the final loop control comparison
+            break;
         }
     }
     loopControlComparisons++; // for boolean condition evaluates to false

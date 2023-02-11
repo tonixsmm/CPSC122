@@ -24,7 +24,7 @@ void openFile(ofstream& outFile, string fileName);
 void closeFile(ofstream& outFile);
 void createVector(vector<int>& vec, int size, bool sorting, bool desc);
 void swap(int& a, int& b);
-bool sortedChecking(vector<int> vec);
+bool sortedChecking(vector<int> vec, long& dataComparisons, long& loopControlComparisons, long& dataAssignments, long& loopControlAssignments, long& other, long& total);
 void algorithmAnalysis(ofstream& outFileSelection, ofstream& outFileBubble, ofstream& outFileInsertion, ofstream& outFileShell, string sortType);
 void selectionSort(vector<int> vec, long& dataComparisons, long& loopControlComparisons, long& dataAssignments, long& loopControlAssignments, long& other, long& total);
 void bubbleSort(vector<int> vec, long& dataComparisons, long& loopControlComparisons, long& dataAssignments, long& loopControlAssignments, long& other, long& total);
