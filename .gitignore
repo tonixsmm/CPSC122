@@ -2,3 +2,4 @@ note.txt
 .vscode/settings.json
 a.out
 .DS_Store
+__pycache__/utils.cpython-39.pyc
