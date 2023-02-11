@@ -1,9 +1,10 @@
 /*
 Name: Tony Nguyen
 Class: CPSC 122 01
-Date: February 20, 2022
+Date: February 10, 2022
 Programming Assignment: PA2
 Description: This program implements several sorting algorithm to compare for efficiency
+Note: I decided to use milliseconds instead of seconds for execution time measurement becuase it is more accurate
 */
 
 #ifndef PA2_H
@@ -24,9 +25,10 @@ void closeFile(ofstream& outFile);
 void createVector(vector<int>& vec, int size, bool sorting, bool desc);
 void swap(int& a, int& b);
 bool sortedChecking(vector<int> vec);
-void algorithmAnalysis(ofstream& outFileSelection, ofstream& outFileBubble, ofstream& outFileInsertion, string sortType);
-void selectionSort(vector<int> vec, long& numDataComparisons, long& numLoopComparisons, long& numDataAssignments, long& numLoopAssignments, long& numOther, long& total);
-void bubbleSort(vector<int> vec, long& numDataComparisons, long& numLoopComparisons, long& numDataAssignments, long& numLoopAssignments, long& numOther, long& total);
-void insertionSort(vector<int> vec, long& numDataComparisons, long& numLoopComparisons, long& numDataAssignments, long& numLoopAssignments, long& numOther, long& total);
+void algorithmAnalysis(ofstream& outFileSelection, ofstream& outFileBubble, ofstream& outFileInsertion, ofstream& outFileShell, string sortType);
+void selectionSort(vector<int> vec, long& dataComparisons, long& loopControlComparisons, long& dataAssignments, long& loopControlAssignments, long& other, long& total);
+void bubbleSort(vector<int> vec, long& dataComparisons, long& loopControlComparisons, long& dataAssignments, long& loopControlAssignments, long& other, long& total);
+void insertionSort(vector<int> vec, long& dataComparisons, long& loopControlComparisons, long& dataAssignments, long& loopControlAssignments, long& other, long& total);
+void shellSort(vector<int> vec, long& dataComparisons, long& loopControlComparisons, long& dataAssignments, long& loopControlAssignments, long& other, long& total);
 
 #endif

@@ -1,9 +1,10 @@
 /*
 Name: Tony Nguyen
 Class: CPSC 122 01
-Date: February 20, 2022
+Date: February 10, 2022
 Programming Assignment: PA2
 Description: This program implements several sorting algorithm to compare for efficiency
+Note: I decided to use milliseconds instead of seconds for execution time measurement becuase it is more accurate
 */
 
 #include "pa2.h"
@@ -11,7 +12,7 @@ Description: This program implements several sorting algorithm to compare for ef
 /*
 Function: openFile()
  * Date Created: 02/04/2022
- * Date Last Modified: 02/04/2022
+ * Date Last Modified: 02/09/2022
  * Description: This function opens a file and checks if it is opened successfully
  * Input parameters: File stream and file name
  * Returns: None
@@ -23,7 +24,7 @@ void openFile(ofstream& outFile, string fileName){
 
     if (outFile.is_open()){
         cout << "Successfully opened " << fileName << endl;
-        outFile << "Vector configuration,Seconds,# Data Comparisons,# Loop Comparisons,# Data Assignments,# Loop Assignments,# Other,# Total" << endl;
+        outFile << "Vector configuration,Milliseconds,# Data Comparisons,# Loop Comparisons,# Data Assignments,# Loop Assignments,# Other,# Total" << endl;
     }
     else{
         cout << "Failed to open " << fileName << endl;
@@ -36,9 +37,9 @@ Function: createVector()
  * Date Created: 02/04/2022
  * Date Last Modified: 02/05/2022
  * Description: This function fills vector with randomly generated numbers
- * Input parameters: a vector, vector size, conditional arguments for sorting or descending sorting
+ * Input parameters: A vector, vector size, conditional arguments for sorting or descending sorting
  * Returns: None
- * Pre: a vector must be previously declared and passed by reference
+ * Pre: A vector must be previously declared and passed by reference
  * Post: None
 */
 void createVector(vector<int>& vec, int size, bool sorting, bool desc){
@@ -63,9 +64,9 @@ Function: openFile()
  * Date Created: 02/06/2022
  * Date Last Modified: 02/06/2022
  * Description: This function swaps two integers
- * Input parameters: two integers
+ * Input parameters: Two integers
  * Returns: None
- * Pre: two intergers must be previously intialized and passed by reference
+ * Pre: Two intergers must be previously intialized and passed by reference
  * Post: None
  * Note: Adapted from Gaddis
 */
@@ -80,8 +81,8 @@ Function: sortedChecking()
  * Date Created: 02/06/2022
  * Date Last Modified: 02/07/2022
  * Description: This function checks if a vector is sorted
- * Input parameters: a vector
- * Returns: boolean value of true or false
+ * Input parameters: A vector
+ * Returns: Boolean value of true or false
  * Pre: None
  * Post: None
 */
@@ -105,10 +106,11 @@ Function: selectionSort()
  * Date Created: 02/09/2022
  * Date Last Modified: 02/10/2022
  * Description: This function performs selection sort
- * Input parameters: a vector and six variables for operation counting
+ * Input parameters: A vector and six variables for operation counting
  * Returns: None
- * Pre: all input parameters must be previously intialized and passed by reference
+ * Pre: All input parameters must be previously intialized and passed by reference
  * Post: None
+ * Note: Adapted from Gaddis
 */
 void selectionSort(vector<int> vec, long& dataComparisons, long& loopControlComparisons, long& dataAssignments, long& loopControlAssignments, long& other, long& total){
     int minValue, minIndex;
@@ -156,10 +158,11 @@ Function: bubbleSort()
  * Date Created: 02/09/2022
  * Date Last Modified: 02/10/2022
  * Description: This function performs bubble sort
- * Input parameters: a vector and six variables for operation counting
+ * Input parameters: A vector and six variables for operation counting
  * Returns: None
- * Pre: all input parameters must be previously intialized and passed by reference
+ * Pre: All input parameters must be previously intialized and passed by reference
  * Post: None
+ * Note: Adapted from Gaddis
 */
 void bubbleSort(vector<int> vec, long& dataComparisons, long& loopControlComparisons, long& dataAssignments, long& loopControlAssignments, long& other, long& total){
     int maxValue, maxIndex;
@@ -202,10 +205,11 @@ Function: insertionSort()
  * Date Created: 02/09/2022
  * Date Last Modified: 02/10/2022
  * Description: This function performs insertion sort
- * Input parameters: a vector and six variables for operation counting
+ * Input parameters: A vector and six variables for operation counting
  * Returns: None
- * Pre: all input parameters must be previously intialized and passed by reference
+ * Pre: All input parameters must be previously intialized and passed by reference
  * Post: None
+ * Note: Adapted from Gina
 */
 void insertionSort(vector<int> vec, long& dataComparisons, long& loopControlComparisons, long& dataAssignments, long& loopControlAssignments, long& other, long& total){
     int j, value;
@@ -252,12 +256,12 @@ Function: algorithmAnalysis()
  * Pre: Three file streams must be previously intialized and passed by reference
  * Post: None
 */
-void algorithmAnalysis(ofstream& outFileSelection, ofstream& outFileBubble, ofstream& outFileInsertion, string sortType){
+void algorithmAnalysis(ofstream& outFileSelection, ofstream& outFileBubble, ofstream& outFileInsertion, ofstream& outFileShell, string sortType){
     // Declare and initialize variables
     long dataComparisons = 0, loopControlComparisons = 0, dataAssignments = 0, loopControlAssignments = 0, other = 0, total = 0;
     double numSeconds = 0.0;
     int vecSize[4] = {500, 1000, 5000, 10000};
-    string sortAlgo[3] = {"Selection", "Bubble", "Insertion"};
+    string sortAlgo[4] = {"Selection", "Bubble", "Insertion", "Shell"};
     string sortMethod;
     vector<int> vec;
     
@@ -275,27 +279,34 @@ void algorithmAnalysis(ofstream& outFileSelection, ofstream& outFileBubble, ofst
             createVector(vec, vecSize[i], 0, 0);
             sortMethod = "Random N=";
         }
-        for (int j = 0; j < 3; j++){
+        for (int j = 0; j < 4; j++){
             // Calculate execution time
             if (sortAlgo[j] == "Selection"){
                 auto start = high_resolution_clock::now();
                 selectionSort(vec, dataComparisons, loopControlComparisons, dataAssignments, loopControlAssignments, other, total);
                 auto stop = high_resolution_clock::now();
-                auto duration = duration_cast<seconds>(stop - start);
+                auto duration = duration_cast<milliseconds>(stop - start);
                 numSeconds = duration.count();
             }
             if (sortAlgo[j] == "Bubble"){
                 auto start = high_resolution_clock::now();
                 bubbleSort(vec, dataComparisons, loopControlComparisons, dataAssignments, loopControlAssignments, other, total);
                 auto stop = high_resolution_clock::now();
-                auto duration = duration_cast<seconds>(stop - start);
+                auto duration = duration_cast<milliseconds>(stop - start);
                 numSeconds = duration.count();
             }
             if (sortAlgo[j] == "Insertion"){
                 auto start = high_resolution_clock::now();
                 insertionSort(vec, dataComparisons, loopControlComparisons, dataAssignments, loopControlAssignments, other, total);
                 auto stop = high_resolution_clock::now();
-                auto duration = duration_cast<microseconds>(stop - start);
+                auto duration = duration_cast<milliseconds>(stop - start);
+                numSeconds = duration.count();
+            }
+            if (sortAlgo[j] == "Shell"){
+                auto start = high_resolution_clock::now();
+                shellSort(vec, dataComparisons, loopControlComparisons, dataAssignments, loopControlAssignments, other, total);
+                auto stop = high_resolution_clock::now();
+                auto duration = duration_cast<milliseconds>(stop - start);
                 numSeconds = duration.count();
             }
             
@@ -312,6 +323,10 @@ void algorithmAnalysis(ofstream& outFileSelection, ofstream& outFileBubble, ofst
                 outFileInsertion << sortMethod << vecSize[i] << "," << fixed << setprecision(2) << numSeconds << "," << dataComparisons << "," << loopControlComparisons;
                 outFileInsertion << "," << dataAssignments << "," << loopControlAssignments << "," << other << "," << total << endl;
             }
+            if (sortAlgo[j] == "Shell"){
+                outFileShell << sortMethod << vecSize[i] << "," << fixed << setprecision(2) << numSeconds << "," << dataComparisons << "," << loopControlComparisons;
+                outFileShell << "," << dataAssignments << "," << loopControlAssignments << "," << other << "," << total << endl;
+            }
         }
     }
 }
@@ -319,7 +334,7 @@ void algorithmAnalysis(ofstream& outFileSelection, ofstream& outFileBubble, ofst
 /*
 Function: selectionSort()
  * Date Created: 02/04/2022
- * Date Last Modified: 02/14/2022
+ * Date Last Modified: 02/04/2022
  * Description: This function closes the file
  * Input parameters: File stream
  * Returns: None
@@ -328,4 +343,53 @@ Function: selectionSort()
 */
 void closeFile(ofstream& outFile){
     outFile.close();
+}
+
+/*
+ * Function: shellSort()
+ * Date Created: 02/10/2022
+ * Date Last Modified: 02/10/2022
+ * Description: This function performs shell sort
+ * Input parameters: A vector and six variables for operation counting
+ * Returns: None
+ * Pre: All input parameters must be previously intialized and passed by reference
+ * Post: None
+ * Note: Adapted from https://www.programiz.com/dsa/shell-sort
+*/
+void shellSort(vector<int> vec, long& dataComparisons, long& loopControlComparisons, long& dataAssignments, long& loopControlAssignments, long& other, long& total){
+    loopControlAssignments++; // for i assignment
+    for (int i = vec.size() / 2; i > 0; i /= 2){
+        loopControlComparisons++; // for boolean condition evaluates to true
+        loopControlAssignments++; // for i/= 2
+
+        loopControlAssignments++; // for j assignment
+        for (int j = i; j < vec.size(); j++){
+            loopControlComparisons++; // for boolean condition evaluates to true
+            loopControlAssignments++; // for j++
+
+            int temp = vec[j];
+            dataAssignments++; // for temp assignment
+
+            int k;
+            other++; // for k declaration
+
+            loopControlAssignments++; // for k assignment
+            for (k = j; k >= i && vec[k - i] > temp; k -= i){
+                loopControlComparisons += 2; // for boolean conditions evaluate to true
+                loopControlAssignments++; // for k-= i
+
+                vec[k] = vec[k - i];
+                dataAssignments++; // for vec[k] assignment
+            }
+            loopControlComparisons++; // for boolean condition evaluates to false
+
+            vec[k] = temp;
+            dataAssignments++; // for vec[k] assignment
+        }
+        loopControlComparisons++; // for boolean condition evaluates to false
+    }
+    loopControlComparisons++; // for boolean condition evaluates to false
+    
+    // Calculate total of operations
+    total = dataComparisons + loopControlComparisons + dataAssignments + loopControlAssignments + other;
 }
