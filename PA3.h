@@ -8,6 +8,7 @@
 #include <cmath>
 #include <cctype>
 #include <string>
+#include <sstream>
 
 using namespace std;
 
@@ -29,5 +30,9 @@ void runTask2();
 string * createWordsArray(ifstream&, const int);
 void generateSentence(string *, const string *, const int, const string *, const int, const string *, const int, const string *, const int);
 // TODO: add your additional function prototypes for task 3 here
+void runTask3();
+void printArray(string *, const int);
+void swap(int&, int&);
+void bubbleSort(string *, const int);
 
 #endif
