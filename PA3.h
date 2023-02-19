@@ -23,6 +23,7 @@ void openFile(ifstream&, string);
 // task 2
 bool findWinningLotteryTicket(int, const int *, const int);
 // TODO: add your additional function prototypes for task 2 here
+void runTask2();
 
 // task 3
 string * createWordsArray(ifstream&, const int);

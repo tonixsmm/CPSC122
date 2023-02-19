@@ -108,8 +108,30 @@ void runTask1(){
 ////////////////////////////////////
 // TODO: finish the function
 bool findWinningLotteryTicket(const int winningTicketNum, const int * playerNumbers, const int numPlayerNumbers) {
-	
+	for (int i = 0; i < numPlayerNumbers; i++){
+		if (*(playerNumbers + i) == winningTicketNum){
+			return true;
+		}
+	}
 	return false;
+}
+
+void runTask2(){
+	int playerNums[] = {13579, 26791, 26792, 33445, 55555, 62483, 77777, 79422, 85647, 93121};
+	int playerNumsSize = 10, winningNum = 0;
+	bool winner = false;
+
+	cout << "Enter the winning lottery ticket number: ";
+	cin >> winningNum;
+
+	winner = findWinningLotteryTicket(winningNum, playerNums, playerNumsSize);
+
+	if (winner == true){
+		cout << "You won!" << endl;
+	}
+	else {
+		cout << "You lost!" << endl;
+	}
 }
 
 ////////////////////////////////////
@@ -120,6 +142,8 @@ string * createWordsArray(ifstream& inFile, const int size) {
 
 	return NULL;
 }
+
+
 
 void generateSentence(string * sentence,
 		const string * articlesArr, const int articlesSize,
