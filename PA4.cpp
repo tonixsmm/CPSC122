@@ -2,7 +2,15 @@
 
 // TODO: finish the functions and define/call additional functions
 Package * loadPackages(ifstream& inFile, string * driverName, int * numPackages) {
+	long position;
 	Package * packageArray = new Package[*numPackages];
+
+	getline(inFile, *driverName);
+
+	position = inFile.tellg();
+	countPackage(inFile, numPackages);
+	inFile.clear();
+	inFile.seekg(position);
 
 	for (int i = 0; i < *numPackages; i++){
 		if (inFile.good()){
@@ -90,15 +98,11 @@ void runReadFromFile(string filename){
 	string driverName;
 	Package * packageArray;
 	int numPackage, heaviestId;
-	long position;
 	double heaviestWeight, avgWeight;
 
 	openFile(inFile, filename);
-	getline(inFile, driverName);
 
-	position = inFile.tellg();
-
-	countPackage(inFile, &numPackage);
+	packageArray = loadPackages(inFile, &driverName, &numPackage);
 
 	cout << "Number of packages on " << driverName << "'s truck: " << numPackage << endl;
 	cout << endl;
@@ -106,10 +110,6 @@ void runReadFromFile(string filename){
 	cout << "-------------------" << endl;
 	cout << endl;
 
-	inFile.clear();
-	inFile.seekg(position);
-
-	packageArray = loadPackages(inFile, &driverName, &numPackage);
 	printStructArray(packageArray, numPackage);
 
 	computePackageStats(packageArray, numPackage, &heaviestId, &heaviestWeight, &avgWeight);
