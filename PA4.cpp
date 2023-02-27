@@ -3,7 +3,6 @@
 // TODO: finish the functions and define/call additional functions
 Package * loadPackages(ifstream& inFile, string * driverName, int * numPackages) {
 	long position;
-	Package * packageArray = new Package[*numPackages];
 
 	getline(inFile, *driverName);
 
@@ -11,6 +10,8 @@ Package * loadPackages(ifstream& inFile, string * driverName, int * numPackages)
 	countPackage(inFile, numPackages);
 	inFile.clear();
 	inFile.seekg(position);
+
+	Package * packageArray = new Package[*numPackages];
 
 	for (int i = 0; i < *numPackages; i++){
 		if (inFile.good()){
