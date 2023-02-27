@@ -45,3 +45,7 @@ replit.nix
 *.exe
 *.out
 *.app
+
+# Tony added
+truckloadtest1.txt
+truckloadtest2.txt
