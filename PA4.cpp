@@ -18,7 +18,19 @@ Package * loadPackages(ifstream& inFile, string * driverName, int * numPackages)
 
 
 void computePackageStats(const Package packages[], const int numPackages, int * heaviestId, double * heaviestWeight, double * avgWeight) {
-	
+	double aggregatedWeight = 0.0;
+	*heaviestWeight = packages[0].weight;
+	*heaviestId = packages[0].id;
+
+	for (int i = 0; i < numPackages; i++){
+		if (packages[i].weight > *heaviestWeight){
+			*heaviestWeight = packages[i].weight;
+			*heaviestId = packages[i].id;
+		}
+		aggregatedWeight += packages[i].weight;
+	}
+
+	*avgWeight = aggregatedWeight / numPackages;
 }
 
 /*
@@ -77,20 +89,36 @@ void runReadFromFile(string filename){
 	ifstream inFile;
 	string driverName;
 	Package * packageArray;
-	int numPackage;
+	int numPackage, heaviestId;
 	long position;
+	double heaviestWeight, avgWeight;
 
 	openFile(inFile, filename);
 	getline(inFile, driverName);
+
 	position = inFile.tellg();
 
 	countPackage(inFile, &numPackage);
+
+	cout << "Number of packages on " << driverName << "'s truck: " << numPackage << endl;
+	cout << endl;
+	cout << "Package Information" << endl;
+	cout << "-------------------" << endl;
+	cout << endl;
 
 	inFile.clear();
 	inFile.seekg(position);
 
 	packageArray = loadPackages(inFile, &driverName, &numPackage);
 	printStructArray(packageArray, numPackage);
+
+	computePackageStats(packageArray, numPackage, &heaviestId, &heaviestWeight, &avgWeight);
+
+	cout << "Package Stats" << endl;
+	cout << "-------------" << endl;
+	cout << "ID of the heaviest package: " << heaviestId << endl;
+	cout << "Weight of the heaviest package: " << heaviestWeight << endl;
+	cout << "Average weight of packages on truck: " << avgWeight << endl;
 
 	delete [] packageArray;
 	packageArray = NULL;
