@@ -17,6 +17,10 @@ struct Package {
 Package * loadPackages(ifstream&, string *, int *);
 void computePackageStats(const Package[], const int, int * heaviestId, double *, double *);
 // TODO: add your additional function prototypes here
-
+void runReadFromFile(string filename);
+void openFile(ifstream& inFile, string fileName);
+void countPackage(ifstream& inFile, int * numPackage);
+void printStructArray(Package * packageArray, int size);
+void checkInputFile(int argc);
 
 #endif
