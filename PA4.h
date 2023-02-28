@@ -4,6 +4,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <iomanip>
 
 using namespace std;
 
@@ -26,10 +27,10 @@ void computePackageStats(const Package[], const int, int * heaviestId, double *,
 void runReadFromFile(string filename);
 void openFile(ifstream& inFile, string fileName);
 void countPackage(ifstream& inFile, int * numPackage);
-void printStructArray(Package * packageArray, int size);
+void printPackageArray(Package * packageArray, int size);
 void checkInputFile(int argc);
 void runBonus(void);
-void analyzeString(string userInput);
-void compareString(char * c);
+LetterOccurrence * analyzeString(string userInput);
+void printLetterArray(LetterOccurrence * letterArray);
 
 #endif

@@ -76,7 +76,7 @@ void countPackage(ifstream& inFile, int * numPackage){
 	// Each package has 5 attributes, pluses one for an extra line at the end. Therefore, divided by 6
 }
 
-void printStructArray(Package * packageArray, int size){
+void printPackageArray(Package * packageArray, int size){
 	for (int i = 0; i < size; i++){
 		cout << "Package ID: " << packageArray[i].id << endl;
 		cout << "Package Weight: " << packageArray[i].weight << endl;
@@ -112,7 +112,7 @@ void runReadFromFile(string filename){
 	cout << "-------------------" << endl;
 	cout << endl;
 
-	printStructArray(packageArray, numPackage);
+	printPackageArray(packageArray, numPackage);
 
 	computePackageStats(packageArray, numPackage, &heaviestId, &heaviestWeight, &avgWeight);
 
@@ -129,35 +129,66 @@ void runReadFromFile(string filename){
 }
 
 void runBonus(void){
-	string userInput = "", userResponse = "";
+	string userInput = "", userResponse;
+	LetterOccurrence * letterArray;
 	
 	do {
-		userInput = "";
 		userResponse = "";
 		cout << "Please enter a string that only contains alphabet characters:" << endl;
 		getline(cin, userInput);
 
-		analyzeString(userInput);
+		letterArray = analyzeString(userInput);
+		printLetterArray(letterArray);
 
 		cout << "Do you want to continue? Enter 'quit' to stop the program or any key to continue" << endl;
-		cin >> userResponse;
+		getline(cin, userResponse);
 	} while (userResponse != "quit");
+
+	delete [] letterArray;
+	letterArray = nullptr;
 }
 
-void analyzeString(string userInput){
+LetterOccurrence * analyzeString(string userInput){
 	istringstream iss;
-	string word;
+	string word = "";
+	int count = 0;
+
+	LetterOccurrence * letterArray = new LetterOccurrence[123]; 
+	// Size of 123 to cover just enought of the last lowercase character ASCII value
 
 	iss.clear();
 	iss.str(userInput);
 	while (iss.good()) {
 		iss >> word;
 		for (char c : word){
-			cout << c << endl;
+			letterArray[int(c)].count += 1;
+			count++;
 		}
 	}
+	cout << "Char count: " << count << endl;
+
+	// For uppercase characters. A is 65 and Z is 90
+	for (int i = 65; i <= 90; i++){
+		letterArray[i].frequency = (letterArray[i].count / count);
+	}
+	// For lowercase characters. a is 97 and z is 122
+	for (int i = 97; i <= 122; i++){
+		letterArray[i].frequency = (letterArray[i].count / count);
+	}
+
+	return letterArray;
 }
 
-void compareString(char * c){
-
+void printLetterArray(LetterOccurrence * letterArray){
+	for (int i = 65; i <= 90; i ++){
+		cout << char(i);
+		cout << ": Count: " << letterArray[i].count;
+		cout << " Freq: " << setprecision(2) << letterArray[i].frequency << endl;
+	}
+	for (int i = 97; i <= 122; i ++){
+		cout << char(i);
+		cout << ": Count: " << letterArray[i].count;
+		cout << " Freq: " << setprecision(2) << letterArray[i].frequency << endl;
+	}
+	//TODO: fix frequency bug
 }
