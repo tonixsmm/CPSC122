@@ -70,7 +70,9 @@ void countPackage(ifstream& inFile, int * numPackage){
 
 	while (!inFile.eof()){
 		getline(inFile, line);
-		count++;
+		if (!inFile.bad()){
+			count++;
+		}
 	}
 	*numPackage = (count - 1) / 6; 
 	// Each package has 5 attributes, pluses one for an extra line at the end. Therefore, divided by 6
