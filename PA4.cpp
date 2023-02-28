@@ -72,7 +72,8 @@ void countPackage(ifstream& inFile, int * numPackage){
 		getline(inFile, line);
 		count++;
 	}
-	*numPackage = (count - 1) / 6; // Each package has 5 attributes, pluses one for an extra line at the end
+	*numPackage = (count - 1) / 6; 
+	// Each package has 5 attributes, pluses one for an extra line at the end. Therefore, divided by 6
 }
 
 void printStructArray(Package * packageArray, int size){
@@ -125,4 +126,38 @@ void runReadFromFile(string filename){
 	packageArray = NULL;
 
 	inFile.close();
+}
+
+void runBonus(void){
+	string userInput = "", userResponse = "";
+	
+	do {
+		userInput = "";
+		userResponse = "";
+		cout << "Please enter a string that only contains alphabet characters:" << endl;
+		getline(cin, userInput);
+
+		analyzeString(userInput);
+
+		cout << "Do you want to continue? Enter 'quit' to stop the program or any key to continue" << endl;
+		cin >> userResponse;
+	} while (userResponse != "quit");
+}
+
+void analyzeString(string userInput){
+	istringstream iss;
+	string word;
+
+	iss.clear();
+	iss.str(userInput);
+	while (iss.good()) {
+		iss >> word;
+		for (char c : word){
+			cout << c << endl;
+		}
+	}
+}
+
+void compareString(char * c){
+
 }
