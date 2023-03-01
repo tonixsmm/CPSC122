@@ -136,12 +136,14 @@ void runBonus(void){
 	
 	do {
 		userResponse = "";
-		cout << "Please enter a string that only contains alphabet characters:" << endl;
-		// getline(cin, userInput);
-		userInput = "The state of Washington";
+		cout << "Please enter a string that only contains alphabet characters: " << endl;
+		getline(cin, userInput);
+		cout << endl;
 
 		letterArray = analyzeString(userInput);
-		printLetterArray(letterArray);
+		cout << "Letter Histogram" << endl;
+		plotHistogram(letterArray);
+		charStats(letterArray);
 
 		cout << "Do you want to continue? Enter 'quit' to stop the program or any key to continue" << endl;
 		getline(cin, userResponse);
@@ -168,7 +170,6 @@ LetterOccurrence * analyzeString(string userInput){
 			count++;
 		}
 	}
-	cout << "Char count: " << count << endl;
 
 	// ASCII value for uppercase characters. A is 65 and Z is 90
 	for (int i = 65; i <= 90; i++){
@@ -193,5 +194,88 @@ void printLetterArray(LetterOccurrence * letterArray){
 		cout << ": Count: " << letterArray[i].count;
 		cout << " Freq: " << setprecision(2) << fixed << letterArray[i].frequency << endl;
 	}
-	//TODO: fix frequency bug
+}
+
+void plotHistogram(LetterOccurrence * letterArray){
+	int largestValue = findMaxOccurrenceChar(letterArray);
+
+	char histArr[largestValue + 2][52];
+	// There are 26 alphabetic character, times 2 for upper and lower cases. Hence, there are 52 "columns"
+	// The character with the largest number of occurrence is the row size, pluses 1 for character line and 1 for line feed
+
+	// Plotting algorithm
+	for (int i = 65, m = 0; i <= 90; i++, m++){
+		for (int j = 0; j < (largestValue - letterArray[i].count); j++){
+			histArr[j][m] = ' ';
+		}
+		for (int k = 1; k <= (letterArray[i].count); k++){
+			histArr[largestValue - k][m] = '*';
+		}
+		histArr[largestValue][m] = static_cast<char>(i);
+	}
+	for (int i = 97, m = 26; i <= 122; i++, m++){
+		for (int j = 0; j < (largestValue - letterArray[i].count); j++){
+			histArr[j][m] = ' ';
+		}
+		for (int k = 1; k <= (letterArray[i].count); k++){
+			histArr[largestValue - k][m] = '*';
+		}
+		histArr[largestValue][m] = static_cast<char>(i);
+	}
+	cout << endl;
+
+	// Print out the histogram
+	for (int i = 0; i < (largestValue + 1); i++){
+		for (int j = 0; j < 52; j++){
+			cout << histArr[i][j];
+		}
+		cout << endl;
+	}
+}
+
+void charStats(LetterOccurrence * letterArray){
+	int maxOccurrence = letterArray[0].count, maxIndex = 0;
+
+	for (int i = 0; i < 123; i++){
+		if (letterArray[i].count > maxOccurrence){
+			maxOccurrence = letterArray[i].count;
+			maxIndex = i;
+		}
+	}
+
+	char tempChar1 = static_cast<char>(maxIndex);
+	string tempString2 = to_string(maxOccurrence);
+	string tempString3 = to_string(letterArray[maxIndex].frequency);
+
+	for (int i = 0; i < 123; i++){
+		if (letterArray[i].count == maxOccurrence && static_cast<char>(i) != static_cast<char>(maxIndex)){
+			tempChar1 += ',';
+			tempChar1 += ' ';
+			tempChar1 += (static_cast<char>(i));
+
+			tempString2 += ", ";
+			tempString2 += to_string(letterArray[i].count);
+
+			tempString3 += ", ";
+			tempString3 += to_string(letterArray[i].frequency);
+		}
+	}
+
+	// Print responses
+	cout << endl;
+	cout << "The letter with the maximum number of occurrences is " << tempChar1 << endl;
+	cout << "The number of occurrences of the letter with the maximum number of occurrences is " << tempString2 << endl;
+	cout << "The frequency of the letter with the maximum number of occurrences is " << tempString3 << endl;
+	cout << endl;
+}
+
+int findMaxOccurrenceChar(LetterOccurrence * letterArray){
+	int largestValue = letterArray[0].count;
+
+	for (int i = 0; i < 123; i++){
+		if (letterArray[i].count > largestValue){
+			largestValue = letterArray[i].count;
+		}
+	}
+	return largestValue;
 }

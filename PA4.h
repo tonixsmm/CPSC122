@@ -32,5 +32,8 @@ void checkInputFile(int argc);
 void runBonus(void);
 LetterOccurrence * analyzeString(string userInput);
 void printLetterArray(LetterOccurrence * letterArray);
+void plotHistogram(LetterOccurrence * letterArray);
+int findMaxOccurrenceChar(LetterOccurrence * letterArray);
+void charStats(LetterOccurrence * letterArray);
 
 #endif
