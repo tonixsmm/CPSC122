@@ -143,6 +143,7 @@ void runBonus(void){
 		letterArray = analyzeString(userInput);
 		cout << "Letter Histogram" << endl;
 		plotHistogram(letterArray);
+		cout << "before charStats" << endl;
 		charStats(letterArray);
 
 		cout << "Do you want to continue? Enter 'quit' to stop the program or any key to continue" << endl;
@@ -202,7 +203,7 @@ void plotHistogram(LetterOccurrence * letterArray){
 	char histArr[largestValue + 2][52];
 	// There are 26 alphabetic character, times 2 for upper and lower cases. Hence, there are 52 "columns"
 	// The character with the largest number of occurrence is the row size, pluses 1 for character line and 1 for line feed
-
+	cout << "hello" << endl;
 	// Plotting algorithm
 	for (int i = 65, m = 0; i <= 90; i++, m++){
 		for (int j = 0; j < (largestValue - letterArray[i].count); j++){
@@ -213,6 +214,7 @@ void plotHistogram(LetterOccurrence * letterArray){
 		}
 		histArr[largestValue][m] = static_cast<char>(i);
 	}
+	cout << "hello" << endl;
 	for (int i = 97, m = 26; i <= 122; i++, m++){
 		for (int j = 0; j < (largestValue - letterArray[i].count); j++){
 			histArr[j][m] = ' ';
@@ -223,6 +225,7 @@ void plotHistogram(LetterOccurrence * letterArray){
 		histArr[largestValue][m] = static_cast<char>(i);
 	}
 	cout << endl;
+	cout << "hello" << endl;
 
 	// Print out the histogram
 	for (int i = 0; i < (largestValue + 1); i++){
@@ -244,13 +247,14 @@ void charStats(LetterOccurrence * letterArray){
 	}
 
 	string tempString1(1, static_cast<char>(maxIndex));
+	// string tempString1 = to_string(static_cast<char>(maxIndex));
 	string tempString2 = to_string(maxOccurrence);
 	string tempString3 = to_string(letterArray[maxIndex].frequency);
 
 	for (int i = 0; i < 123; i++){
 		if (letterArray[i].count == maxOccurrence && static_cast<char>(i) != static_cast<char>(maxIndex)){
-			// tempString1 += ", ";
-			// tempChar1.push_back(static_cast<char>(i));
+			string tempString4(1, static_cast<char>(i));
+			tempString1 += ", " + tempString4;
 
 			tempString2 += ", ";
 			tempString2 += to_string(letterArray[i].count);
