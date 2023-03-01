@@ -2,7 +2,7 @@
 
 // TODO: finish the functions and define/call additional functions
 Package * loadPackages(ifstream& inFile, string * driverName, int * numPackages) {
-	long position;
+	long position = 0;
 
 	getline(inFile, *driverName);
 
@@ -65,7 +65,7 @@ void openFile(ifstream& inFile, string fileName){
 }
 
 void countPackage(ifstream& inFile, int * numPackage){
-	string line;
+	string line = "";
 	int count = 0;
 
 	while (!inFile.eof()){
@@ -99,10 +99,10 @@ void checkInputFile(int argc){
 
 void runReadFromFile(string filename){
 	ifstream inFile;
-	string driverName;
-	Package * packageArray;
-	int numPackage, heaviestId;
-	double heaviestWeight, avgWeight;
+	string driverName = "";
+	Package * packageArray = nullptr;
+	int numPackage = 0, heaviestId = 0;
+	double heaviestWeight = 0.0, avgWeight = 0.0;
 
 	openFile(inFile, filename);
 
@@ -128,30 +128,6 @@ void runReadFromFile(string filename){
 	packageArray = NULL;
 
 	inFile.close();
-}
-
-void runBonus(void){
-	string userInput = "", userResponse;
-	LetterOccurrence * letterArray;
-	
-	do {
-		userResponse = "";
-		cout << "Please enter a string that only contains alphabet characters: " << endl;
-		getline(cin, userInput);
-		cout << endl;
-
-		letterArray = analyzeString(userInput);
-		cout << "Letter Histogram" << endl;
-		plotHistogram(letterArray);
-		cout << "before charStats" << endl;
-		charStats(letterArray);
-
-		cout << "Do you want to continue? Enter 'quit' to stop the program or any key to continue" << endl;
-		getline(cin, userResponse);
-	} while (userResponse != "quit");
-
-	delete [] letterArray;
-	letterArray = nullptr;
 }
 
 LetterOccurrence * analyzeString(string userInput){
@@ -197,13 +173,23 @@ void printLetterArray(LetterOccurrence * letterArray){
 	}
 }
 
+int findMaxOccurrenceChar(LetterOccurrence * letterArray){
+	int largestValue = letterArray[0].count;
+
+	for (int i = 0; i < 123; i++){
+		if (letterArray[i].count > largestValue){
+			largestValue = letterArray[i].count;
+		}
+	}
+	return largestValue;
+}
+
 void plotHistogram(LetterOccurrence * letterArray){
 	int largestValue = findMaxOccurrenceChar(letterArray);
 
 	char histArr[largestValue + 2][52];
 	// There are 26 alphabetic character, times 2 for upper and lower cases. Hence, there are 52 "columns"
 	// The character with the largest number of occurrence is the row size, pluses 1 for character line and 1 for line feed
-	cout << "hello" << endl;
 	// Plotting algorithm
 	for (int i = 65, m = 0; i <= 90; i++, m++){
 		for (int j = 0; j < (largestValue - letterArray[i].count); j++){
@@ -214,7 +200,6 @@ void plotHistogram(LetterOccurrence * letterArray){
 		}
 		histArr[largestValue][m] = static_cast<char>(i);
 	}
-	cout << "hello" << endl;
 	for (int i = 97, m = 26; i <= 122; i++, m++){
 		for (int j = 0; j < (largestValue - letterArray[i].count); j++){
 			histArr[j][m] = ' ';
@@ -225,7 +210,6 @@ void plotHistogram(LetterOccurrence * letterArray){
 		histArr[largestValue][m] = static_cast<char>(i);
 	}
 	cout << endl;
-	cout << "hello" << endl;
 
 	// Print out the histogram
 	for (int i = 0; i < (largestValue + 1); i++){
@@ -247,7 +231,6 @@ void charStats(LetterOccurrence * letterArray){
 	}
 
 	string tempString1(1, static_cast<char>(maxIndex));
-	// string tempString1 = to_string(static_cast<char>(maxIndex));
 	string tempString2 = to_string(maxOccurrence);
 	string tempString3 = to_string(letterArray[maxIndex].frequency);
 
@@ -272,13 +255,25 @@ void charStats(LetterOccurrence * letterArray){
 	cout << endl;
 }
 
-int findMaxOccurrenceChar(LetterOccurrence * letterArray){
-	int largestValue = letterArray[0].count;
+void runBonus(void){
+	string userInput = "", userResponse = "";
+	LetterOccurrence * letterArray;
+	
+	do {
+		userResponse = "";
+		cout << "Please enter a string that only contains alphabet characters: " << endl;
+		getline(cin, userInput);
+		cout << endl;
 
-	for (int i = 0; i < 123; i++){
-		if (letterArray[i].count > largestValue){
-			largestValue = letterArray[i].count;
-		}
-	}
-	return largestValue;
+		letterArray = analyzeString(userInput);
+		cout << "Letter Histogram" << endl;
+		plotHistogram(letterArray);
+		charStats(letterArray);
+
+		cout << "Do you want to continue? Enter 'quit' to stop the program or any key to continue" << endl;
+		getline(cin, userResponse);
+	} while (userResponse != "quit");
+
+	delete [] letterArray;
+	letterArray = nullptr;
 }

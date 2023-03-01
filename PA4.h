@@ -37,4 +37,5 @@ void plotHistogram(LetterOccurrence * letterArray);
 int findMaxOccurrenceChar(LetterOccurrence * letterArray);
 void charStats(LetterOccurrence * letterArray);
 
+// this is a comment
 #endif
