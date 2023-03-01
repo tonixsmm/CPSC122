@@ -243,15 +243,14 @@ void charStats(LetterOccurrence * letterArray){
 		}
 	}
 
-	string tempChar1;
-	tempChar1.push_back(static_cast<char>(maxIndex));
+	string tempString1(1, static_cast<char>(maxIndex));
 	string tempString2 = to_string(maxOccurrence);
 	string tempString3 = to_string(letterArray[maxIndex].frequency);
 
 	for (int i = 0; i < 123; i++){
 		if (letterArray[i].count == maxOccurrence && static_cast<char>(i) != static_cast<char>(maxIndex)){
-			tempChar1 += ", ";
-			tempChar1.push_back(static_cast<char>(i));
+			// tempString1 += ", ";
+			// tempChar1.push_back(static_cast<char>(i));
 
 			tempString2 += ", ";
 			tempString2 += to_string(letterArray[i].count);
@@ -263,9 +262,9 @@ void charStats(LetterOccurrence * letterArray){
 
 	// Print responses
 	cout << endl;
-	cout << "The letter with the maximum number of occurrences is " << tempChar1 << endl;
-	cout << "The number of occurrences of the letter with the maximum number of occurrences is " << tempString2 << endl;
-	cout << "The frequency of the letter with the maximum number of occurrences is " << tempString3 << endl;
+	cout << "The letter with the maximum number of occurrences: " << tempString1 << endl;
+	cout << "The number of occurrences of the letter with the maximum number of occurrences: " << tempString2 << endl;
+	cout << "The frequency of the letter with the maximum number of occurrences: " << tempString3 << endl;
 	cout << endl;
 }
 
