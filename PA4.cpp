@@ -243,15 +243,15 @@ void charStats(LetterOccurrence * letterArray){
 		}
 	}
 
-	char tempChar1 = static_cast<char>(maxIndex);
+	string tempChar1;
+	tempChar1.push_back(static_cast<char>(maxIndex));
 	string tempString2 = to_string(maxOccurrence);
 	string tempString3 = to_string(letterArray[maxIndex].frequency);
 
 	for (int i = 0; i < 123; i++){
 		if (letterArray[i].count == maxOccurrence && static_cast<char>(i) != static_cast<char>(maxIndex)){
-			tempChar1 += ',';
-			tempChar1 += ' ';
-			tempChar1 += (static_cast<char>(i));
+			tempChar1 += ", ";
+			tempChar1.push_back(static_cast<char>(i));
 
 			tempString2 += ", ";
 			tempString2 += to_string(letterArray[i].count);
