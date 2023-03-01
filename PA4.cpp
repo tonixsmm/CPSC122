@@ -137,7 +137,8 @@ void runBonus(void){
 	do {
 		userResponse = "";
 		cout << "Please enter a string that only contains alphabet characters:" << endl;
-		getline(cin, userInput);
+		// getline(cin, userInput);
+		userInput = "The state of Washington";
 
 		letterArray = analyzeString(userInput);
 		printLetterArray(letterArray);
@@ -163,19 +164,19 @@ LetterOccurrence * analyzeString(string userInput){
 	while (iss.good()) {
 		iss >> word;
 		for (char c : word){
-			letterArray[int(c)].count += 1;
+			letterArray[static_cast<int>(c)].count += 1;
 			count++;
 		}
 	}
 	cout << "Char count: " << count << endl;
 
-	// For uppercase characters. A is 65 and Z is 90
+	// ASCII value for uppercase characters. A is 65 and Z is 90
 	for (int i = 65; i <= 90; i++){
-		letterArray[i].frequency = (letterArray[i].count / count);
+		letterArray[i].frequency = static_cast<double>(letterArray[i].count) / count;
 	}
-	// For lowercase characters. a is 97 and z is 122
+	// ASCII value for lowercase characters. a is 97 and z is 122
 	for (int i = 97; i <= 122; i++){
-		letterArray[i].frequency = (letterArray[i].count / count);
+		letterArray[i].frequency = static_cast<double>(letterArray[i].count) / count;
 	}
 
 	return letterArray;
@@ -185,12 +186,12 @@ void printLetterArray(LetterOccurrence * letterArray){
 	for (int i = 65; i <= 90; i ++){
 		cout << char(i);
 		cout << ": Count: " << letterArray[i].count;
-		cout << " Freq: " << setprecision(2) << letterArray[i].frequency << endl;
+		cout << " Freq: " << setprecision(2) << fixed << letterArray[i].frequency << endl;
 	}
 	for (int i = 97; i <= 122; i ++){
 		cout << char(i);
 		cout << ": Count: " << letterArray[i].count;
-		cout << " Freq: " << setprecision(2) << letterArray[i].frequency << endl;
+		cout << " Freq: " << setprecision(2) << fixed << letterArray[i].frequency << endl;
 	}
 	//TODO: fix frequency bug
 }
