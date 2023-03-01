@@ -1,3 +1,12 @@
+/*
+Name: Tony Nguyen
+Class: CPSC 122 01
+Date: March 1, 2022
+Programming Assignment: PA4
+Description: This program implements several tasks required by PA4
+Note: I attempted the bonus. Please run PA4BonusMain.cpp to see the bonus part
+*/
+
 #ifndef PA4_H
 #define PA4_H
 
@@ -24,7 +33,6 @@ struct LetterOccurrence{
 
 Package * loadPackages(ifstream&, string *, int *);
 void computePackageStats(const Package[], const int, int * heaviestId, double *, double *);
-// TODO: add your additional function prototypes here
 void runReadFromFile(string filename);
 void openFile(ifstream& inFile, string fileName);
 void countPackage(ifstream& inFile, int * numPackage);
@@ -37,5 +45,4 @@ void plotHistogram(LetterOccurrence * letterArray);
 int findMaxOccurrenceChar(LetterOccurrence * letterArray);
 void charStats(LetterOccurrence * letterArray);
 
-// this is a comment
 #endif
