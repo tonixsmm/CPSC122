@@ -1,6 +1,4 @@
 # README !!!
-## IMPORTANT
-Please run `PA4BonusMain.cpp` with `PA4.cpp` for the bonus part. They are not included in the `Main.cpp` file.
 
 ## To Setup (One Time Only)
 `git clone (your github repo url here)`  
