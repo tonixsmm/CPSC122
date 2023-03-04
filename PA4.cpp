@@ -4,7 +4,7 @@ Class: CPSC 122 01
 Date: March 1, 2022
 Programming Assignment: PA4
 Description: This program implements several tasks required by PA4
-Note: I attempted the bonus. Please run PA4BonusMain.cpp to see the bonus part
+Note: I attempted the bonus
 */
 
 #include "PA4.h"
@@ -219,8 +219,16 @@ LetterOccurrence * analyzeString(string userInput){
 	int count = 0;
 
 	// Create a LetterOccurrence array, walk through the string, and count their characters
-	LetterOccurrence * letterArray = new LetterOccurrence[123]; 
 	// Size of 123 to cover just enought of the last lowercase character ASCII value
+	LetterOccurrence * letterArray = new LetterOccurrence[123]; 
+
+	// Initializing array
+	for (int i = 0; i < 123; i++){
+		letterArray[i].count = 0;
+		letterArray[i].frequency = 0.0;
+	}
+
+	// Walk through the input string count its characters
 	iss.clear();
 	iss.str(userInput);
 	while (iss.good()) {
