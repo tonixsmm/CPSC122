@@ -2,18 +2,26 @@
 
 // TODO: finish this function
 string convertToLowercase(string s) {
-
-	return "";
+	for (char c : s){
+		c = tolower(c);
+	}
+	return s;
 }
 
 // TODO: finish Song default value constructor
 Song::Song() {
-
+	title = "";
+	artist = "";
+	genre = "";
+	rating = 1;
 }
 
 // TODO: finish Song explicit value constructor
 Song::Song(string titleParam, string artistParam, string genreParam, int ratingParam) {
-
+	title = convertToLowercase(titleParam);
+	artist = convertToLowercase(artistParam);
+	genre = convertToLowercase(genreParam);
+	setRating(ratingParam);
 }
 
 string Song::getTitle() {
@@ -61,11 +69,27 @@ void Song::setRating(int newRating) {
 
 // TODO: finish this function
 void Song::displaySong() {
-
+	cout << "Song title: " << title << endl;
+	cout << "Song artist: " << artist << endl;
+	cout << "Song genre: " << genre << endl;
+	cout << "Song rating: " << rating << endl;
 }
 
 // TODO: finish this function
 string Song::getStringAttributeValue(string attribute) {
-	
-	return "";
+	if (convertToLowercase(attribute) == "title") {
+		return getTitle();
+	}
+	else if (convertToLowercase(attribute) == "artist") {
+		return getArtist();
+	}
+	else if (convertToLowercase(attribute) == "genre") {
+		return getGenre();
+	}
+	else if (convertToLowercase(attribute) == "rating") {
+		return to_string(getRating());
+	}
+	else {
+		return "";
+	}
 }
