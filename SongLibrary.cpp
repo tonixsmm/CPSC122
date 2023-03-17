@@ -8,7 +8,11 @@ SongLibrary::SongLibrary() {
 
 // TODO: finish SongLibrary destructor
 SongLibrary::~SongLibrary() {
-	
+	if (songs != nullptr){
+		delete [] songs;
+		songs = nullptr;
+		numSongs = 0;
+	}
 }
 
 int SongLibrary::getNumSongs() {
