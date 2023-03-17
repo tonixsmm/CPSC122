@@ -2,10 +2,11 @@
 
 // TODO: finish this function
 string convertToLowercase(string s) {
+	string tempString = "";
 	for (char c : s){
-		c = tolower(c);
+		tempString += tolower(c);
 	}
-	return s;
+	return tempString;
 }
 
 // TODO: finish Song default value constructor
