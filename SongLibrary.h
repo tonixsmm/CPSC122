@@ -31,6 +31,7 @@ class SongLibrary {
 		void performEditSong(int, string, string);
 
 		// TODO: add your additional public member functions here
+		SongLibrary(const SongLibrary & otherSongLibrary);
 };
 
 #endif
