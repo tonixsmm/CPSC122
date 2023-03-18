@@ -94,3 +94,13 @@ string Song::getStringAttributeValue(string attribute) {
 		return "";
 	}
 }
+
+const Song & Song::operator=(const Song& right){
+	if (this != &right){
+		title = right.title;
+		artist = right.artist;
+		genre = right.genre;
+		rating = right.rating;
+		return *this;
+	}
+}

@@ -34,6 +34,8 @@ class Song {
 
 		void displaySong();
 		string getStringAttributeValue(string);
+
+		const Song & operator=(const Song&);
 };
 
 #endif
