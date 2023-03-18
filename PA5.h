@@ -16,5 +16,6 @@ void displayMenu();
 int getValidChoice();
 void executeUserChoice(int, SongLibrary&);
 void runMusicManager();
+void testTask6(SongLibrary lib);
 
 #endif

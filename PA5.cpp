@@ -47,6 +47,7 @@ void executeUserChoice(int choice, SongLibrary& lib) {
 			break;
 		case 6:
 		 	// TODO: call a helper member function, something like lib.addSongToLibrary();
+			testTask6(lib);
 		 	break;
 		case 7:
 			// TODO: call a helper member function, something like lib.removeSongFromLibrary();
@@ -72,4 +73,11 @@ void runMusicManager() {
 		}
 	} while (choice != QUIT_OPTION);
 	cout << "Thanks for you using the CPSC 122 Music Manager!!" << endl;
+}
+
+void testTask6(SongLibrary lib){
+	Song newSong("all of the girls you loved before", "taylor swift", "pop", 5);
+	lib.performAddSong(newSong);
+	Song newSong2("safe & sound", "taylor swift", "pop", 4);
+	lib.performAddSong(newSong2);
 }
