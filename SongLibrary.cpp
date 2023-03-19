@@ -174,3 +174,30 @@ void SongLibrary::loadSongFromFile(ifstream & inFile, int numSongFromFile){
 		performAddSong(tempSong);
 	}
 }
+
+void SongLibrary::addSongToLibrary(){
+	string tempString = "";
+	Song tempSong;
+
+	cout << "Please enter the song title: ";
+	getline(cin, tempString);
+	tempSong.setTitle(tempString);
+	cout << endl;
+
+	cout << "Please enter the song artist: ";
+	getline(cin, tempString);
+	tempSong.setArtist(tempString);
+	cout << endl;
+
+	cout << "Please enter the song genre: ";
+	getline(cin, tempString);
+	tempSong.setGenre(tempString);
+	cout << endl;
+
+	cout << "Please enter the song rating: ";
+	getline(cin, tempString);
+	tempSong.setRating(stoi(tempString));
+	cout << endl;
+
+	performAddSong(tempSong);
+}

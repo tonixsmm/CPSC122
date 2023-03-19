@@ -36,6 +36,7 @@ class SongLibrary {
 		// TODO: add your additional public member functions here
 		SongLibrary(const SongLibrary & otherSongLibrary);
 		void loadSongFromFile(ifstream &, int);
+		void addSongToLibrary();
 };
 
 #endif
