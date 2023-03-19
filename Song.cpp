@@ -103,14 +103,17 @@ const Song & Song::operator=(const Song& right){
 		rating = right.rating;
 		return *this;
 	}
+	else {
+		return right;
+	}
 }
 
 string beautyPrint(string word){
 	string tempString = word;
 	
 	tempString[0] = toupper(tempString[0]);
-	for (int i = 0; i < tempString.length(); i++){
-		if ((isspace(tempString[i]) || tempString[i] == 40 || tempString[i] == 91 || tempString[i] == 123) && i <= tempString.length() - 1){
+	for (int i = 0; i < static_cast<int>(tempString.length()); i++){
+		if ((isspace(tempString[i]) || tempString[i] == 40 || tempString[i] == 91 || tempString[i] == 123) && i <= static_cast<int>(tempString.length()) - 1){
 			tempString[i + 1] = toupper(tempString[i + 1]);
 		}
 	}
