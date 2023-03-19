@@ -110,7 +110,7 @@ string beautyPrint(string word){
 	
 	tempString[0] = toupper(tempString[0]);
 	for (int i = 0; i < tempString.length(); i++){
-		if (isspace(tempString[i]) && i <= tempString.length() - 1){
+		if ((isspace(tempString[i]) || tempString[i] == 40 || tempString[i] == 91 || tempString[i] == 123) && i <= tempString.length() - 1){
 			tempString[i + 1] = toupper(tempString[i + 1]);
 		}
 	}
