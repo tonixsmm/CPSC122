@@ -36,17 +36,29 @@ void SongLibrary::setSongsArray(Song * newSongsArr) {
 
 // TODO: finish this function
 void SongLibrary::displayLibrary() {
-	cout << "All Songs in the Library" << endl;
+	cout << "All Songs In The Library" << endl;
 	cout << "------------------------" << endl;
+	cout << endl;
 
 	for (int i = 0; i < numSongs; i++){
-		songs[i].displaySong();
+		cout << "SONG " << i + 1 << endl;
+ 		songs[i].displaySong();
+		cout << endl;
 	}
 }
 
 // TODO: finish this function
 void SongLibrary::performLoad(string filename) {
-	
+	ifstream inFile;
+	int numSongFromFile = 0;
+
+	openFile(inFile, filename);
+
+	numSongFromFile = countSongFromFile(inFile);
+	inFile.clear();
+	inFile.seekg(0);
+
+	loadSongFromFile(inFile, numSongFromFile);
 }
 
 // TODO: finish this function
@@ -66,16 +78,24 @@ bool SongLibrary::performSearch(string searchAttribute, string searchAttributeVa
 }
 
 // TODO: finish this function
+// CHECK FOR A MORE EFFICIENT WAY
 void SongLibrary::performAddSong(Song newSong) {
 	numSongs += 1;
+
 	Song * tempSongs = new Song[numSongs];
+		
 	for (int i = 0; i < numSongs - 1; i++){
-		tempSongs[i] = songs[i];
+		tempSongs[i].setTitle(songs[i].getTitle());
+		tempSongs[i].setArtist(songs[i].getArtist());
+		tempSongs[i].setGenre(songs[i].getGenre());
+		tempSongs[i].setRating(songs[i].getRating());
 	}
-	
-	tempSongs[numSongs - 1] = newSong;
+
 	setSongsArray(tempSongs);
+	tempSongs[numSongs - 1] = newSong;
+
 	// delete [] tempSongs;	// Double check if there is a leak here
+
 }
 
 // TODO: finish this function
@@ -98,5 +118,59 @@ SongLibrary::SongLibrary(const SongLibrary & otherSongLibrary){
 	}
 	else {
 		songs = nullptr;
+	}
+}
+
+/*
+open
+Function: openFile()
+ * Date Created: 02/04/2022
+ * Date Last Modified: 02/26/2022
+ * Description: This function opens a file and checks if it is opened successfully
+ * Input parameters: File stream and file name
+ * Returns: None
+ * Pre: None
+ * Post: None
+*/
+void openFile(ifstream& inFile, string fileName){
+	inFile.open(fileName);
+
+	if (inFile.is_open()){
+        cout << "Successfully opened " << fileName << endl;
+    }
+    else{
+        cout << "Failed to open " << fileName << endl;
+        exit(-1);
+	}
+}
+
+int countSongFromFile(ifstream & inFile){
+	int count = 0, numSongFromFile = 0;
+	string line = "";
+
+	while (!inFile.eof()){
+		getline(inFile, line);
+		if (!inFile.bad()){
+			count++;
+		}
+	}
+	numSongFromFile = count / 5;
+
+	return numSongFromFile;
+}
+
+void SongLibrary::loadSongFromFile(ifstream & inFile, int numSongFromFile){
+	string tempTitle = "", tempArtist = "", tempGenre = "", tempLine = "", tempRating = "";
+
+	for (int i = 0; i < numSongFromFile; i++){
+		if (!inFile.bad()){
+			getline(inFile, tempTitle);
+			getline(inFile, tempArtist);
+			getline(inFile, tempGenre);
+			getline(inFile, tempRating);
+			getline(inFile, tempLine);
+		}
+		Song tempSong(tempTitle, tempArtist, tempGenre, stoi(tempRating));
+		performAddSong(tempSong);
 	}
 }

@@ -7,6 +7,9 @@
 
 using namespace std;
 
+void openFile(ifstream &, string);
+int countSongFromFile(ifstream &);
+
 class SongLibrary {
 	private:
 		int numSongs;
@@ -32,6 +35,7 @@ class SongLibrary {
 
 		// TODO: add your additional public member functions here
 		SongLibrary(const SongLibrary & otherSongLibrary);
+		void loadSongFromFile(ifstream &, int);
 };
 
 #endif

@@ -70,10 +70,10 @@ void Song::setRating(int newRating) {
 
 // TODO: finish this function
 void Song::displaySong() {
-	cout << "Song title: " << title << endl;
-	cout << "Song artist: " << artist << endl;
-	cout << "Song genre: " << genre << endl;
-	cout << "Song rating: " << rating << endl;
+	cout << "Title:\t" << beautyPrint(title) << endl;
+	cout << "Artist:\t" << beautyPrint(artist) << endl;
+	cout << "Genre:\t" << beautyPrint(genre) << endl;
+	cout << "Rating:\t" << rating << endl;
 }
 
 // TODO: finish this function
@@ -103,4 +103,16 @@ const Song & Song::operator=(const Song& right){
 		rating = right.rating;
 		return *this;
 	}
+}
+
+string beautyPrint(string word){
+	string tempString = word;
+	
+	tempString[0] = toupper(tempString[0]);
+	for (int i = 0; i < tempString.length(); i++){
+		if (isspace(tempString[i]) && i <= tempString.length() - 1){
+			tempString[i + 1] = toupper(tempString[i + 1]);
+		}
+	}
+	return tempString;
 }
