@@ -185,6 +185,7 @@ void SongLibrary::loadSongFromFile(ifstream & inFile, int numSongFromFile){
 			getline(inFile, tempLine);
 		}
 
+		count = 0;
 		// Check if there's a song that has already been in the library. If so, not loading it.
 		if (numSongs > 0){
 			for (int j = 0; j < numSongs; j++){
@@ -195,14 +196,14 @@ void SongLibrary::loadSongFromFile(ifstream & inFile, int numSongFromFile){
 				if (count == numSongs){
 					Song tempSong(tempTitle, tempArtist, tempGenre, stoi(tempRating));
 					performAddSong(tempSong);
-					count = 0;
+					// count = 0;
 				}
 			}
 		}
 		else if (numSongs == 0){
 			Song tempSong(tempTitle, tempArtist, tempGenre, stoi(tempRating));
 			performAddSong(tempSong);
-			count = 0;
+			// count = 0;
 		}
 	}
 }
