@@ -37,6 +37,8 @@ class SongLibrary {
 		SongLibrary(const SongLibrary & otherSongLibrary);
 		void loadSongFromFile(ifstream &, int);
 		void addSongToLibrary();
+		void loadLibrary();
+		void saveLibrary();
 };
 
 #endif

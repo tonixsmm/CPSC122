@@ -59,11 +59,24 @@ void SongLibrary::performLoad(string filename) {
 	inFile.seekg(0);
 
 	loadSongFromFile(inFile, numSongFromFile);
+
+	inFile.close();
 }
 
 // TODO: finish this function
 void SongLibrary::performSave(string filename) {
-	
+	fstream outFile;
+	outFile.open(filename, ios::out);
+
+	for (int i = 0; i < numSongs; i++){
+		outFile << songs[i].getTitle() << endl;
+		outFile << songs[i].getArtist() << endl;
+		outFile << songs[i].getGenre() << endl;
+		outFile << songs[i].getRating() << endl;
+		outFile << endl;
+	}
+
+	outFile.close();
 }
 
 // TODO: finish this function
@@ -161,6 +174,7 @@ int countSongFromFile(ifstream & inFile){
 
 void SongLibrary::loadSongFromFile(ifstream & inFile, int numSongFromFile){
 	string tempTitle = "", tempArtist = "", tempGenre = "", tempLine = "", tempRating = "";
+	int count = 0;
 
 	for (int i = 0; i < numSongFromFile; i++){
 		if (!inFile.bad()){
@@ -170,8 +184,26 @@ void SongLibrary::loadSongFromFile(ifstream & inFile, int numSongFromFile){
 			getline(inFile, tempRating);
 			getline(inFile, tempLine);
 		}
-		Song tempSong(tempTitle, tempArtist, tempGenre, stoi(tempRating));
-		performAddSong(tempSong);
+
+		// Check if there's a song that has already been in the library. If so, not loading it.
+		if (numSongs > 0){
+			for (int j = 0; j < numSongs; j++){
+				if (tempTitle != songs[j].getTitle()){
+					count++;
+				}
+
+				if (count == numSongs){
+					Song tempSong(tempTitle, tempArtist, tempGenre, stoi(tempRating));
+					performAddSong(tempSong);
+					count = 0;
+				}
+			}
+		}
+		else if (numSongs == 0){
+			Song tempSong(tempTitle, tempArtist, tempGenre, stoi(tempRating));
+			performAddSong(tempSong);
+			count = 0;
+		}
 	}
 }
 
@@ -182,22 +214,38 @@ void SongLibrary::addSongToLibrary(){
 	cout << "Please enter the song title: ";
 	getline(cin, tempString);
 	tempSong.setTitle(tempString);
-	cout << endl;
 
 	cout << "Please enter the song artist: ";
 	getline(cin, tempString);
 	tempSong.setArtist(tempString);
-	cout << endl;
 
 	cout << "Please enter the song genre: ";
 	getline(cin, tempString);
 	tempSong.setGenre(tempString);
-	cout << endl;
 
 	cout << "Please enter the song rating: ";
 	getline(cin, tempString);
 	tempSong.setRating(stoi(tempString));
-	cout << endl;
 
 	performAddSong(tempSong);
+}
+
+void SongLibrary::loadLibrary(){
+	string fileName = "";
+
+	cout << "Please enter filename to be opened: " << endl;
+	cin >> fileName;
+	// fileName = "../library.txt";
+
+	performLoad(fileName);
+}
+
+void SongLibrary::saveLibrary(){
+	string fileName = "";
+
+	cout << "Enter the filename that you want to save your library to: " << endl;
+	cin >> fileName;
+	// fileName = "../SaveTest.txt";
+
+	performSave(fileName);;
 }

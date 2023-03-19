@@ -34,11 +34,10 @@ void executeUserChoice(int choice, SongLibrary& lib) {
 			lib.displayLibrary();
 			break;
 		case 2:
-			// TODO: call a helper member function, something like lib.loadLibrary();
-			lib.performLoad("../library.txt");
+			lib.loadLibrary();
 			break;
 		case 3: 
-			// TODO: call a helper member function, something like lib.saveLibrary();
+			lib.saveLibrary();
 			break;
 		case 4:
 			// TODO: call a helper member function, something like lib.sortLibrary();
@@ -47,7 +46,6 @@ void executeUserChoice(int choice, SongLibrary& lib) {
 			// TODO: call a helper member function, something like lib.searchLibrary();
 			break;
 		case 6:
-		 	// TODO: call a helper member function, something like lib.addSongToLibrary();
 			lib.addSongToLibrary();
 		 	break;
 		case 7:
