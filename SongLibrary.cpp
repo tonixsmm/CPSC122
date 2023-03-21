@@ -145,24 +145,29 @@ void SongLibrary::performRemoveSong(int indexToRemove) {
 	int oldNumSongs = numSongs;
 	numSongs -= 1;
 
-	Song * tempSongs = new Song[numSongs];
-		
-	for (int i = 0, j = 0; i <= numSongs, j < oldNumSongs; i++, j++){
-		if (j < indexToRemove){
-			tempSongs[i].setTitle(songs[j].getTitle());
-			tempSongs[i].setArtist(songs[j].getArtist());
-			tempSongs[i].setGenre(songs[j].getGenre());
-			tempSongs[i].setRating(songs[j].getRating());
+	if (numSongs > 0){
+		Song * tempSongs = new Song[numSongs];
+			
+		for (int i = 0, j = 0; i <= numSongs, j < oldNumSongs; i++, j++){
+			if (j < indexToRemove){
+				tempSongs[i].setTitle(songs[j].getTitle());
+				tempSongs[i].setArtist(songs[j].getArtist());
+				tempSongs[i].setGenre(songs[j].getGenre());
+				tempSongs[i].setRating(songs[j].getRating());
+			}
+			else if (j > indexToRemove){
+				tempSongs[i - 1].setTitle(songs[j].getTitle());
+				tempSongs[i - 1].setArtist(songs[j].getArtist());
+				tempSongs[i - 1].setGenre(songs[j].getGenre());
+				tempSongs[i - 1].setRating(songs[j].getRating());
+			}
 		}
-		else if (j > indexToRemove){
-			tempSongs[i - 1].setTitle(songs[j].getTitle());
-			tempSongs[i - 1].setArtist(songs[j].getArtist());
-			tempSongs[i - 1].setGenre(songs[j].getGenre());
-			tempSongs[i - 1].setRating(songs[j].getRating());
-		}
+		setSongsArray(tempSongs);
 	}
-
-	setSongsArray(tempSongs);
+	else {
+		setSongsArray(nullptr);
+		setNumSongs(0);
+	}
 }
 
 // TODO: finish this function
@@ -349,4 +354,13 @@ void SongLibrary::searchLibrary(){
 
 	delete foundSong;
 	foundSong = nullptr;
+}
+
+void SongLibrary::removeSongFromLibrary(){
+	int indexToRemove = -1;
+
+	cout << "Please enter the song index to be removed from the library: " << endl;
+	cin >> indexToRemove;
+
+	performRemoveSong(indexToRemove);
 }
