@@ -41,6 +41,8 @@ class SongLibrary {
 		void loadLibrary();
 		void saveLibrary();
 		void sortLibrary();
+		void searchLibrary();
+		void removeSongFromLibrary();
 };
 
 #endif

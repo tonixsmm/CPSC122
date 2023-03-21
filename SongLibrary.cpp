@@ -94,7 +94,28 @@ void SongLibrary::performSort(string attribute) {
 
 // TODO: finish this function
 bool SongLibrary::performSearch(string searchAttribute, string searchAttributeValue, Song * foundSong, int * index) {
+	string tempString = "";
 	
+	// Convert searchAttributeValue to lowercases
+	for (char c : searchAttributeValue){
+		tempString += tolower(c);
+	}
+	searchAttributeValue = tempString;
+
+	// Iterate through the songs array
+	for (int i = 0; i < numSongs; i++){
+		if (songs[i].getStringAttributeValue(searchAttribute) == searchAttributeValue){
+			foundSong->setTitle(songs[i].getTitle());
+			foundSong->setArtist(songs[i].getArtist());
+			foundSong->setGenre(songs[i].getGenre());
+			foundSong->setRating(songs[i].getRating());
+			*index = i;
+			return true;
+		}
+		else {
+			*index = -1;
+		}
+	}
 	return false;
 }
 
@@ -121,7 +142,27 @@ void SongLibrary::performAddSong(Song newSong) {
 
 // TODO: finish this function
 void SongLibrary::performRemoveSong(int indexToRemove) {
-	
+	int oldNumSongs = numSongs;
+	numSongs -= 1;
+
+	Song * tempSongs = new Song[numSongs];
+		
+	for (int i = 0, j = 0; i <= numSongs, j < oldNumSongs; i++, j++){
+		if (j < indexToRemove){
+			tempSongs[i].setTitle(songs[j].getTitle());
+			tempSongs[i].setArtist(songs[j].getArtist());
+			tempSongs[i].setGenre(songs[j].getGenre());
+			tempSongs[i].setRating(songs[j].getRating());
+		}
+		else if (j > indexToRemove){
+			tempSongs[i - 1].setTitle(songs[j].getTitle());
+			tempSongs[i - 1].setArtist(songs[j].getArtist());
+			tempSongs[i - 1].setGenre(songs[j].getGenre());
+			tempSongs[i - 1].setRating(songs[j].getRating());
+		}
+	}
+
+	setSongsArray(tempSongs);
 }
 
 // TODO: finish this function
@@ -193,7 +234,7 @@ void SongLibrary::loadSongFromFile(ifstream & inFile, int numSongFromFile){
 			getline(inFile, tempLine);
 		}
 
-		// Check if there's a song that has already been in the library. If so, not loading it.
+		// Check if there's a song that has already been in the library. If so, not adding it.
 		count = 0;
 		if (numSongs > 0){
 			for (int j = 0; j < numSongs; j++){
@@ -281,4 +322,31 @@ void SongLibrary::sortLibrary(){
 	cin >> attribute;
 
 	performSort(attribute);
+}
+
+void SongLibrary::searchLibrary(){
+	string searchAttribute = "", searchAttributeValue = "";
+	Song * foundSong = new Song;
+	int index = 0;
+	bool searchResult = false;
+
+	cout << "Please enter the attribute that you want to search for (title, artist, genre, or rating): " << endl;
+	getline(cin, searchAttribute);
+	cout << "Please enter the attribute value to be searched: " << endl;
+	getline(cin, searchAttributeValue);
+
+	searchResult = performSearch(searchAttribute, searchAttributeValue, foundSong, &index);
+
+	if (searchResult == true) {
+		cout << "A song with the " << searchAttribute << " of " << searchAttributeValue << " is found!" << endl;
+		cout << "Song Information" << endl;
+		cout << "----------------" << endl;
+		foundSong->displaySong();
+	}
+	else {
+		cout << "A song with the " << searchAttribute << " of " << searchAttributeValue << " is not found!" << endl;
+	}
+
+	delete foundSong;
+	foundSong = nullptr;
 }
