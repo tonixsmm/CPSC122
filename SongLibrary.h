@@ -9,6 +9,7 @@ using namespace std;
 
 void openFile(ifstream &, string);
 int countSongFromFile(ifstream &);
+void swap(Song &, Song &);
 
 class SongLibrary {
 	private:
@@ -39,6 +40,7 @@ class SongLibrary {
 		void addSongToLibrary();
 		void loadLibrary();
 		void saveLibrary();
+		void sortLibrary();
 };
 
 #endif

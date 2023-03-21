@@ -81,7 +81,15 @@ void SongLibrary::performSave(string filename) {
 
 // TODO: finish this function
 void SongLibrary::performSort(string attribute) {
-	
+	int maxElement = 0, index = 0;
+
+  	for (maxElement = numSongs - 1; maxElement > 0; maxElement--) {
+    	for (index = 0; index < maxElement; index++) {
+      		if (songs[index].getStringAttributeValue(attribute) > songs[index + 1].getStringAttributeValue(attribute) && songs[index].getStringAttributeValue(attribute) != "" && songs[index + 1].getStringAttributeValue(attribute) != "") {
+        		swap(songs[index], songs[index + 1]);
+      		}
+    	}
+  	}
 }
 
 // TODO: finish this function
@@ -185,8 +193,8 @@ void SongLibrary::loadSongFromFile(ifstream & inFile, int numSongFromFile){
 			getline(inFile, tempLine);
 		}
 
-		count = 0;
 		// Check if there's a song that has already been in the library. If so, not loading it.
+		count = 0;
 		if (numSongs > 0){
 			for (int j = 0; j < numSongs; j++){
 				if (tempTitle != songs[j].getTitle()){
@@ -196,14 +204,12 @@ void SongLibrary::loadSongFromFile(ifstream & inFile, int numSongFromFile){
 				if (count == numSongs){
 					Song tempSong(tempTitle, tempArtist, tempGenre, stoi(tempRating));
 					performAddSong(tempSong);
-					// count = 0;
 				}
 			}
 		}
 		else if (numSongs == 0){
 			Song tempSong(tempTitle, tempArtist, tempGenre, stoi(tempRating));
 			performAddSong(tempSong);
-			// count = 0;
 		}
 	}
 }
@@ -234,9 +240,9 @@ void SongLibrary::addSongToLibrary(){
 void SongLibrary::loadLibrary(){
 	string fileName = "";
 
-	cout << "Please enter filename to be opened: " << endl;
-	cin >> fileName;
-	// fileName = "../library.txt";
+	// cout << "Please enter filename to be opened: " << endl;
+	// cin >> fileName;
+	fileName = "../library.txt";
 
 	performLoad(fileName);
 }
@@ -244,9 +250,35 @@ void SongLibrary::loadLibrary(){
 void SongLibrary::saveLibrary(){
 	string fileName = "";
 
-	cout << "Enter the filename that you want to save your library to: " << endl;
-	cin >> fileName;
-	// fileName = "../SaveTest.txt";
+	// cout << "Enter the filename that you want to save your library to: " << endl;
+	// cin >> fileName;
+	fileName = "../SaveTest.txt";
 
 	performSave(fileName);;
+}
+
+/*
+Function: swap()
+ * Date Created: 02/06/2022
+ * Date Last Modified: 03/20/2022
+ * Description: This function swaps two integers
+ * Input parameters: Two integers
+ * Returns: None
+ * Pre: Two intergers must be previously intialized and passed by reference
+ * Post: None
+ * Note: Adapted from Gaddis
+*/
+void swap(Song &a, Song &b) {
+  	Song temp = a;
+  	a = b;
+  	b = temp;
+}
+
+void SongLibrary::sortLibrary(){
+	string attribute = "";
+
+	cout << "Please enter the attribute that you want your library to be sorted by (title, artist, genre, or rating): " << endl;
+	cin >> attribute;
+
+	performSort(attribute);
 }
