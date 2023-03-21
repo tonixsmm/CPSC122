@@ -124,7 +124,7 @@ void SongLibrary::displayLibrary() {
 	cout << endl;
 
 	for (int i = 0; i < numSongs; i++){
-		cout << "SONG " << i + 1 << endl;
+		cout << "SONG " << i << endl;
  		songs[i].displaySong();
 		cout << endl;
 	}
