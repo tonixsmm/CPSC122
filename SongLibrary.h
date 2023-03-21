@@ -1,3 +1,12 @@
+/*
+Name: Tony Nguyen
+Class: CPSC 122 01
+Date: March 21, 2022
+Programming Assignment: PA5
+Description: This program implements several tasks required by PA5
+Note: I attempted the bonus
+*/
+
 #ifndef SONG_LIBRARY_H
 #define SONG_LIBRARY_H
 
@@ -7,16 +16,17 @@
 
 using namespace std;
 
+// Global function prototypes
 void openFile(ifstream &, string);
 int countSongFromFile(ifstream &);
 void swap(Song &, Song &);
 
+// Class prototypes
 class SongLibrary {
 	private:
 		int numSongs;
 		Song * songs;
 		
-		// TODO: add your additional private member functions here
 	public:
 		SongLibrary();
 		~SongLibrary();
@@ -34,7 +44,6 @@ class SongLibrary {
 		void performRemoveSong(int);
 		void performEditSong(int, string, string);
 
-		// TODO: add your additional public member functions here
 		SongLibrary(const SongLibrary & otherSongLibrary);
 		void loadSongFromFile(ifstream &, int);
 		void addSongToLibrary();

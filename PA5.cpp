@@ -1,5 +1,24 @@
+/*
+Name: Tony Nguyen
+Class: CPSC 122 01
+Date: March 21, 2022
+Programming Assignment: PA5
+Description: This program implements several tasks required by PA5
+Note: I attempted the bonus
+*/
+
 #include "PA5.h"
 
+/*
+Function: displayMenu()
+ * Date Created: 03/15/2023
+ * Date Last Modified: 03/15/2023
+ * Description: This function prints out command options
+ * Input parameters: None
+ * Returns: None
+ * Pre: None
+ * Post: None
+*/
 void displayMenu() {
 	cout << endl << "Welcome to the CPSC 122 Music Manager!!" << endl;
 	cout << "Please choose from the following options: " << endl;
@@ -14,6 +33,16 @@ void displayMenu() {
 	cout << "9) Quit" << endl;
 }
 
+/*
+Function: getValidChoice()
+ * Date Created: 03/15/2023
+ * Date Last Modified: 03/15/2023
+ * Description: This function validates user's input
+ * Input parameters: None
+ * Returns: An int
+ * Pre: None
+ * Post: None
+*/
 int getValidChoice() {
 	int choice = -1;
 	string temp;
@@ -28,6 +57,16 @@ int getValidChoice() {
 	return choice;
 }
 
+/*
+Function: executeUserChoice()
+ * Date Created: 03/15/2023
+ * Date Last Modified: 03/15/2023
+ * Description: This is a driver function that calls out necessary functions to perform tasks
+ * Input parameters: An int and a pass-by-reference SongLibrary object
+ * Returns: None
+ * Pre: None
+ * Post: None
+*/
 void executeUserChoice(int choice, SongLibrary& lib) {
 	switch (choice) {
 		case 1:
@@ -52,7 +91,6 @@ void executeUserChoice(int choice, SongLibrary& lib) {
 			lib.removeSongFromLibrary();
 			break;
 		case 8:
-			// TODO: call a helper member function, something like lib.editSongInLibrary();
 			lib.editSongInLibrary();
 			break;
 		default:
@@ -61,6 +99,16 @@ void executeUserChoice(int choice, SongLibrary& lib) {
 	}
 }
 
+/*
+Function: runMusicManager()
+ * Date Created: 03/15/2023
+ * Date Last Modified: 03/15/2023
+ * Description: This is a driver function that calls out necessary functions to perform tasks
+ * Input parameters: None
+ * Returns: None
+ * Pre: None
+ * Post: None
+*/
 void runMusicManager() {
 	SongLibrary lib;
 	
