@@ -305,9 +305,9 @@ void SongLibrary::addSongToLibrary(){
 void SongLibrary::loadLibrary(){
 	string fileName = "";
 
-	// cout << "Please enter filename to be opened: " << endl;
-	// cin >> fileName;
-	fileName = "../library.txt";
+	cout << "Please enter filename to be opened: " << endl;
+	cin >> fileName;
+	// fileName = "../library.txt";
 
 	performLoad(fileName);
 }
@@ -315,9 +315,9 @@ void SongLibrary::loadLibrary(){
 void SongLibrary::saveLibrary(){
 	string fileName = "";
 
-	// cout << "Enter the filename that you want to save your library to: " << endl;
-	// cin >> fileName;
-	fileName = "../SaveTest.txt";
+	cout << "Enter the filename that you want to save your library to: " << endl;
+	cin >> fileName;
+	// fileName = "../SaveTest.txt";
 
 	performSave(fileName);;
 }
