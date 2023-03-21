@@ -43,6 +43,7 @@ class SongLibrary {
 		void sortLibrary();
 		void searchLibrary();
 		void removeSongFromLibrary();
+		void editSongInLibrary();
 };
 
 #endif

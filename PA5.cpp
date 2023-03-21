@@ -53,6 +53,7 @@ void executeUserChoice(int choice, SongLibrary& lib) {
 			break;
 		case 8:
 			// TODO: call a helper member function, something like lib.editSongInLibrary();
+			lib.editSongInLibrary();
 			break;
 		default:
 			cout << "Unrecognized menu choice" << endl;

@@ -172,7 +172,26 @@ void SongLibrary::performRemoveSong(int indexToRemove) {
 
 // TODO: finish this function
 void SongLibrary::performEditSong(int indexToEdit, string attribute, string newAttributeValue) {	
-	
+	string tempString = "";
+
+	// Convert to all lowercase
+	for (char c : newAttributeValue){
+		tempString += tolower(c);
+	}
+	newAttributeValue = tempString;
+
+	if (attribute == "title"){
+		songs[indexToEdit].setTitle(newAttributeValue);
+	}
+	else if (attribute == "artist"){
+		songs[indexToEdit].setArtist(newAttributeValue);
+	}
+	else if (attribute == "genre"){
+		songs[indexToEdit].setGenre(newAttributeValue);
+	}
+	else if (attribute == "rating"){
+		songs[indexToEdit].setRating(stoi(newAttributeValue));
+	}
 }
 
 SongLibrary::SongLibrary(const SongLibrary & otherSongLibrary){
@@ -363,4 +382,17 @@ void SongLibrary::removeSongFromLibrary(){
 	cin >> indexToRemove;
 
 	performRemoveSong(indexToRemove);
+}
+
+void SongLibrary::editSongInLibrary(){
+	string attribute = "", newAttributeValue = "", indexToEdit = "";
+
+	cout << "Please enter the song index that you want to edit: ";
+	getline(cin, indexToEdit);
+	cout << "Please enter the attribute that you want to edit (title, artist, genre, or rating): " << endl;
+	getline(cin, attribute);
+	cout << "Please enter the new attribute value: " << endl;
+	getline(cin, newAttributeValue);
+
+	performEditSong(stoi(indexToEdit), attribute, newAttributeValue);
 }
