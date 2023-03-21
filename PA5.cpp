@@ -43,14 +43,13 @@ void executeUserChoice(int choice, SongLibrary& lib) {
 			lib.sortLibrary();
 			break;
 		case 5:
-			// TODO: call a helper member function, something like lib.searchLibrary();
 			lib.searchLibrary();
 			break;
 		case 6:
 			lib.addSongToLibrary();
 		 	break;
 		case 7:
-			// TODO: call a helper member function, something like lib.removeSongFromLibrary();
+			lib.removeSongFromLibrary();
 			break;
 		case 8:
 			// TODO: call a helper member function, something like lib.editSongInLibrary();
