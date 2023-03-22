@@ -312,6 +312,7 @@ void SongLibrary::performRemoveSong(int indexToRemove) {
 		}
 		// setSongArray frees the old array memory
 		setSongsArray(tempSongs);
+		cout << "Removed successfully!" << endl;
 	}
 	else {
 		// setSongArray frees the old array memory
@@ -608,7 +609,7 @@ void SongLibrary::searchLibrary(){
 
 	// Printing results
 	if (searchResult == true) {
-		cout << "A song with the is found!" << endl;
+		cout << "A song with the given information is found!" << endl;
 		cout << "Song Information" << endl;
 		cout << "----------------" << endl;
 		foundSong->displaySong();
@@ -646,6 +647,8 @@ void SongLibrary::removeSongFromLibrary(){
 
 	// Search for index of the song to remove
 	performSearch(searchAttribute, searchAttributeValue, foundSong, &indexToRemove);
+	cout << "Match song information:" << endl;
+	foundSong->displaySong();
 
 	// Remove song
 	performRemoveSong(indexToRemove);
@@ -679,6 +682,8 @@ void SongLibrary::editSongInLibrary(){
 	getline(cin, searchAttributeValue);
 
 	performSearch(searchAttribute, searchAttributeValue, foundSong, &indexToEdit);
+	cout << "Match song information:" << endl;
+	foundSong->displaySong();
 
 	// Editing song attribute
 	cout << endl << ".....Editing song attribute......" << endl;
