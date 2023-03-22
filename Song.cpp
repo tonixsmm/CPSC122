@@ -281,7 +281,7 @@ string beautyPrint(string word){
 	
 	tempString[0] = toupper(tempString[0]);
 	for (int i = 0; i < static_cast<int>(tempString.length()); i++){
-		if ((isspace(tempString[i]) || tempString[i] == 40 || tempString[i] == 91 || tempString[i] == 123) && i <= static_cast<int>(tempString.length()) - 1){
+		if ((isspace(tempString[i]) || tempString[i] == 38 || tempString[i] == 40 || tempString[i] == 91 || tempString[i] == 123) && i <= static_cast<int>(tempString.length()) - 1){
 			tempString[i + 1] = toupper(tempString[i + 1]);
 		}
 	}
