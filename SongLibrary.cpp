@@ -219,21 +219,31 @@ Function: performSearch()
  * Note: This is a SongLibrary member function
 */
 bool SongLibrary::performSearch(string searchAttribute, string searchAttributeValue, Song * foundSong, int * index) {
-	searchAttributeValue = convertToLowercase(searchAttributeValue);
+	if (searchAttribute != "index"){
+		searchAttributeValue = convertToLowercase(searchAttributeValue);
 
-	// Iterate through the songs array
-	for (int i = 0; i < numSongs; i++){
-		if (songs[i].getStringAttributeValue(searchAttribute) == searchAttributeValue){
-			foundSong->setTitle(songs[i].getTitle());
-			foundSong->setArtist(songs[i].getArtist());
-			foundSong->setGenre(songs[i].getGenre());
-			foundSong->setRating(songs[i].getRating());
-			*index = i;
-			return true;
+		// Iterate through the songs array
+		for (int i = 0; i < numSongs; i++){
+			if (songs[i].getStringAttributeValue(searchAttribute) == searchAttributeValue){
+				foundSong->setTitle(songs[i].getTitle());
+				foundSong->setArtist(songs[i].getArtist());
+				foundSong->setGenre(songs[i].getGenre());
+				foundSong->setRating(songs[i].getRating());
+				*index = i;
+				return true;
+			}
+			else {
+				*index = -1;
+			}
 		}
-		else {
-			*index = -1;
-		}
+	}
+	else if (searchAttribute == "index") {
+		foundSong->setTitle(songs[stoi(searchAttributeValue)].getTitle());
+		foundSong->setArtist(songs[stoi(searchAttributeValue)].getArtist());
+		foundSong->setGenre(songs[stoi(searchAttributeValue)].getGenre());
+		foundSong->setRating(songs[stoi(searchAttributeValue)].getRating());
+		*index = stoi(searchAttributeValue);
+		return true;
 	}
 	return false;
 }
@@ -322,19 +332,23 @@ Function: performEditSong()
  * Note: This is a SongLibrary member function
 */
 void SongLibrary::performEditSong(int indexToEdit, string attribute, string newAttributeValue) {	
-	newAttributeValue = convertToLowercase(newAttributeValue);
-
 	if (attribute == "title"){
-		songs[indexToEdit].setTitle(newAttributeValue);
+		songs[indexToEdit].setTitle(convertToLowercase(newAttributeValue));
 	}
 	else if (attribute == "artist"){
-		songs[indexToEdit].setArtist(newAttributeValue);
+		songs[indexToEdit].setArtist(convertToLowercase(newAttributeValue));
 	}
 	else if (attribute == "genre"){
-		songs[indexToEdit].setGenre(newAttributeValue);
+		songs[indexToEdit].setGenre(convertToLowercase(newAttributeValue));
 	}
 	else if (attribute == "rating"){
-		songs[indexToEdit].setRating(stoi(newAttributeValue));
+		if (stoi(newAttributeValue) >= 1 && stoi(newAttributeValue) <= 5){
+			songs[indexToEdit].setRating(stoi(newAttributeValue));
+		}
+		else {
+			songs[indexToEdit].setRating(stoi(newAttributeValue));
+			cout << "Your song rating has been overidden to " << songs[indexToEdit].getRating() << endl;
+		}
 	}
 }
 
@@ -585,22 +599,22 @@ void SongLibrary::searchLibrary(){
 	int index = 0;
 	bool searchResult = false;
 
-	cout << "Please enter the attribute that you want to search for (title, artist, genre, or rating): ";
+	cout << "Please enter the attribute that you want to search for (title, artist, genre, or rating). If you want to search by index, please enter 'index': ";
 	getline(cin, searchAttribute);
-	cout << "Please enter the attribute value to be searched: ";
+	cout << "Please enter the attribute value to be searched. If you search by song index, please enter the index number: ";
 	getline(cin, searchAttributeValue);
 
 	searchResult = performSearch(searchAttribute, searchAttributeValue, foundSong, &index);
 
 	// Printing results
 	if (searchResult == true) {
-		cout << "A song with the " << searchAttribute << " of " << searchAttributeValue << " is found!" << endl;
+		cout << "A song with the is found!" << endl;
 		cout << "Song Information" << endl;
 		cout << "----------------" << endl;
 		foundSong->displaySong();
 	}
 	else {
-		cout << "A song with the " << searchAttribute << " of " << searchAttributeValue << " is not found!" << endl;
+		cout << "A song with the given information is not found!" << endl;
 	}
 
 	// Freeing memory
@@ -621,11 +635,24 @@ Function: removeSongFromLibrary()
 */
 void SongLibrary::removeSongFromLibrary(){
 	int indexToRemove = -1;
+	string searchAttribute = "", searchAttributeValue = "";
+	Song * foundSong = new Song;
 
-	cout << "Please enter the song index to be removed from the library: ";
-	cin >> indexToRemove;
+	cout << ".....Searching for the song to remove....." << endl;
+	cout << "Please enter the attribute that you want to search for (title, artist, genre, or rating). If you want to search by index, please enter 'index': ";
+	getline(cin, searchAttribute);
+	cout << "Please enter the attribute value to be searched. If you search by song index, please enter the index number: ";
+	getline(cin, searchAttributeValue);
 
+	// Search for index of the song to remove
+	performSearch(searchAttribute, searchAttributeValue, foundSong, &indexToRemove);
+
+	// Remove song
 	performRemoveSong(indexToRemove);
+
+	// Free memory
+	delete foundSong;
+	foundSong = nullptr;
 }
 
 /*
@@ -640,14 +667,29 @@ Function: editSongInLibrary()
  * Note: This is a SongLibrary member function
 */
 void SongLibrary::editSongInLibrary(){
-	string attribute = "", newAttributeValue = "", indexToEdit = "";
+	string newAttribute = "", newAttributeValue = "", searchAttribute = "", searchAttributeValue = "";
+	Song * foundSong = new Song;
+	int indexToEdit = -1;
 
-	cout << "Please enter the song index that you want to edit: ";
-	getline(cin, indexToEdit);
+	// Search for the index of the song to edit
+	cout << ".....Searching for the song to edit....." << endl;
+	cout << "Please enter the attribute that you want to search for (title, artist, genre, or rating). If you want to search by index, please enter 'index': ";
+	getline(cin, searchAttribute);
+	cout << "Please enter the attribute value to be searched. If you search by song index, please enter the index number: ";
+	getline(cin, searchAttributeValue);
+
+	performSearch(searchAttribute, searchAttributeValue, foundSong, &indexToEdit);
+
+	// Editing song attribute
+	cout << endl << ".....Editing song attribute......" << endl;
 	cout << "Please enter the attribute that you want to edit (title, artist, genre, or rating): ";
-	getline(cin, attribute);
+	getline(cin, newAttribute);
 	cout << "Please enter the new attribute value: ";
 	getline(cin, newAttributeValue);
 
-	performEditSong(stoi(indexToEdit), attribute, newAttributeValue);
+	performEditSong(indexToEdit, newAttribute, newAttributeValue);
+
+	// Free memory
+	delete foundSong;
+	foundSong = nullptr;
 }
