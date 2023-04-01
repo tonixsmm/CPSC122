@@ -34,10 +34,12 @@ class SongLibrary {
 		void addToFront(Song *);
 		void reverseList();
 		void loadSongFromFile(ifstream&, int);
+		string getValueFromIndex(int, string);
 		
 		void loadLibrary();
 		void saveLibrary();
 		void sortLibrary();
+		void searchLibrary();
 };
 
 void openFile(ifstream&, string);

@@ -99,18 +99,43 @@ void SongLibrary::performSave(string filename) {
 	outFile.close();
 }
 
-// TODO: finish this function
 void SongLibrary::performSort() {
-	// Copy constructor calls performInsertInOrder()
+	// Copy constructor calls performInsertInOrder(), implementing insertion sort
 	SongLibrary tempLibrary(*this);
 	Song * tempHead = tempLibrary.getHead();
 	this->setHead(tempHead);
 }
 
-// TODO: finish this function
 Song * SongLibrary::performSearch(string searchAttribute, string searchAttributeValue, bool * found, int * index) {
-	
-	return NULL; // TODO: fix this
+	*found = false;
+	Song * curr = head;
+	int count = 0;
+
+	if (searchAttribute != "index"){
+		searchAttributeValue = convertToLowercase(searchAttributeValue);
+
+		while (curr != NULL && curr->getStringAttributeValue(searchAttribute) != searchAttributeValue){
+			curr = curr->getNext();
+			count++;
+		}
+		if (curr != NULL){
+			*found = true;
+			*index = count;
+			return curr;
+		}
+	}
+	else if (searchAttribute == "index"){
+		while (curr != NULL && count != stoi(searchAttributeValue)){
+			curr = curr->getNext();
+			count++;
+		}
+		if (curr != NULL){
+			*found = true;
+			*index = count;
+			return curr;
+		}
+	}
+	return NULL;
 }
 
 void SongLibrary::performInsertSongInOrder(Song * songToInsert) {
@@ -336,8 +361,9 @@ void SongLibrary::loadLibrary(){
 	string fileName = "";
 
 	cout << "Please enter filename to be opened: ";
-	cin >> fileName;
-	// fileName = "../library.txt";
+	// cin >> fileName;
+	fileName = "../library.txt";
+	// fileName = "../SaveTest.txt";
 
 	performLoad(fileName);
 }
@@ -370,4 +396,59 @@ void SongLibrary::sortLibrary(){
 	sortAttribute = convertToLowercase(userInput);
 
 	performSort();
+}
+
+string SongLibrary::getValueFromIndex(int index, string searchAttribute){
+	Song * curr = head;
+	int count = 0;
+
+	while (curr != NULL && index != count){
+		curr = curr->getNext();
+		count++;
+	}
+
+	if (curr != NULL){
+		return curr->getStringAttributeValue(searchAttribute); // check number case
+	}
+	else {
+		return "";
+	}
+}
+
+/*
+Function: searchLibrary()
+ * Date Created: 03/20/2023
+ * Date Last Modified: 4/1/2023
+ * Description: This is a helper function to call performSearch() from command line and prints it out if there is a match
+ * Input parameters: Void
+ * Returns: None
+ * Pre: None
+ * Post: None
+ * Note: This is a SongLibrary member function
+*/
+void SongLibrary::searchLibrary(){
+	string searchAttribute = "", searchAttributeValue = "";
+	Song * foundSong = new Song;
+	int index = -1;
+	bool searchResult = false;
+
+	cout << "Please enter the attribute that you want to search for (title, artist, genre, or rating). If you want to search by index, please enter 'index': ";
+	getline(cin, searchAttribute);
+	cout << "Please enter the attribute value to be searched. If you search by song index, please enter the index number: ";
+	getline(cin, searchAttributeValue);
+
+	foundSong = performSearch(searchAttribute, searchAttributeValue, &searchResult, &index);
+
+	if (searchResult == true) {
+		cout << "A song with the given information is found!" << endl;
+		cout << endl << "Song Information" << endl;
+		cout << "----------------" << endl;
+		foundSong->displaySong();
+	}
+	else {
+		cout << "A song with the given information is not found!" << endl;
+	}
+
+	delete foundSong;
+	foundSong = NULL;
 }
