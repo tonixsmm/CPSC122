@@ -182,9 +182,32 @@ void SongLibrary::performRemoveSong(Song * songToRemove) {
 	}
 }
 
-// TODO: finish this function
 void SongLibrary::performEditSong(Song * songToEdit, string attribute, string newAttributeValue) {	
-	
+	if (songToEdit != NULL){
+		Song * curr = head;
+		while (curr != songToEdit){
+			curr = curr->getNext();
+		}
+
+		if (attribute == "title"){
+			curr->setTitle(convertToLowercase(newAttributeValue));
+		}
+		else if (attribute == "artist"){
+			curr->setArtist(convertToLowercase(newAttributeValue));
+		}
+		else if (attribute == "genre"){
+			curr->setGenre(convertToLowercase(newAttributeValue));
+		}
+		else {
+			if (stoi(newAttributeValue) >= 1 && stoi(newAttributeValue) <= 5){
+				curr->setRating(stoi(newAttributeValue));
+			}
+			else {
+				curr->setRating(stoi(newAttributeValue));
+				cout << "Your song rating has been overidden to " << curr->getRating() << endl;
+			}
+		}
+	}
 }
 
 
@@ -541,4 +564,39 @@ void SongLibrary::removeSongFromLibrary(){
 	// Check if there is a leak
 	// delete foundSong;
 	// foundSong = NULL;
+}
+
+void SongLibrary::editSongInLibrary(){
+	string searchAttribute = "", searchAttributeValue = "", newAttribute = "", newAttributeValue = "";
+	Song * foundSong = new Song;
+	int index = -1;
+	bool searchResult = false;
+
+	cout << ".....Searching for the song to remove....." << endl;
+	cout << "Please enter the attribute that you want to search for (title, artist, genre, or rating). If you want to search by index, please enter 'index': ";
+	getline(cin, searchAttribute);
+	cout << "Please enter the attribute value to be searched. If you search by song index, please enter the index number: ";
+	getline(cin, searchAttributeValue);
+
+	foundSong = performSearch(searchAttribute, searchAttributeValue, &searchResult, &index);
+
+	if (searchResult == true){
+		cout << endl << "Match song information:" << endl;
+		foundSong->displaySong();
+
+		// Editing song attribute
+		cout << endl << ".....Editing song attribute......" << endl;
+		cout << "Please enter the attribute that you want to edit (title, artist, genre, or rating): ";
+		getline(cin, newAttribute);
+		cout << "Please enter the new attribute value: ";
+		getline(cin, newAttributeValue);
+
+		performEditSong(foundSong, newAttribute, newAttributeValue);
+	}
+	else {
+		cout << "No song found to edit!" << endl;
+	}
+
+	delete foundSong;
+	foundSong = NULL;
 }

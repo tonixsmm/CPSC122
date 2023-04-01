@@ -53,7 +53,7 @@ void executeUserChoice(int choice, SongLibrary& lib) {
 			lib.removeSongFromLibrary();
 			break;
 		case 8:
-			// TODO: call a member function, something like lib.editSongInLibrary();
+			lib.editSongInLibrary();
 			break;
 		default:
 			cout << "Unrecognized menu choice" << endl;
