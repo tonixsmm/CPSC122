@@ -47,10 +47,10 @@ void executeUserChoice(int choice, SongLibrary& lib) {
 			lib.searchLibrary();
 			break;
 		case 6:
-			// TODO: call a member function, something like lib.insertSongInLibraryOrder();
+			lib.insertSongInLibraryOrder();
 			break;
 		case 7:
-			// TODO: call a member function, something like lib.removeSongFromLibrary();
+			lib.removeSongFromLibrary();
 			break;
 		case 8:
 			// TODO: call a member function, something like lib.editSongInLibrary();

@@ -163,9 +163,23 @@ void SongLibrary::performInsertSongInOrder(Song * songToInsert) {
 }
 
 
-// TODO: finish this function
 void SongLibrary::performRemoveSong(Song * songToRemove) {
-	
+	if (head != NULL && songToRemove != NULL){
+		Song * curr = head;
+		if (head == songToRemove){
+			head = head->getNext();
+			delete curr;
+		}
+		else {
+			Song * prev = NULL;
+			while (curr != songToRemove){
+				prev = curr;
+				curr = curr->getNext();
+			}
+			prev->setNext(curr->getNext());
+			delete curr;
+		}
+	}
 }
 
 // TODO: finish this function
@@ -451,4 +465,80 @@ void SongLibrary::searchLibrary(){
 
 	delete foundSong;
 	foundSong = NULL;
+}
+
+/*
+Function: insertSongInLibraryOrder()
+ * Date Created: 03/17/2023
+ * Date Last Modified: 4/1/2023
+ * Description: This is a helper function to call performAddSong() from command line
+ * Input parameters: Void
+ * Returns: None
+ * Pre: None
+ * Post: None
+ * Note: This is a SongLibrary member function
+*/
+void SongLibrary::insertSongInLibraryOrder(){
+	string tempString = "";
+	Song tempSong;
+
+	cout << "Please enter the song title: ";
+	getline(cin, tempString);
+	tempSong.setTitle(tempString);
+
+	cout << "Please enter the song artist: ";
+	getline(cin, tempString);
+	tempSong.setArtist(tempString);
+
+	cout << "Please enter the song genre: ";
+	getline(cin, tempString);
+	tempSong.setGenre(tempString);
+
+	cout << "Please enter the song rating: ";
+	getline(cin, tempString);
+	tempSong.setRating(stoi(tempString));
+
+	Song * tempSongPtr = new Song(tempSong);
+	tempSongPtr->setNext(NULL);
+	performInsertSongInOrder(tempSongPtr);
+}
+
+/*
+Function: removeSongFromLibrary()
+ * Date Created: 03/20/2023
+ * Date Last Modified: 4/1/2023
+ * Description: This is a helper function to call performRemoveSong() from command line
+ * Input parameters: Void
+ * Returns: None
+ * Pre: None
+ * Post: None
+ * Note: This is a SongLibrary member function
+*/
+void SongLibrary::removeSongFromLibrary(){
+	string searchAttribute = "", searchAttributeValue = "";
+	Song * foundSong = new Song;
+	int index = -1;
+	bool searchResult = false;
+
+	cout << ".....Searching for the song to remove....." << endl;
+	cout << "Please enter the attribute that you want to search for (title, artist, genre, or rating). If you want to search by index, please enter 'index': ";
+	getline(cin, searchAttribute);
+	cout << "Please enter the attribute value to be searched. If you search by song index, please enter the index number: ";
+	getline(cin, searchAttributeValue);
+
+	foundSong = performSearch(searchAttribute, searchAttributeValue, &searchResult, &index);
+
+	if (searchResult == true){
+		cout << endl << "Match song information:" << endl;
+		foundSong->displaySong();
+		performRemoveSong(foundSong);
+		cout << endl << "Remove successfully!" << endl;
+	}
+	else {
+		cout << "No song found to delete!" << endl;
+	}
+
+	// Check if there is a leak
+	// delete foundSong;
+	// foundSong = NULL;
 }

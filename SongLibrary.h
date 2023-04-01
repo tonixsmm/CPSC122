@@ -40,6 +40,8 @@ class SongLibrary {
 		void saveLibrary();
 		void sortLibrary();
 		void searchLibrary();
+		void insertSongInLibraryOrder();
+		void removeSongFromLibrary();
 };
 
 void openFile(ifstream&, string);
