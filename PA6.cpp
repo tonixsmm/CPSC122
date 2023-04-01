@@ -41,7 +41,7 @@ void executeUserChoice(int choice, SongLibrary& lib) {
 			lib.displayLibrary();
 			break;
 		case 4:
-			// TODO: call a member function, something like lib.sortLibrary();
+			lib.sortLibrary();
 			break;
 		case 5:
 			// TODO: call a member function, something like lib.searchLibrary();

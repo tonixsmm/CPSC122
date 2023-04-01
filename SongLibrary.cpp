@@ -101,7 +101,10 @@ void SongLibrary::performSave(string filename) {
 
 // TODO: finish this function
 void SongLibrary::performSort() {
-
+	// Copy constructor calls performInsertInOrder()
+	SongLibrary tempLibrary(*this);
+	Song * tempHead = tempLibrary.getHead();
+	this->setHead(tempHead);
 }
 
 // TODO: finish this function
@@ -110,7 +113,6 @@ Song * SongLibrary::performSearch(string searchAttribute, string searchAttribute
 	return NULL; // TODO: fix this
 }
 
-// TODO: finish this function
 void SongLibrary::performInsertSongInOrder(Song * songToInsert) {
 	if (head == NULL){
 		head = songToInsert;
@@ -320,7 +322,6 @@ void SongLibrary::loadSongFromFile(ifstream & inFile, int numSongFromFile){
 }
 
 /*
-loadLi
 Function: loadLibrary()
  * Date Created: 03/18/2023
  * Date Last Modified: 03/18/2023
@@ -359,4 +360,14 @@ void SongLibrary::saveLibrary(){
 	cin >> fileName;
 
 	performSave(fileName);;
+}
+
+void SongLibrary::sortLibrary(){
+	string userInput = "";
+
+	cout << "Please enter the attribute that you want to sort by (title, artist, genre, rating): ";
+	cin >> userInput;
+	sortAttribute = convertToLowercase(userInput);
+
+	performSort();
 }
