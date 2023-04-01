@@ -44,14 +44,59 @@ void SongLibrary::setSortAttribute(string newSortAttribute) {
 	sortAttribute = newSortAttribute;
 }
 
-// TODO: finish this function
+/*
+Function: performLoad()
+ * Date Created: 03/15/2023
+ * Date Last Modified: 4/1/2023
+ * Description: This function performs the loading requirement of PA5
+ * Input parameters: A string
+ * Returns: None
+ * Pre: None
+ * Post: None
+ * Note: This is a SongLibrary member function
+*/
 void SongLibrary::performLoad(string filename) {
-	
+	ifstream inFile;
+	int numSongFromFile = 0;
+
+	openFile(inFile, filename);
+
+	// Count the number of song in the input file
+	numSongFromFile = countSongFromFile(inFile);
+	inFile.clear();
+	inFile.seekg(0);
+
+	loadSongFromFile(inFile, numSongFromFile);
+
+	inFile.close();
 }
 
-// TODO: finish this function
+/*
+Function: performSave()
+ * Date Created: 03/15/2023
+ * Date Last Modified: 03/19/2023
+ * Description: This function saves the available songs in the songs array to a file
+ * Input parameters: A string
+ * Returns: None
+ * Pre: None
+ * Post: None
+ * Note: This is a SongLibrary member function
+*/
 void SongLibrary::performSave(string filename) {
-	
+	fstream outFile;
+	outFile.open(filename, ios::out);
+	Song * curr = head;
+
+	while (curr != NULL){
+		outFile << curr->getTitle() << endl;
+		outFile << curr->getArtist() << endl;
+		outFile << curr->getGenre() << endl;
+		outFile << curr->getRating() << endl;
+		outFile << endl; 
+		curr = curr->getNext();
+	}
+
+	outFile.close();
 }
 
 // TODO: finish this function
@@ -114,6 +159,17 @@ void SongLibrary::destroyList(){
     head = NULL;
 }
 
+/*
+Function: displayLibrary()
+ * Date Created: 03/15/2023
+ * Date Last Modified: 03/31/2023
+ * Description: This function prints out the songs array
+ * Input parameters: None
+ * Returns: None
+ * Pre: None
+ * Post: None
+ * Note: This is a SongLibrary member function
+*/
 void SongLibrary::displayLibrary(){
 	int count = 0;
 
@@ -167,4 +223,140 @@ void SongLibrary::reverseList(){
 		curr = nextNode;
 	}
 	head = prev;
+}
+
+/*
+openFile
+Function: openFile()
+ * Date Created: 02/04/2022
+ * Date Last Modified: 02/26/2022
+ * Description: This function opens a file and checks if it is opened successfully
+ * Input parameters: File stream and file name
+ * Returns: None
+ * Pre: None
+ * Post: None
+*/
+void openFile(ifstream& inFile, string fileName){
+	inFile.open(fileName);
+
+	if (inFile.is_open()){
+        cout << "Successfully opened " << fileName << endl;
+    }
+    else{
+        cout << "Failed to open " << fileName << endl;
+        exit(-1);
+	}
+}
+
+/*
+Function: countSongFromFile()
+ * Date Created: 02/26/2023
+ * Date Last Modified: 03/17/2023
+ * Description: This function counts the number of song in the input file
+ * Input parameters: A file stream
+ * Returns: An int
+ * Pre: None
+ * Post: None
+ * Note: This function is adapted from PA4
+*/
+int countSongFromFile(ifstream & inFile){
+	int count = 0, numSongFromFile = 0;
+	string line = "";
+
+	while (!inFile.eof()){
+		getline(inFile, line);
+		if (!inFile.bad()){
+			count++;
+		}
+	}
+	// There are 4 attributes, plus 1 empty line. So, I divide by 5.
+	numSongFromFile = count / 5;
+
+	return numSongFromFile;
+}
+
+/*
+Function: loadSongFromFile()
+ * Date Created: 03/16/2023
+ * Date Last Modified: 03/18/2023
+ * Description: This function reads in new songs from the input file, decides whether there has been a similar song already in the array. If not, then add it in
+ * Input parameters: A file stream, an int
+ * Returns: None
+ * Pre: None
+ * Post: None
+ * Note: This is a SongLibrary member function
+*/
+void SongLibrary::loadSongFromFile(ifstream & inFile, int numSongFromFile){
+	string tempTitle = "", tempArtist = "", tempGenre = "", tempLine = "", tempRating = "";
+
+	// Read in from file
+	for (int i = 0; i < numSongFromFile; i++){
+		if (!inFile.bad()){
+			getline(inFile, tempTitle);
+			getline(inFile, tempArtist);
+			getline(inFile, tempGenre);
+			getline(inFile, tempRating);
+			getline(inFile, tempLine);
+		}
+
+		Song * tempSong = new Song(tempTitle, tempArtist, tempGenre, stoi(tempRating));
+		tempSong->setNext(NULL);
+
+		// Check if there's a song that has already been in the library. If so, not adding it.
+		if (head != NULL){
+			Song * curr = head;
+			while (curr != NULL && curr->getTitle() != tempTitle && curr->getArtist() != tempArtist){\
+				curr = curr->getNext();
+			}
+
+			if (curr == NULL){
+				performInsertSongInOrder(tempSong);
+			}
+		}
+		else{
+			head = tempSong;
+		}
+	}
+}
+
+/*
+loadLi
+Function: loadLibrary()
+ * Date Created: 03/18/2023
+ * Date Last Modified: 03/18/2023
+ * Description: This is a helper function to call performLoad() from command line
+ * Input parameters: Void
+ * Returns: None
+ * Pre: None
+ * Post: None
+ * Note: This is a SongLibrary member function
+*/
+void SongLibrary::loadLibrary(){
+	string fileName = "";
+
+	cout << "Please enter filename to be opened: ";
+	cin >> fileName;
+	// fileName = "../library.txt";
+
+	performLoad(fileName);
+}
+
+/*
+Function: saveLibrary()
+ * Date Created: 03/19/2023
+ * Date Last Modified: 03/19/2023
+ * Description: This is a helper function to call performSave() from command line
+ * Input parameters: Void
+ * Returns: None
+ * Pre: None
+ * Post: None
+ * Note: This is a SongLibrary member function
+*/
+void SongLibrary::saveLibrary(){
+	string fileName = "";
+
+	cout << "Enter the filename that you want to save your library to: ";
+	cin >> fileName;
+
+	performSave(fileName);;
 }

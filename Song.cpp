@@ -19,7 +19,6 @@ string convertToLowercase(string s) {
 	return tempString;
 }
 
-// TODO: finish Song default value constructor
 Song::Song() {
 	title = "";
 	artist = "";
@@ -28,7 +27,6 @@ Song::Song() {
 	next = NULL;
 }
 
-// TODO: finish Song explicit value constructor
 Song::Song(string titleParam, string artistParam, string genreParam, int ratingParam) {
 	title = titleParam;
 	artist = artistParam;
@@ -37,7 +35,6 @@ Song::Song(string titleParam, string artistParam, string genreParam, int ratingP
 	next = NULL;
 }
 
-// TODO: finish Song copy constructor
 Song::Song(const Song& other) {
 	title = other.title;
 	artist = other.artist;

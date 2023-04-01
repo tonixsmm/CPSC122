@@ -33,6 +33,13 @@ class SongLibrary {
 		void addToEnd(Song *);
 		void addToFront(Song *);
 		void reverseList();
+		void loadSongFromFile(ifstream&, int);
+		
+		void loadLibrary();
+		void saveLibrary();
 };
+
+void openFile(ifstream&, string);
+int countSongFromFile(ifstream&);
 
 #endif

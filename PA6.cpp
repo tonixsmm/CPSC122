@@ -32,13 +32,13 @@ int getValidChoice() {
 void executeUserChoice(int choice, SongLibrary& lib) {
 	switch (choice) {
 		case 1:
-			// TODO: call a member function, something like lib.loadLibrary();
+			lib.loadLibrary();
 			break;
 		case 2:
-			// TODO: call a member function, something like lib.saveLibrary();
+			lib.saveLibrary();
 			break;
 		case 3: 
-			// TODO: call a member function, something like lib.displayLibrary();
+			lib.displayLibrary();
 			break;
 		case 4:
 			// TODO: call a member function, something like lib.sortLibrary();

@@ -1,23 +1,24 @@
 #include "PA6.h"
 
 int main() {
-	// runMusicManager();
-	Song testSong1("cardigan", "taylor swift", "indie", 5);
-	Song testSong2("mirrorball", "taylor swift", "indie", 5);
-	Song testSong3("lover", "taylor swift", "pop", 5);
-	Song testSong4("willow", "taylor swift", "indie folk", 5);
-	SongLibrary lib;
+	runMusicManager();
 
-	lib.performInsertSongInOrder(&testSong1);
-	lib.performInsertSongInOrder(&testSong2);
-	lib.performInsertSongInOrder(&testSong3);
-	lib.performInsertSongInOrder(&testSong4);
+	// Song testSong1("cardigan", "taylor swift", "indie", 5);
+	// Song testSong2("mirrorball", "taylor swift", "indie", 5);
+	// Song testSong3("lover", "taylor swift", "pop", 5);
+	// Song testSong4("willow", "taylor swift", "indie folk", 5);
+	// SongLibrary lib;
 
-	cout << "--------" << endl;
+	// lib.performInsertSongInOrder(&testSong1);
+	// lib.performInsertSongInOrder(&testSong2);
+	// lib.performInsertSongInOrder(&testSong3);
+	// lib.performInsertSongInOrder(&testSong4);
 
-	SongLibrary lib2(lib);
+	// cout << "--------" << endl;
 
-	lib2.displayLibrary();
+	// SongLibrary lib2(lib);
+
+	// lib2.displayLibrary();
 
 	return 0;
 }
