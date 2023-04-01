@@ -20,6 +20,7 @@ class SongLibrary {
 		string getSortAttribute() const; // NEW: getter for sortAttribute
 		void setSortAttribute(string); // NEW: setter for sortAttribute
 		
+		void displayLibrary();
 		void performLoad(string);
 		void performSave(string);
 		void performSort(); // UPDATED: no parameter for sort attribute, using Song's sortAttribute member variable
@@ -27,6 +28,11 @@ class SongLibrary {
 		void performInsertSongInOrder(Song *); // NEW: replaces addSong()
 		void performRemoveSong(Song *); // UPDATED: parameter list
 		void performEditSong(Song *, string, string); // UPDATED: parameter list
+
+		void destroyList();
+		void addToEnd(Song *);
+		void addToFront(Song *);
+		void reverseList();
 };
 
 #endif

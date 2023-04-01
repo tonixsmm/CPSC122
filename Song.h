@@ -10,6 +10,7 @@ const int MIN_RATING = 1;
 const int MAX_RATING = 5;
 
 string convertToLowercase(string);
+string beautyPrint(string);
 
 class Song {
 	private:
