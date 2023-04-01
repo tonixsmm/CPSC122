@@ -572,7 +572,7 @@ void SongLibrary::editSongInLibrary(){
 	int index = -1;
 	bool searchResult = false;
 
-	cout << ".....Searching for the song to remove....." << endl;
+	cout << ".....Searching for the song to edit....." << endl;
 	cout << "Please enter the attribute that you want to search for (title, artist, genre, or rating). If you want to search by index, please enter 'index': ";
 	getline(cin, searchAttribute);
 	cout << "Please enter the attribute value to be searched. If you search by song index, please enter the index number: ";
