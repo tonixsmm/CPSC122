@@ -17,6 +17,10 @@ SongLibrary::SongLibrary(const SongLibrary& other) {
 		Song * newSong = new Song(*curr);
 		performInsertSongInOrder(newSong);
 		curr = curr->getNext();
+
+		newSong = NULL;
+		delete newSong;
+		newSong = NULL;
 	}
 }
 
@@ -104,6 +108,10 @@ void SongLibrary::performSort() {
 	SongLibrary tempLibrary(*this);
 	Song * tempHead = tempLibrary.getHead();
 	this->setHead(tempHead);
+
+	tempHead = NULL;
+	delete tempHead;
+	tempHead = NULL;
 }
 
 Song * SongLibrary::performSearch(string searchAttribute, string searchAttributeValue, bool * found, int * index) {
@@ -152,8 +160,8 @@ void SongLibrary::performInsertSongInOrder(Song * songToInsert) {
 		}
 
 		if (prevSong == NULL){
-			head = songToInsert;
 			songToInsert->setNext(currSong);
+			head = songToInsert;
 		}
 		else{
 			songToInsert->setNext(currSong);
@@ -204,7 +212,7 @@ void SongLibrary::performEditSong(Song * songToEdit, string attribute, string ne
 			}
 			else {
 				curr->setRating(stoi(newAttributeValue));
-				cout << "Your song rating has been overidden to " << curr->getRating() << endl;
+				cout << "Your song rating has been overwritten to " << curr->getRating() << endl;
 			}
 		}
 	}
@@ -250,43 +258,6 @@ void SongLibrary::displayLibrary(){
 		curr = curr->getNext();
 		count++;
 	}
-}
-
-void SongLibrary::addToEnd(Song * newSong){
-	if (head == NULL){
-        head = newSong;
-	    }
-    else {
-        Song * currNode = head;
-        while (currNode->getNext() != NULL){
-            currNode = currNode->getNext();
-        }
-        currNode->setNext(newSong);
-    }
-}
-
-void SongLibrary::addToFront(Song * newSong){
-    if (head == NULL){
-        head = newSong;
-    }
-    else {
-        newSong->setNext(head);
-        head = newSong;
-    }
-}
-
-void SongLibrary::reverseList(){
-	Song * curr = head;
-	Song * prev = NULL;
-	Song * nextNode = NULL;
-
-	while (curr != NULL){
-		nextNode = curr->getNext();
-		curr->setNext(prev);
-		prev = curr;
-		curr = nextNode;
-	}
-	head = prev;
 }
 
 /*
@@ -363,23 +334,27 @@ void SongLibrary::loadSongFromFile(ifstream & inFile, int numSongFromFile){
 			getline(inFile, tempLine);
 		}
 
-		Song * tempSong = new Song(tempTitle, tempArtist, tempGenre, stoi(tempRating));
-		tempSong->setNext(NULL);
+		Song tempSong(tempTitle, tempArtist, tempGenre, stoi(tempRating));
+		Song * tempSongPtr = new Song(tempSong);
 
 		// Check if there's a song that has already been in the library. If so, not adding it.
 		if (head != NULL){
 			Song * curr = head;
-			while (curr != NULL && curr->getTitle() != tempTitle && curr->getArtist() != tempArtist){\
+			while (curr != NULL && curr->getTitle() != tempTitle && curr->getArtist() != tempArtist){
 				curr = curr->getNext();
 			}
 
 			if (curr == NULL){
-				performInsertSongInOrder(tempSong);
+				performInsertSongInOrder(tempSongPtr);
 			}
 		}
-		else{
-			head = tempSong;
+		if (head == NULL) {
+			setHead(tempSongPtr);
 		}
+
+		tempSongPtr = NULL;
+		delete tempSongPtr;
+		tempSongPtr = NULL;
 	}
 }
 
@@ -486,6 +461,7 @@ void SongLibrary::searchLibrary(){
 		cout << "A song with the given information is not found!" << endl;
 	}
 
+	foundSong = NULL;
 	delete foundSong;
 	foundSong = NULL;
 }
@@ -524,6 +500,10 @@ void SongLibrary::insertSongInLibraryOrder(){
 	Song * tempSongPtr = new Song(tempSong);
 	tempSongPtr->setNext(NULL);
 	performInsertSongInOrder(tempSongPtr);
+
+	tempSongPtr = NULL;
+	delete tempSongPtr;
+	tempSongPtr = NULL;
 }
 
 /*
@@ -561,9 +541,9 @@ void SongLibrary::removeSongFromLibrary(){
 		cout << "No song found to delete!" << endl;
 	}
 
-	// Check if there is a leak
-	// delete foundSong;
-	// foundSong = NULL;
+	foundSong = NULL;
+	delete foundSong;
+	foundSong = NULL;
 }
 
 void SongLibrary::editSongInLibrary(){
@@ -597,6 +577,7 @@ void SongLibrary::editSongInLibrary(){
 		cout << "No song found to edit!" << endl;
 	}
 
+	foundSong = NULL;
 	delete foundSong;
 	foundSong = NULL;
 }

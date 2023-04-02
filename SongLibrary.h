@@ -30,9 +30,6 @@ class SongLibrary {
 		void performEditSong(Song *, string, string); // UPDATED: parameter list
 
 		void destroyList();
-		void addToEnd(Song *);
-		void addToFront(Song *);
-		void reverseList();
 		void loadSongFromFile(ifstream&, int);
 		string getValueFromIndex(int, string);
 		
