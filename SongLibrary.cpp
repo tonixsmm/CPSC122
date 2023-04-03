@@ -220,7 +220,7 @@ void SongLibrary::performEditSong(Song * songToEdit, string attribute, string ne
 
 
 void SongLibrary::destroyList(){
-	Song * currNode = NULL;
+	Song * currNode = head;
     Song * nextNode = NULL;
 
     while (currNode != NULL){
