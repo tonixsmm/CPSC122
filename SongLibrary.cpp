@@ -18,9 +18,9 @@ SongLibrary::SongLibrary(const SongLibrary& other) {
 		performInsertSongInOrder(newSong);
 		curr = curr->getNext();
 
-		newSong = NULL;
-		delete newSong;
-		newSong = NULL;
+		// newSong = NULL;
+		// delete newSong;
+		// newSong = NULL;
 	}
 }
 
@@ -107,10 +107,8 @@ void SongLibrary::performSort() {
 	// Copy constructor calls performInsertInOrder(), implementing insertion sort
 	SongLibrary tempLibrary(*this);
 	Song * tempHead = tempLibrary.getHead();
-	this->setHead(tempHead);
-
-	tempHead = NULL;
-	delete tempHead;
+	setHead(tempHead);
+	// head = tempHead;
 	tempHead = NULL;
 }
 
@@ -225,7 +223,10 @@ void SongLibrary::destroyList(){
 
     while (currNode != NULL){
         nextNode = currNode->getNext();
+		cout << "before delete" << endl;
         delete currNode;
+		currNode = NULL;
+		cout << "after delete" << endl;
         currNode = nextNode;
     }
     head = NULL;
@@ -352,9 +353,9 @@ void SongLibrary::loadSongFromFile(ifstream & inFile, int numSongFromFile){
 			setHead(tempSongPtr);
 		}
 
-		tempSongPtr = NULL;
-		delete tempSongPtr;
-		tempSongPtr = NULL;
+		// tempSongPtr = NULL;
+		// delete tempSongPtr;
+		// tempSongPtr = NULL;
 	}
 }
 
@@ -461,7 +462,6 @@ void SongLibrary::searchLibrary(){
 		cout << "A song with the given information is not found!" << endl;
 	}
 
-	foundSong = NULL;
 	delete foundSong;
 	foundSong = NULL;
 }
@@ -500,10 +500,6 @@ void SongLibrary::insertSongInLibraryOrder(){
 	Song * tempSongPtr = new Song(tempSong);
 	tempSongPtr->setNext(NULL);
 	performInsertSongInOrder(tempSongPtr);
-
-	tempSongPtr = NULL;
-	delete tempSongPtr;
-	tempSongPtr = NULL;
 }
 
 /*
@@ -540,10 +536,6 @@ void SongLibrary::removeSongFromLibrary(){
 	else {
 		cout << "No song found to delete!" << endl;
 	}
-
-	foundSong = NULL;
-	delete foundSong;
-	foundSong = NULL;
 }
 
 void SongLibrary::editSongInLibrary(){
@@ -576,8 +568,4 @@ void SongLibrary::editSongInLibrary(){
 	else {
 		cout << "No song found to edit!" << endl;
 	}
-
-	foundSong = NULL;
-	delete foundSong;
-	foundSong = NULL;
 }
