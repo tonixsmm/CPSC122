@@ -17,10 +17,6 @@ SongLibrary::SongLibrary(const SongLibrary& other) {
 		Song * newSong = new Song(*curr);
 		performInsertSongInOrder(newSong);
 		curr = curr->getNext();
-
-		// newSong = NULL;
-		// delete newSong;
-		// newSong = NULL;
 	}
 }
 
@@ -105,11 +101,9 @@ void SongLibrary::performSave(string filename) {
 
 void SongLibrary::performSort() {
 	// Copy constructor calls performInsertInOrder(), implementing insertion sort
-	SongLibrary tempLibrary(*this);
-	Song * tempHead = tempLibrary.getHead();
-	setHead(tempHead);
-	// head = tempHead;
-	tempHead = NULL;
+	SongLibrary * tempLibrary = new SongLibrary(*this);
+	Song * tempHead = tempLibrary->getHead();
+	this->setHead(tempHead); // setHead() frees the "this", then set head to the tempLib
 }
 
 Song * SongLibrary::performSearch(string searchAttribute, string searchAttributeValue, bool * found, int * index) {
@@ -223,10 +217,7 @@ void SongLibrary::destroyList(){
 
     while (currNode != NULL){
         nextNode = currNode->getNext();
-		cout << "before delete" << endl;
         delete currNode;
-		currNode = NULL;
-		cout << "after delete" << endl;
         currNode = nextNode;
     }
     head = NULL;
@@ -352,10 +343,6 @@ void SongLibrary::loadSongFromFile(ifstream & inFile, int numSongFromFile){
 		if (head == NULL) {
 			setHead(tempSongPtr);
 		}
-
-		// tempSongPtr = NULL;
-		// delete tempSongPtr;
-		// tempSongPtr = NULL;
 	}
 }
 
@@ -441,7 +428,7 @@ Function: searchLibrary()
 */
 void SongLibrary::searchLibrary(){
 	string searchAttribute = "", searchAttributeValue = "";
-	Song * foundSong = new Song;
+	Song * foundSong;
 	int index = -1;
 	bool searchResult = false;
 
@@ -461,9 +448,6 @@ void SongLibrary::searchLibrary(){
 	else {
 		cout << "A song with the given information is not found!" << endl;
 	}
-
-	delete foundSong;
-	foundSong = NULL;
 }
 
 /*
@@ -515,7 +499,7 @@ Function: removeSongFromLibrary()
 */
 void SongLibrary::removeSongFromLibrary(){
 	string searchAttribute = "", searchAttributeValue = "";
-	Song * foundSong = new Song;
+	Song * foundSong;
 	int index = -1;
 	bool searchResult = false;
 
@@ -540,7 +524,7 @@ void SongLibrary::removeSongFromLibrary(){
 
 void SongLibrary::editSongInLibrary(){
 	string searchAttribute = "", searchAttributeValue = "", newAttribute = "", newAttributeValue = "";
-	Song * foundSong = new Song;
+	Song * foundSong;
 	int index = -1;
 	bool searchResult = false;
 
