@@ -19,6 +19,7 @@ class Song {
 		string genre;
 		int rating;
 		Song * next; // NEW: link for linking Songs together in a linked list
+		Song * prev; // Bonus
 	public:
 		Song();
 		Song(string, string, string, int);

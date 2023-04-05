@@ -25,6 +25,7 @@ Song::Song() {
 	genre = "";
 	rating = 1;
 	next = NULL;
+	prev = NULL;
 }
 
 Song::Song(string titleParam, string artistParam, string genreParam, int ratingParam) {
@@ -33,6 +34,7 @@ Song::Song(string titleParam, string artistParam, string genreParam, int ratingP
 	genre = genreParam;
 	rating = ratingParam;
 	next = NULL;
+	prev = NULL;
 }
 
 Song::Song(const Song& other) {
@@ -41,6 +43,7 @@ Song::Song(const Song& other) {
 	genre = other.genre;
 	rating = other.rating;
 	next = NULL;
+	prev = NULL;
 }
 
 string Song::getTitle() {

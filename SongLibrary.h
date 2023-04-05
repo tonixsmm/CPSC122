@@ -19,6 +19,8 @@ class SongLibrary {
 		void setHead(Song *); // UPDATED: name
 		string getSortAttribute() const; // NEW: getter for sortAttribute
 		void setSortAttribute(string); // NEW: setter for sortAttribute
+
+		void setHeadWithoutFreeing(Song *);
 		
 		void displayLibrary();
 		void performLoad(string);

@@ -36,6 +36,10 @@ void SongLibrary::setHead(Song * newHead) {
 	head = newHead;
 }
 
+void SongLibrary::setHeadWithoutFreeing(Song * newHead){
+	head = newHead;
+}
+
 string SongLibrary::getSortAttribute() const {
 	return sortAttribute;
 }
@@ -103,7 +107,11 @@ void SongLibrary::performSort() {
 	// Copy constructor calls performInsertInOrder(), implementing insertion sort
 	SongLibrary * tempLibrary = new SongLibrary(*this);
 	Song * tempHead = tempLibrary->getHead();
-	this->setHead(tempHead); // setHead() frees the "this", then set head to the tempLib
+	this->setHead(tempHead); // setHead() frees "this", then set head to tempLib
+
+	// Free memory
+	tempLibrary->setHeadWithoutFreeing(NULL);
+	delete tempLibrary;
 }
 
 Song * SongLibrary::performSearch(string searchAttribute, string searchAttributeValue, bool * found, int * index) {
@@ -339,6 +347,10 @@ void SongLibrary::loadSongFromFile(ifstream & inFile, int numSongFromFile){
 			if (curr == NULL){
 				performInsertSongInOrder(tempSongPtr);
 			}
+			else {
+				delete tempSongPtr;
+				tempSongPtr = NULL;
+			}
 		}
 		if (head == NULL) {
 			setHead(tempSongPtr);
@@ -361,8 +373,8 @@ void SongLibrary::loadLibrary(){
 	string fileName = "";
 
 	cout << "Please enter filename to be opened: ";
-	// cin >> fileName;
-	fileName = "../library.txt";
+	cin >> fileName;
+	// fileName = "../library.txt";
 	// fileName = "../SaveTest.txt";
 
 	performLoad(fileName);
