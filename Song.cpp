@@ -1,3 +1,12 @@
+/*
+Name: Tony Nguyen
+Class: CPSC 122 01
+Date: April 4, 2023
+Programming Assignment: PA6
+Description: This program implements several tasks required by PA6
+*/
+
+
 #include "Song.h"
 
 /*
@@ -19,61 +28,179 @@ string convertToLowercase(string s) {
 	return tempString;
 }
 
+/*
+Song()
+ * Date Created: 04/01/2023
+ * Date Last Modified: 04/01/2023
+ * Description: This is the default value constructor of Song class
+ * Input parameters: None
+ * Returns: None
+ * Pre: None
+ * Post: None
+ * Note: This is a Song class member function
+*/
 Song::Song() {
 	title = "";
 	artist = "";
 	genre = "";
 	rating = 1;
 	next = NULL;
-	prev = NULL;
 }
 
+/*
+Song()
+ * Date Created: 04/01/2023
+ * Date Last Modified: 04/01/2023
+ * Description: This is the explicit value constructor of Song class
+ * Input parameters: None
+ * Returns: None
+ * Pre: None
+ * Post: None
+ * Note: This is a Song class member function
+*/
 Song::Song(string titleParam, string artistParam, string genreParam, int ratingParam) {
 	title = titleParam;
 	artist = artistParam;
 	genre = genreParam;
 	rating = ratingParam;
 	next = NULL;
-	prev = NULL;
 }
 
+/*
+Song()
+ * Date Created: 04/01/2023
+ * Date Last Modified: 04/01/2023
+ * Description: This is the copy constructor of Song class
+ * Input parameters: A Song object passed by reference
+ * Returns: None
+ * Pre: None
+ * Post: None
+ * Note: This is a Song class member function
+*/
 Song::Song(const Song& other) {
 	title = other.title;
 	artist = other.artist;
 	genre = other.genre;
 	rating = other.rating;
 	next = NULL;
-	prev = NULL;
 }
 
+/*
+Function: getTitle()
+ * Date Created: 04/01/2023
+ * Date Last Modified: 04/01/2023
+ * Description: This is the title getter of the Song class
+ * Input parameters: None
+ * Returns: A string
+ * Pre: None
+ * Post: None
+ * Note: This is a Song class member function
+*/
 string Song::getTitle() {
 	return title;
 }
 
+/*
+Function: setTitle()
+ * Date Created: 04/01/2023
+ * Date Last Modified: 04/01/2023
+ * Description: This is the title setter of the Song class
+ * Input parameters: A string
+ * Returns: None
+ * Pre: None
+ * Post: None
+ * Note: This is a Song class member function
+*/
 void Song::setTitle(string newTitle) {
 	title = convertToLowercase(newTitle);
 }
 
+/*
+Function: getArtist()
+ * Date Created: 04/01/2023
+ * Date Last Modified: 04/01/2023
+ * Description: This is the artist getter of the Song class
+ * Input parameters: None
+ * Returns: A string
+ * Pre: None
+ * Post: None
+ * Note: This is a Song class member function
+*/
 string Song::getArtist() {
 	return artist;
 }
 
+/*
+Function: setArtist()
+ * Date Created: 04/01/2023
+ * Date Last Modified: 04/01/2023
+ * Description: This is the artist setter of the Song class
+ * Input parameters: A string
+ * Returns: None
+ * Pre: None
+ * Post: None
+ * Note: This is a Song class member function
+*/
 void Song::setArtist(string newArtist) {
 	artist = convertToLowercase(newArtist);
 }
 
+/*
+Function: getGenre()
+ * Date Created: 04/01/2023
+ * Date Last Modified: 04/01/2023
+ * Description: This is the genre getter of the Song class
+ * Input parameters: None
+ * Returns: A string
+ * Pre: None
+ * Post: None
+ * Note: This is a Song class member function
+*/
 string Song::getGenre() {
 	return genre;
 }
 
+/*
+Function: setGenre()
+ * Date Created: 04/01/2023
+ * Date Last Modified: 04/01/2023
+ * Description: This is the genre setter of the Song class
+ * Input parameters: A string
+ * Returns: None
+ * Pre: None
+ * Post: None
+ * Note: This is a Song class member function
+*/
 void Song::setGenre(string newGenre) {
 	genre = convertToLowercase(newGenre);
 }
 
+/*
+Function: getRating()
+ * Date Created: 04/01/2023
+ * Date Last Modified: 04/01/2023
+ * Description: This is the rating getter of the Song class
+ * Input parameters: None
+ * Returns: An int
+ * Pre: None
+ * Post: None
+ * Note: This is a Song class member function
+*/
 int Song::getRating() {
 	return rating;
 }
 
+/*
+Function: setRating()
+ * Date Created: 04/01/2023
+ * Date Last Modified: 04/01/2023
+ * Description: This is the rating setter of the Song class
+ * Input parameters: A string
+ * Returns: None
+ * Pre: Rating will be set according to the global variable declared above
+ * Post: None
+ * Note: This is a Song class member function
+*/
 void Song::setRating(int newRating) {
 	if (newRating < MIN_RATING || newRating > MAX_RATING) {
 		cout << "Rating must be in [" << MIN_RATING << ", " << MAX_RATING << "]" << endl;
@@ -89,10 +216,32 @@ void Song::setRating(int newRating) {
 	}
 }
 
+/*
+Function: getNext()
+ * Date Created: 04/01/2023
+ * Date Last Modified: 04/01/2023
+ * Description: This is the next pointer getter of the Song class
+ * Input parameters: None
+ * Returns: A Song pointer
+ * Pre: None
+ * Post: None
+ * Note: This is a Song class member function
+*/
 Song * Song::getNext() {
 	return next;
 }
 
+/*
+Function: setNext()
+ * Date Created: 04/01/2023
+ * Date Last Modified: 04/01/2023
+ * Description: This is the next pointer setter of the Song class
+ * Input parameters: A Song object pointer
+ * Returns: None
+ * Pre: None
+ * Post: None
+ * Note: This is a Song class member function
+*/
 void Song::setNext(Song * newNext) {
 	next = newNext;
 }
@@ -126,7 +275,17 @@ string Song::getStringAttributeValue(string attribute) {
 	}
 }
 
-
+/*
+Function: displaySong()
+ * Date Created: 03/17/2023
+ * Date Last Modified: 03/18/2023
+ * Description: This function displays a Song object attributes
+ * Input parameters: None
+ * Returns: None
+ * Pre: None
+ * Post: None
+ * Note: This is a Song member function
+*/
 void Song::displaySong() {
 	cout << "Title:\t" << beautyPrint(title) << endl;
 	cout << "Artist:\t" << beautyPrint(artist) << endl;
