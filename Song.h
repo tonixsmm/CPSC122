@@ -1,3 +1,11 @@
+/*
+Name: Tony Nguyen
+Class: CPSC 122 01
+Date: April 4, 2023
+Programming Assignment: PA6
+Description: This program implements several tasks required by PA6
+*/
+
 #ifndef SONG_H
 #define SONG_H
 
@@ -19,7 +27,6 @@ class Song {
 		string genre;
 		int rating;
 		Song * next; // NEW: link for linking Songs together in a linked list
-		Song * prev; // Bonus
 	public:
 		Song();
 		Song(string, string, string, int);
