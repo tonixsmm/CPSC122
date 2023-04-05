@@ -1,8 +1,8 @@
-==26913== Memcheck, a memory error detector
-==26913== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==26913== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
-==26913== Command: ./runPA6
-==26913== 
+==9928== Memcheck, a memory error detector
+==9928== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==9928== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==9928== Command: ./runPA6
+==9928== 
 
 Welcome to the CPSC 122 Music Manager!!
 Please choose from the following options: 
@@ -16,21 +16,8 @@ Please choose from the following options:
 8) Edit song
 9) Exit
 Choice: 1
-Please enter filename to be opened: Successfully opened ../library.txt
-
-Welcome to the CPSC 122 Music Manager!!
-Please choose from the following options: 
-1) Load library
-2) Store library
-3) Display library
-4) Sort library
-5) Search library
-6) Insert song in order
-7) Remove song
-8) Edit song
-9) Exit
-Choice: 2
-Enter the filename that you want to save your library to: ../SaveTest.txt
+Please enter filename to be opened: ../library.txt
+Successfully opened ../library.txt
 
 Welcome to the CPSC 122 Music Manager!!
 Please choose from the following options: 
@@ -102,8 +89,155 @@ Please choose from the following options:
 7) Remove song
 8) Edit song
 9) Exit
+Choice: 6
+Please enter the song title: willow
+Please enter the song artist: taylor swift
+Please enter the song genre: indie folk
+Please enter the song rating: 4
+
+Welcome to the CPSC 122 Music Manager!!
+Please choose from the following options: 
+1) Load library
+2) Store library
+3) Display library
+4) Sort library
+5) Search library
+6) Insert song in order
+7) Remove song
+8) Edit song
+9) Exit
+Choice: 3
+
+All Songs In The Library
+------------------------
+
+SONG 0
+Title:  I Gotta Feeling
+Artist: Black Eyed Peas
+Genre:  Pop
+Rating: 5
+
+SONG 1
+Title:  Mack The Knife
+Artist: Bobby Darin
+Genre:  Rock
+Rating: 1
+
+SONG 2
+Title:  Party Rock Anthem
+Artist: Lmfao
+Genre:  Hip Hop
+Rating: 4
+
+SONG 3
+Title:  Shape Of You
+Artist: Ed Sheeran
+Genre:  Pop
+Rating: 4
+
+SONG 4
+Title:  Smooth
+Artist: Santana
+Genre:  Electronic
+Rating: 2
+
+SONG 5
+Title:  The Twist
+Artist: Chubby Checker
+Genre:  Rock
+Rating: 3
+
+SONG 6
+Title:  Uptown Funk!
+Artist: Mark Ronson
+Genre:  Funk
+Rating: 5
+
+SONG 7
+Title:  Willow
+Artist: Taylor Swift
+Genre:  Indie Folk
+Rating: 4
+
+
+Welcome to the CPSC 122 Music Manager!!
+Please choose from the following options: 
+1) Load library
+2) Store library
+3) Display library
+4) Sort library
+5) Search library
+6) Insert song in order
+7) Remove song
+8) Edit song
+9) Exit
 Choice: 4
-Please enter the attribute that you want to sort by (title, artist, genre, rating): artist
+Please enter the attribute that you want to sort by (title, artist, genre, rating): rating
+
+Welcome to the CPSC 122 Music Manager!!
+Please choose from the following options: 
+1) Load library
+2) Store library
+3) Display library
+4) Sort library
+5) Search library
+6) Insert song in order
+7) Remove song
+8) Edit song
+9) Exit
+Choice: 3
+
+All Songs In The Library
+------------------------
+
+SONG 0
+Title:  Mack The Knife
+Artist: Bobby Darin
+Genre:  Rock
+Rating: 1
+
+SONG 1
+Title:  Smooth
+Artist: Santana
+Genre:  Electronic
+Rating: 2
+
+SONG 2
+Title:  The Twist
+Artist: Chubby Checker
+Genre:  Rock
+Rating: 3
+
+SONG 3
+Title:  Willow
+Artist: Taylor Swift
+Genre:  Indie Folk
+Rating: 4
+
+SONG 4
+Title:  Shape Of You
+Artist: Ed Sheeran
+Genre:  Pop
+Rating: 4
+
+SONG 5
+Title:  Party Rock Anthem
+Artist: Lmfao
+Genre:  Hip Hop
+Rating: 4
+
+SONG 6
+Title:  Uptown Funk!
+Artist: Mark Ronson
+Genre:  Funk
+Rating: 5
+
+SONG 7
+Title:  I Gotta Feeling
+Artist: Black Eyed Peas
+Genre:  Pop
+Rating: 5
+
 
 Welcome to the CPSC 122 Music Manager!!
 Please choose from the following options: 
@@ -117,50 +251,32 @@ Please choose from the following options:
 8) Edit song
 9) Exit
 Choice: 5
-Please enter the attribute that you want to search for (title, artist, genre, or rating). If you want to search by index, please enter 'index': title
-Please enter the attribute value to be searched. If you search by song index, please enter the index number: shape of you
+Please enter the attribute that you want to search for (title, artist, genre, or rating). If you want to search by index, please enter 'index': inde  
+Please enter the attribute value to be searched. If you search by song index, please enter the index number: 5
+A song with the given information is not found!
+
+Welcome to the CPSC 122 Music Manager!!
+Please choose from the following options: 
+1) Load library
+2) Store library
+3) Display library
+4) Sort library
+5) Search library
+6) Insert song in order
+7) Remove song
+8) Edit song
+9) Exit
+Choice: 5
+Please enter the attribute that you want to search for (title, artist, genre, or rating). If you want to search by index, please enter 'index': index
+Please enter the attribute value to be searched. If you search by song index, please enter the index number: 0
 A song with the given information is found!
 
 Song Information
 ----------------
-Title:  Shape Of You
-Artist: Ed Sheeran
-Genre:  Pop
-Rating: 4
-
-Welcome to the CPSC 122 Music Manager!!
-Please choose from the following options: 
-1) Load library
-2) Store library
-3) Display library
-4) Sort library
-5) Search library
-6) Insert song in order
-7) Remove song
-8) Edit song
-9) Exit
-Choice: 6
-Please enter the song title: sad beautiful tragic
-Please enter the song artist: taylow swift
-Please enter the song genre: pop
-Please enter the song rating: 5
-
-Welcome to the CPSC 122 Music Manager!!
-Please choose from the following options: 
-1) Load library
-2) Store library
-3) Display library
-4) Sort library
-5) Search library
-6) Insert song in order
-7) Remove song
-8) Edit song
-9) Exit
-Choice: 6
-Please enter the song title: the way i loved you
-Please enter the song artist: taylor swift
-Please enter the song genre: country
-Please enter the song rating: 5
+Title:  Mack The Knife
+Artist: Bobby Darin
+Genre:  Rock
+Rating: 1
 
 Welcome to the CPSC 122 Music Manager!!
 Please choose from the following options: 
@@ -175,16 +291,75 @@ Please choose from the following options:
 9) Exit
 Choice: 7
 .....Searching for the song to remove.....
-Please enter the attribute that you want to search for (title, artist, genre, or rating). If you want to search by index, please enter 'index': title
-Please enter the attribute value to be searched. If you search by song index, please enter the index number: sad beautiful tragic
+Please enter the attribute that you want to search for (title, artist, genre, or rating). If you want to search by index, please enter 'index': genre
+Please enter the attribute value to be searched. If you search by song index, please enter the index number: rock
 
 Match song information:
-Title:  Sad Beautiful Tragic
-Artist: Taylow Swift
+Title:  Mack The Knife
+Artist: Bobby Darin
+Genre:  Rock
+Rating: 1
+
+Remove successfully!
+
+Welcome to the CPSC 122 Music Manager!!
+Please choose from the following options: 
+1) Load library
+2) Store library
+3) Display library
+4) Sort library
+5) Search library
+6) Insert song in order
+7) Remove song
+8) Edit song
+9) Exit
+Choice: 3
+
+All Songs In The Library
+------------------------
+
+SONG 0
+Title:  Smooth
+Artist: Santana
+Genre:  Electronic
+Rating: 2
+
+SONG 1
+Title:  The Twist
+Artist: Chubby Checker
+Genre:  Rock
+Rating: 3
+
+SONG 2
+Title:  Willow
+Artist: Taylor Swift
+Genre:  Indie Folk
+Rating: 4
+
+SONG 3
+Title:  Shape Of You
+Artist: Ed Sheeran
+Genre:  Pop
+Rating: 4
+
+SONG 4
+Title:  Party Rock Anthem
+Artist: Lmfao
+Genre:  Hip Hop
+Rating: 4
+
+SONG 5
+Title:  Uptown Funk!
+Artist: Mark Ronson
+Genre:  Funk
+Rating: 5
+
+SONG 6
+Title:  I Gotta Feeling
+Artist: Black Eyed Peas
 Genre:  Pop
 Rating: 5
 
-Remove successfully!
 
 Welcome to the CPSC 122 Music Manager!!
 Please choose from the following options: 
@@ -200,17 +375,504 @@ Please choose from the following options:
 Choice: 8
 .....Searching for the song to edit.....
 Please enter the attribute that you want to search for (title, artist, genre, or rating). If you want to search by index, please enter 'index': title
-Please enter the attribute value to be searched. If you search by song index, please enter the index number: the way i loved you
+Please enter the attribute value to be searched. If you search by song index, please enter the index number: willow
 
 Match song information:
-Title:  The Way I Loved You
+Title:  Willow
 Artist: Taylor Swift
-Genre:  Country
-Rating: 5
+Genre:  Indie Folk
+Rating: 4
 
 .....Editing song attribute......
-Please enter the attribute that you want to edit (title, artist, genre, or rating): title
-Please enter the new attribute value: the way i love you
+Please enter the attribute that you want to edit (title, artist, genre, or rating): rating
+Please enter the new attribute value: 5
+
+Welcome to the CPSC 122 Music Manager!!
+Please choose from the following options: 
+1) Load library
+2) Store library
+3) Display library
+4) Sort library
+5) Search library
+6) Insert song in order
+7) Remove song
+8) Edit song
+9) Exit
+Choice: 3
+
+All Songs In The Library
+------------------------
+
+SONG 0
+Title:  Smooth
+Artist: Santana
+Genre:  Electronic
+Rating: 2
+
+SONG 1
+Title:  The Twist
+Artist: Chubby Checker
+Genre:  Rock
+Rating: 3
+
+SONG 2
+Title:  Willow
+Artist: Taylor Swift
+Genre:  Indie Folk
+Rating: 5
+
+SONG 3
+Title:  Shape Of You
+Artist: Ed Sheeran
+Genre:  Pop
+Rating: 4
+
+SONG 4
+Title:  Party Rock Anthem
+Artist: Lmfao
+Genre:  Hip Hop
+Rating: 4
+
+SONG 5
+Title:  Uptown Funk!
+Artist: Mark Ronson
+Genre:  Funk
+Rating: 5
+
+SONG 6
+Title:  I Gotta Feeling
+Artist: Black Eyed Peas
+Genre:  Pop
+Rating: 5
+
+
+Welcome to the CPSC 122 Music Manager!!
+Please choose from the following options: 
+1) Load library
+2) Store library
+3) Display library
+4) Sort library
+5) Search library
+6) Insert song in order
+7) Remove song
+8) Edit song
+9) Exit
+Choice: 2
+Enter the filename that you want to save your library to: ../SaveTest.txt
+
+Welcome to the CPSC 122 Music Manager!!
+Please choose from the following options: 
+1) Load library
+2) Store library
+3) Display library
+4) Sort library
+5) Search library
+6) Insert song in order
+7) Remove song
+8) Edit song
+9) Exit
+Choice: 6
+Please enter the song title: mirrorball
+Please enter the song artist: taylor swift
+Please enter the song genre: indie folk
+Please enter the song rating: 5
+
+Welcome to the CPSC 122 Music Manager!!
+Please choose from the following options: 
+1) Load library
+2) Store library
+3) Display library
+4) Sort library
+5) Search library
+6) Insert song in order
+7) Remove song
+8) Edit song
+9) Exit
+Choice: 3
+
+All Songs In The Library
+------------------------
+
+SONG 0
+Title:  Smooth
+Artist: Santana
+Genre:  Electronic
+Rating: 2
+
+SONG 1
+Title:  The Twist
+Artist: Chubby Checker
+Genre:  Rock
+Rating: 3
+
+SONG 2
+Title:  Mirrorball
+Artist: Taylor Swift
+Genre:  Indie Folk
+Rating: 5
+
+SONG 3
+Title:  Willow
+Artist: Taylor Swift
+Genre:  Indie Folk
+Rating: 5
+
+SONG 4
+Title:  Shape Of You
+Artist: Ed Sheeran
+Genre:  Pop
+Rating: 4
+
+SONG 5
+Title:  Party Rock Anthem
+Artist: Lmfao
+Genre:  Hip Hop
+Rating: 4
+
+SONG 6
+Title:  Uptown Funk!
+Artist: Mark Ronson
+Genre:  Funk
+Rating: 5
+
+SONG 7
+Title:  I Gotta Feeling
+Artist: Black Eyed Peas
+Genre:  Pop
+Rating: 5
+
+
+Welcome to the CPSC 122 Music Manager!!
+Please choose from the following options: 
+1) Load library
+2) Store library
+3) Display library
+4) Sort library
+5) Search library
+6) Insert song in order
+7) Remove song
+8) Edit song
+9) Exit
+Choice: 4
+Please enter the attribute that you want to sort by (title, artist, genre, rating): title
+
+Welcome to the CPSC 122 Music Manager!!
+Please choose from the following options: 
+1) Load library
+2) Store library
+3) Display library
+4) Sort library
+5) Search library
+6) Insert song in order
+7) Remove song
+8) Edit song
+9) Exit
+Choice: 3
+
+All Songs In The Library
+------------------------
+
+SONG 0
+Title:  I Gotta Feeling
+Artist: Black Eyed Peas
+Genre:  Pop
+Rating: 5
+
+SONG 1
+Title:  Mirrorball
+Artist: Taylor Swift
+Genre:  Indie Folk
+Rating: 5
+
+SONG 2
+Title:  Party Rock Anthem
+Artist: Lmfao
+Genre:  Hip Hop
+Rating: 4
+
+SONG 3
+Title:  Shape Of You
+Artist: Ed Sheeran
+Genre:  Pop
+Rating: 4
+
+SONG 4
+Title:  Smooth
+Artist: Santana
+Genre:  Electronic
+Rating: 2
+
+SONG 5
+Title:  The Twist
+Artist: Chubby Checker
+Genre:  Rock
+Rating: 3
+
+SONG 6
+Title:  Uptown Funk!
+Artist: Mark Ronson
+Genre:  Funk
+Rating: 5
+
+SONG 7
+Title:  Willow
+Artist: Taylor Swift
+Genre:  Indie Folk
+Rating: 5
+
+
+Welcome to the CPSC 122 Music Manager!!
+Please choose from the following options: 
+1) Load library
+2) Store library
+3) Display library
+4) Sort library
+5) Search library
+6) Insert song in order
+7) Remove song
+8) Edit song
+9) Exit
+Choice: 4
+Please enter the attribute that you want to sort by (title, artist, genre, rating): rating
+
+Welcome to the CPSC 122 Music Manager!!
+Please choose from the following options: 
+1) Load library
+2) Store library
+3) Display library
+4) Sort library
+5) Search library
+6) Insert song in order
+7) Remove song
+8) Edit song
+9) Exit
+Choice: 3
+
+All Songs In The Library
+------------------------
+
+SONG 0
+Title:  Smooth
+Artist: Santana
+Genre:  Electronic
+Rating: 2
+
+SONG 1
+Title:  The Twist
+Artist: Chubby Checker
+Genre:  Rock
+Rating: 3
+
+SONG 2
+Title:  Shape Of You
+Artist: Ed Sheeran
+Genre:  Pop
+Rating: 4
+
+SONG 3
+Title:  Party Rock Anthem
+Artist: Lmfao
+Genre:  Hip Hop
+Rating: 4
+
+SONG 4
+Title:  Willow
+Artist: Taylor Swift
+Genre:  Indie Folk
+Rating: 5
+
+SONG 5
+Title:  Uptown Funk!
+Artist: Mark Ronson
+Genre:  Funk
+Rating: 5
+
+SONG 6
+Title:  Mirrorball
+Artist: Taylor Swift
+Genre:  Indie Folk
+Rating: 5
+
+SONG 7
+Title:  I Gotta Feeling
+Artist: Black Eyed Peas
+Genre:  Pop
+Rating: 5
+
+
+Welcome to the CPSC 122 Music Manager!!
+Please choose from the following options: 
+1) Load library
+2) Store library
+3) Display library
+4) Sort library
+5) Search library
+6) Insert song in order
+7) Remove song
+8) Edit song
+9) Exit
+Choice: 6
+Please enter the song title: lavender haze
+Please enter the song artist: taylor swift
+Please enter the song genre: pop
+Please enter the song rating: 3
+
+Welcome to the CPSC 122 Music Manager!!
+Please choose from the following options: 
+1) Load library
+2) Store library
+3) Display library
+4) Sort library
+5) Search library
+6) Insert song in order
+7) Remove song
+8) Edit song
+9) Exit
+Choice: 3
+
+All Songs In The Library
+------------------------
+
+SONG 0
+Title:  Smooth
+Artist: Santana
+Genre:  Electronic
+Rating: 2
+
+SONG 1
+Title:  Lavender Haze
+Artist: Taylor Swift
+Genre:  Pop
+Rating: 3
+
+SONG 2
+Title:  The Twist
+Artist: Chubby Checker
+Genre:  Rock
+Rating: 3
+
+SONG 3
+Title:  Shape Of You
+Artist: Ed Sheeran
+Genre:  Pop
+Rating: 4
+
+SONG 4
+Title:  Party Rock Anthem
+Artist: Lmfao
+Genre:  Hip Hop
+Rating: 4
+
+SONG 5
+Title:  Willow
+Artist: Taylor Swift
+Genre:  Indie Folk
+Rating: 5
+
+SONG 6
+Title:  Uptown Funk!
+Artist: Mark Ronson
+Genre:  Funk
+Rating: 5
+
+SONG 7
+Title:  Mirrorball
+Artist: Taylor Swift
+Genre:  Indie Folk
+Rating: 5
+
+SONG 8
+Title:  I Gotta Feeling
+Artist: Black Eyed Peas
+Genre:  Pop
+Rating: 5
+
+
+Welcome to the CPSC 122 Music Manager!!
+Please choose from the following options: 
+1) Load library
+2) Store library
+3) Display library
+4) Sort library
+5) Search library
+6) Insert song in order
+7) Remove song
+8) Edit song
+9) Exit
+Choice: 1
+Please enter filename to be opened: ../SaveTest.txt
+Successfully opened ../SaveTest.txt
+
+Welcome to the CPSC 122 Music Manager!!
+Please choose from the following options: 
+1) Load library
+2) Store library
+3) Display library
+4) Sort library
+5) Search library
+6) Insert song in order
+7) Remove song
+8) Edit song
+9) Exit
+Choice: 3
+
+All Songs In The Library
+------------------------
+
+SONG 0
+Title:  Smooth
+Artist: Santana
+Genre:  Electronic
+Rating: 2
+
+SONG 1
+Title:  Lavender Haze
+Artist: Taylor Swift
+Genre:  Pop
+Rating: 3
+
+SONG 2
+Title:  The Twist
+Artist: Chubby Checker
+Genre:  Rock
+Rating: 3
+
+SONG 3
+Title:  Shape Of You
+Artist: Ed Sheeran
+Genre:  Pop
+Rating: 4
+
+SONG 4
+Title:  Party Rock Anthem
+Artist: Lmfao
+Genre:  Hip Hop
+Rating: 4
+
+SONG 5
+Title:  Willow
+Artist: Taylor Swift
+Genre:  Indie Folk
+Rating: 5
+
+SONG 6
+Title:  Uptown Funk!
+Artist: Mark Ronson
+Genre:  Funk
+Rating: 5
+
+SONG 7
+Title:  Mirrorball
+Artist: Taylor Swift
+Genre:  Indie Folk
+Rating: 5
+
+SONG 8
+Title:  I Gotta Feeling
+Artist: Black Eyed Peas
+Genre:  Pop
+Rating: 5
+
 
 Welcome to the CPSC 122 Music Manager!!
 Please choose from the following options: 
@@ -225,56 +887,12 @@ Please choose from the following options:
 9) Exit
 Choice: 9
 Thanks for you using the CPSC 122 Music Manager!!
-==26913== 
-==26913== HEAP SUMMARY:
-==26913==     in use at exit: 2,109 bytes in 21 blocks
-==26913==   total heap usage: 73 allocs, 52 frees, 95,328 bytes allocated
-==26913== 
-==26913== 112 bytes in 1 blocks are definitely lost in loss record 5 of 11
-==26913==    at 0x483BE63: operator new(unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==26913==    by 0x111546: SongLibrary::searchLibrary() (SongLibrary.cpp:443)
-==26913==    by 0x10DD5B: executeUserChoice(int, SongLibrary&) (PA6.cpp:47)
-==26913==    by 0x10DE06: runMusicManager() (PA6.cpp:72)
-==26913==    by 0x10D995: main (Main.cpp:4)
-==26913== 
-==26913== 112 bytes in 1 blocks are definitely lost in loss record 6 of 11
-==26913==    at 0x483BE63: operator new(unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==26913==    by 0x111C5A: SongLibrary::removeSongFromLibrary() (SongLibrary.cpp:522)
-==26913==    by 0x10DD77: executeUserChoice(int, SongLibrary&) (PA6.cpp:53)
-==26913==    by 0x10DE06: runMusicManager() (PA6.cpp:72)
-==26913==    by 0x10D995: main (Main.cpp:4)
-==26913== 
-==26913== 112 bytes in 1 blocks are definitely lost in loss record 7 of 11
-==26913==    at 0x483BE63: operator new(unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==26913==    by 0x11207E: SongLibrary::editSongInLibrary() (SongLibrary.cpp:551)
-==26913==    by 0x10DD85: executeUserChoice(int, SongLibrary&) (PA6.cpp:56)
-==26913==    by 0x10DE06: runMusicManager() (PA6.cpp:72)
-==26913==    by 0x10D995: main (Main.cpp:4)
-==26913== 
-==26913== 815 (112 direct, 703 indirect) bytes in 1 blocks are definitely lost in loss record 10 of 11
-==26913==    at 0x483BE63: operator new(unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==26913==    by 0x110BF5: SongLibrary::loadSongFromFile(std::basic_ifstream<char, std::char_traits<char> >&, int) (SongLibrary.cpp:338)
-==26913==    by 0x10F7D2: SongLibrary::performLoad(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (SongLibrary.cpp:73)
-==26913==    by 0x11105E: SongLibrary::loadLibrary() (SongLibrary.cpp:380)
-==26913==    by 0x10DD20: executeUserChoice(int, SongLibrary&) (PA6.cpp:35)
-==26913==    by 0x10DE06: runMusicManager() (PA6.cpp:72)
-==26913==    by 0x10D995: main (Main.cpp:4)
-==26913== 
-==26913== 958 (112 direct, 846 indirect) bytes in 1 blocks are definitely lost in loss record 11 of 11
-==26913==    at 0x483BE63: operator new(unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==26913==    by 0x10F53A: SongLibrary::SongLibrary(SongLibrary const&) (SongLibrary.cpp:17)
-==26913==    by 0x10FB20: SongLibrary::performSort() (SongLibrary.cpp:108)
-==26913==    by 0x1112F2: SongLibrary::sortLibrary() (SongLibrary.cpp:410)
-==26913==    by 0x10DD4D: executeUserChoice(int, SongLibrary&) (PA6.cpp:44)
-==26913==    by 0x10DE06: runMusicManager() (PA6.cpp:72)
-==26913==    by 0x10D995: main (Main.cpp:4)
-==26913== 
-==26913== LEAK SUMMARY:
-==26913==    definitely lost: 560 bytes in 5 blocks
-==26913==    indirectly lost: 1,549 bytes in 16 blocks
-==26913==      possibly lost: 0 bytes in 0 blocks
-==26913==    still reachable: 0 bytes in 0 blocks
-==26913==         suppressed: 0 bytes in 0 blocks
-==26913== 
-==26913== For lists of detected and suppressed errors, rerun with: -s
-==26913== ERROR SUMMARY: 5 errors from 5 contexts (suppressed: 0 from 0)
+==9928== 
+==9928== HEAP SUMMARY:
+==9928==     in use at exit: 0 bytes in 0 blocks
+==9928==   total heap usage: 99 allocs, 99 frees, 106,755 bytes allocated
+==9928== 
+==9928== All heap blocks were freed -- no leaks are possible
+==9928== 
+==9928== For lists of detected and suppressed errors, rerun with: -s
+==9928== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
