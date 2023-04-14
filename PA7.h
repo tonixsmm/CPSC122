@@ -5,7 +5,8 @@
 
 using namespace std;
 
-// TODO: your PA7.cpp function prototypes here
+string readFromFile();
+void openFile();
 
 
 #endif
