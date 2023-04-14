@@ -35,14 +35,29 @@ void LinkedList::displayList() {
 	cout << "NULL" << endl;
 }
 
-// TODO: finish this function
 void LinkedList::insertAtFront(string newValue) {
+	Node * newNode = new Node;
+	newNode->value = newValue;
+	newNode->next = NULL;
 
+	if (head == NULL){
+		head = newNode;
+	}
+	else {
+		newNode->next = head;
+		head = newNode;
+	}
 }
 
-// TODO: finish this function
 string LinkedList::deleteAtFront() {
-	return ""; // TODO: fix this
+	string value = "";
+	if (head != NULL){
+		Node * curr = head;
+		head = curr->next;
+		value = curr->value;
+		delete curr;
+	}
+	return value;
 }
 
 

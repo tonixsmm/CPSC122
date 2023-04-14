@@ -1,21 +1,24 @@
 #include "Stack.h"
 
-// TODO: finish this function
 void Stack::push(string newValue) {
-
+	insertAtFront(newValue);
 }
 
-// TODO: finish this function
 string Stack::pop() {
-	return ""; // TODO: fix this
+	return deleteAtFront();
 }
 
 // TODO: finish this function
 string Stack::peek() {
-	return ""; // TODO: fix this
+	if (head != NULL) {
+		return head->value;
+	}
+	return "";
 }
 
-// TODO: finish this function
 bool Stack::isEmpty() {
-	return false; // TODO: fix this
+	if (head != NULL){
+		return false;
+	}
+	return true;
 }
