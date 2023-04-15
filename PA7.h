@@ -2,11 +2,10 @@
 #define PA7_H
 
 #include <iostream>
+#include <fstream>
+#include "Calculator.h"
 
 using namespace std;
-
-string readFromFile();
-void openFile();
 
 
 #endif

@@ -3,11 +3,14 @@
 
 #include <iostream>
 #include <cmath>
+#include <fstream>
+#include <sstream>
 #include "Stack.h"
 
 using namespace std;
 
 bool checkOperatorOnStackPrecedence(string, string);
+void openFile(ifstream&, string);
 
 class Calculator {
 	private:
@@ -19,6 +22,12 @@ class Calculator {
 		void setSymbolTable(string[]);
 		string convertInfixToPostfix(string);
 		string evaluatePostfix(string);
+
+		void getSymbolTable() const;
+
+		void readFromFile();
+		void processSymbolTable();
+		void processStringValue(ifstream&);
 };
 
 #endif
