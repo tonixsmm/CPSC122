@@ -45,3 +45,6 @@ replit.nix
 *.exe
 *.out
 *.app
+
+# Tony added
+note.txt
