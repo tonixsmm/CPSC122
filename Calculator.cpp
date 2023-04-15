@@ -16,21 +16,74 @@ void Calculator::setSymbolTable(string newSymbolTable[]) {
 
 // TODO: finish this function
 bool checkOperatorOnStackPrecedence(string operatorOnStack, string currentOperator) {
-	int precedenceTable [3][8];
+	string tempString = "";
+	int precedenceValOnStack = -2, precedenceValCurrItem = -2;
+	int precedenceTable[3][8];
 
-	precedenceTable
+	// Precedence character initialization
+	char tempCharArr[8] = {'(', ')', '^', '*', '/', '%', '+', '-'};
+	for (int i = 0; i < 8; i++){
+		precedenceTable[0][i] = tempCharArr[i];
+	}
 
-	return false; // TODO: fix this
+	// Precendence "on stack" initialization
+	int tempStackArr[8] = {0, -1, 5, 4, 4, 4, 2, 2};
+	for (int i = 0; i < 8; i++){
+		precedenceTable[1][i] = tempStackArr[i];
+	}
+
+	// Precedence "current item" initialization
+	int tempCurrArr[8] = {7, 0, 6, 3, 3, 3, 1, 1};
+	for (int i = 0; i < 8; i++){
+		precedenceTable[2][i] = tempCurrArr[i];
+	}
+
+	// Comparison algorithm
+	for (int i = 0; i < 8; i++){ // "on stack"
+		if (operatorOnStack == to_string(static_cast<char>(precedenceTable[0][i]))){
+			precedenceValOnStack = precedenceTable[1][i];
+		}
+	}
+
+	for (int i = 0; i < 8; i++){ // "current item"
+		if (currentOperator == to_string(static_cast<char>(precedenceTable[0][i]))){
+			precedenceValCurrItem = precedenceTable[2][i];
+		}
+	}
+
+	if (precedenceValOnStack > precedenceValCurrItem){
+		return true;
+	}
+	else {
+		return false;
+	}
 }
 
 // TODO: finish this function
 string Calculator::convertInfixToPostfix(string infix) {
 	istringstream iss;
+	string postfixString = "", stackPop = "";
 
 	iss.clear();
 	iss.str(infix);
 
-	// TODO: Finish algorithm
+	while (iss.good()){
+		for (char c : infix){
+			if (isOperator(c) == false){
+				postfixString += to_string(c);
+			}
+			else if (c == '('){
+				stack.push(to_string(c));
+			}
+			else if (c == ')'){
+				while (stack.peek() != "("){
+					stackPop = stack.pop();
+					postfixString += stackPop;
+				}
+				
+			}
+		}
+	}
 
 	return ""; // TODO: fix this
 }
@@ -109,4 +162,14 @@ void Calculator::processINFIX(ifstream& inFile){
 
 		}
 	}
+}
+
+bool isOperator(char c){
+	char operatorArr[8] = {'(', ')', '^', '*', '/', '%', '+', '-'};
+	for (int i = 0; i < 8; i++){
+		if (c == operatorArr[i]){
+			return true;
+		}
+	}
+	return false;
 }

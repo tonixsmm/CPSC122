@@ -10,6 +10,7 @@
 using namespace std;
 
 bool checkOperatorOnStackPrecedence(string, string);
+bool isOperator(string);
 void openFile(ifstream&, string);
 
 class Calculator {
@@ -29,6 +30,7 @@ class Calculator {
 		void processSymbolTable();
 		void processStringValue(ifstream&);
 		void processINFIX(ifstream&);
+		bool isOperator(char);
 };
 
 #endif
