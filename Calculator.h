@@ -28,6 +28,7 @@ class Calculator {
 		void readFromFile();
 		void processSymbolTable();
 		void processStringValue(ifstream&);
+		void processINFIX(ifstream&);
 };
 
 #endif

@@ -5,7 +5,7 @@ int main() {
 	Calculator cal;
 
 	cal.readFromFile();
-	cal.getSymbolTable();
+	// cal.getSymbolTable();
 
 	return 0;
 }

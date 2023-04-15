@@ -16,11 +16,22 @@ void Calculator::setSymbolTable(string newSymbolTable[]) {
 
 // TODO: finish this function
 bool checkOperatorOnStackPrecedence(string operatorOnStack, string currentOperator) {
+	int precedenceTable [3][8];
+
+	precedenceTable
+
 	return false; // TODO: fix this
 }
 
 // TODO: finish this function
 string Calculator::convertInfixToPostfix(string infix) {
+	istringstream iss;
+
+	iss.clear();
+	iss.str(infix);
+
+	// TODO: Finish algorithm
+
 	return ""; // TODO: fix this
 }
 
@@ -35,6 +46,7 @@ void Calculator::readFromFile(){
 	openFile(inFile, "../input.txt");
 
 	processStringValue(inFile);
+	processINFIX(inFile);
 }
 
 
@@ -78,6 +90,23 @@ void Calculator::processStringValue(ifstream& inFile){
 
 				symbolTable[static_cast<int>(alphabetChar)] = numericValue;
 			}
+		}
+	}
+}
+
+void Calculator::processINFIX(ifstream& inFile){
+	istringstream iss;
+	string line = "";
+
+	while (!inFile.eof() && line != "#"){
+		getline(inFile, line);
+
+		if (inFile.good() && line != "#"){
+			cout << line << endl;
+
+			iss.clear();
+			iss.str(line);
+
 		}
 	}
 }
