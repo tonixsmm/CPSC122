@@ -5,6 +5,7 @@
 #include <cmath>
 #include <fstream>
 #include <sstream>
+#include <string>
 #include "Stack.h"
 
 using namespace std;
@@ -20,6 +21,7 @@ class Calculator {
 		// Calculator "has-a" Stack
 		Stack stack; // for converting infix to postfix and for evaluating postfix
 	public:
+		Calculator();	// DVC
 		void setSymbolTable(string[]);
 		string convertInfixToPostfix(string);
 		string evaluatePostfix(string);
@@ -31,6 +33,8 @@ class Calculator {
 		void processStringValue(ifstream&);
 		void processINFIX(ifstream&);
 		bool isOperator(char);
+		long processMath(string, string, string);
+		long computeMath(bool, long, long, string);
 };
 
 #endif
