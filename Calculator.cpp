@@ -40,13 +40,15 @@ bool checkOperatorOnStackPrecedence(string operatorOnStack, string currentOperat
 
 	// Comparison algorithm
 	for (int i = 0; i < 8; i++){ // "on stack"
-		if (operatorOnStack == to_string(static_cast<char>(precedenceTable[0][i]))){
+		tempString = static_cast<char>(precedenceTable[0][i]);
+		if (operatorOnStack == tempString){
 			precedenceValOnStack = precedenceTable[1][i];
 		}
 	}
 
 	for (int i = 0; i < 8; i++){ // "current item"
-		if (currentOperator == to_string(static_cast<char>(precedenceTable[0][i]))){
+		tempString = static_cast<char>(precedenceTable[0][i]);
+		if (currentOperator == tempString){
 			precedenceValCurrItem = precedenceTable[2][i];
 		}
 	}
@@ -62,30 +64,44 @@ bool checkOperatorOnStackPrecedence(string operatorOnStack, string currentOperat
 // TODO: finish this function
 string Calculator::convertInfixToPostfix(string infix) {
 	istringstream iss;
-	string postfixString = "", stackPop = "";
+	string postfixString = "", tempString = "", word = "";
 
 	iss.clear();
 	iss.str(infix);
 
 	while (iss.good()){
-		for (char c : infix){
+		iss >> word;
+		for (char c : word){
 			if (isOperator(c) == false){
-				postfixString += to_string(c);
+				tempString = c;
+				postfixString += tempString;
 			}
 			else if (c == '('){
-				stack.push(to_string(c));
+				tempString = c;
+				stack.push(tempString);
 			}
 			else if (c == ')'){
 				while (stack.peek() != "("){
-					stackPop = stack.pop();
-					postfixString += stackPop;
+					postfixString += stack.pop();
 				}
-				
+				if (stack.peek() == "("){
+					stack.pop();
+				}
+			}
+			else {
+				tempString = c;
+				while (!stack.isEmpty() && checkOperatorOnStackPrecedence(stack.peek(), tempString) == true){
+					postfixString += stack.pop();
+				}
+				stack.push(tempString);
 			}
 		}
 	}
+	while (!stack.isEmpty()){
+		postfixString += stack.pop();
+	}
 
-	return ""; // TODO: fix this
+	return postfixString;
 }
 
 // TODO: finish this function
@@ -100,6 +116,8 @@ void Calculator::readFromFile(){
 
 	processStringValue(inFile);
 	processINFIX(inFile);
+
+	inFile.close();
 }
 
 
@@ -155,16 +173,12 @@ void Calculator::processINFIX(ifstream& inFile){
 		getline(inFile, line);
 
 		if (inFile.good() && line != "#"){
-			cout << line << endl;
-
-			iss.clear();
-			iss.str(line);
-
+			convertInfixToPostfix(line);
 		}
 	}
 }
 
-bool isOperator(char c){
+bool Calculator::isOperator(char c){
 	char operatorArr[8] = {'(', ')', '^', '*', '/', '%', '+', '-'};
 	for (int i = 0; i < 8; i++){
 		if (c == operatorArr[i]){
