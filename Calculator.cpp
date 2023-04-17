@@ -4,9 +4,9 @@ Calculator::Calculator(){
 	for (int i = 0; i < 'Z' + 1; i++){
 		symbolTable[i] = "NULL";
 	}
-	for (int i = 48; i <= 57; i++){ // ASCII 0-9
-		symbolTable[i] = "NUM";
-	}
+	// for (int i = 48; i <= 57; i++){ // ASCII 0-9
+	// 	symbolTable[i] = "NUM";
+	// }
 }
 
 void Calculator::getSymbolTable() const{
@@ -140,6 +140,9 @@ string Calculator::evaluatePostfix(string postfix) {
 		}
 	}
 	result = stack.pop();
+	if (result == "5916446"){
+		return "ERROR";
+	}
 	return result; // TODO: fix this
 }
 
@@ -232,9 +235,12 @@ long Calculator::processMath(string operandRight, string operandLeft, string ops
 	long opRightLong = -1, opLeftLong = -1, result = 5916446;
 	bool proceed = false;
 
-	cout << operandLeft << ops << operandRight << endl;
+
+
+	// cout << operandLeft << ops << operandRight << endl;
 	cout << operandLeft << " " << symbolTable[static_cast<int>(operandLeft[0])] << endl;
-	if (symbolTable[static_cast<int>(operandRight[0])] != "NULL" && symbolTable[static_cast<int>(operandLeft[0])] != "NULL"){
+	if ((isalpha(operandRight[0]) && symbolTable[static_cast<int>(operandRight[0])] != "NULL") && (isalpha(operandLeft[0]) && symbolTable[static_cast<int>(operandLeft[0])] != "NULL")){
+		cout << "enter 1" << endl;
 		opRightLong = stol(symbolTable[static_cast<int>(operandRight[0])]);
 		cout << opRightLong << endl;
 		opLeftLong = stol(symbolTable[static_cast<int>(operandLeft[0])]);
@@ -242,7 +248,8 @@ long Calculator::processMath(string operandRight, string operandLeft, string ops
 		proceed = true;
 		cout << "clear proceed 1" << endl;
 	}
-	else if (operandRight != "5916446" && operandLeft != "5916446"){
+	else if (((isdigit(operandRight[0]) == true || operandRight[0] == '-') && operandRight != "5916446") && ((isdigit(operandLeft[0]) == true || operandRight[0] == '-') && operandLeft != "5916446")){
+		cout << "enter 2" << endl;
 		opRightLong = stol(operandRight);
 		cout << opRightLong << endl;
 		opLeftLong = stol(operandLeft);
@@ -250,64 +257,69 @@ long Calculator::processMath(string operandRight, string operandLeft, string ops
 		proceed = true;
 		cout << "clear proceed 2" << endl;
 	}
-	else if (operandRight != "5916446" && symbolTable[static_cast<int>(operandLeft[0])] != "NULL"){
+	else if (((isdigit(operandRight[0]) == true || operandRight[0] == '-') && operandRight != "5916446") && (isalpha(operandLeft[0]) && symbolTable[static_cast<int>(operandLeft[0])] != "NULL")){
+		cout << "enter 3" << endl;
 		opRightLong = stol(operandRight);
 		cout << opRightLong << endl;
+		cout << "hello" << endl;
 		opLeftLong = stol(symbolTable[static_cast<int>(operandLeft[0])]);
 		cout << opLeftLong << endl;
 		proceed = true;
-		cout << "clear proceed 2" << endl;
+		cout << "clear proceed 3" << endl;
 	}
-	else if (symbolTable[static_cast<int>(operandRight[0])] != "NULL" && operandLeft != "5916446"){
+	else if ((isalpha(operandRight[0]) && symbolTable[static_cast<int>(operandRight[0])] != "NULL") && ((isdigit(operandLeft[0]) == true || operandRight[0] == '-') && operandLeft != "5916446")){
+		cout << "enter 4" << endl;
 		opRightLong = stol(symbolTable[static_cast<int>(operandRight[0])]);
 		cout << opRightLong << endl;
 		opLeftLong = stol(operandLeft);
 		cout << opLeftLong << endl;
 		proceed = true;
-		cout << "clear proceed 2" << endl;
+		cout << "clear proceed 4" << endl;
 	}
+	cout << "hello" << endl;
 	
-	computeMath(proceed, opRightLong, opLeftLong, ops);
+	if (proceed == true){
+		result = computeMath(proceed, opRightLong, opLeftLong, ops);
+		return result;
+	}
 	return result;
 }
 
 long Calculator::computeMath(bool proceed, long opRightLong, long opLeftLong, string ops){
-	if (proceed == true){
-		if (ops == "+"){
-			return opLeftLong + opRightLong;
+	if (ops == "+"){
+		return opLeftLong + opRightLong;
+	}
+	else if (ops == "-"){
+		return opLeftLong - opRightLong;
+	}
+	else if (ops == "*"){
+		return opLeftLong * opRightLong;
+	}
+	else if (ops == "/"){
+		if (opRightLong == 0) {
+			cout << "error /" << endl;
+			return 5916446; // Arbitrary number to denote "ERROR" value
 		}
-		else if (ops == "-"){
-			return opLeftLong - opRightLong;
+		else {
+			return opLeftLong / opRightLong;
 		}
-		else if (ops == "*"){
-			return opLeftLong * opRightLong;
+	}
+	else if (ops == "^"){
+		if (opRightLong < 0) {
+			cout << "error ^" << endl;
+			return 5916446; // Arbitrary number to denote "ERROR" value
 		}
-		else if (ops == "/"){
-			if (opRightLong == 0) {
-				cout << "error /" << endl;
-				return 5916446; // Arbitrary number to denote "ERROR" value
-			}
-			else {
-				return opLeftLong / opRightLong;
-			}
+		else {
+			return pow(opLeftLong, opRightLong);
 		}
-		else if (ops == "^"){
-			if (opRightLong < 0) {
-				cout << "error ^" << endl;
-				return 5916446; // Arbitrary number to denote "ERROR" value
-			}
-			else {
-				return pow(opLeftLong, opRightLong);
-			}
+	}
+	else if (ops == "%"){
+		if (opRightLong <= 0) {
+			cout << "error %" << endl;
+			return 5916446; // Arbitrary number to denote "ERROR" value
 		}
-		else if (ops == "%"){
-			if (opRightLong <= 0) {
-				cout << "error %" << endl;
-				return 5916446; // Arbitrary number to denote "ERROR" value
-			}
-			else {
-				return opLeftLong % opRightLong;
-			}
+		else {
+			return opLeftLong % opRightLong;
 		}
 	}
 	cout << "error" << endl;

@@ -6,6 +6,7 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+#include <cctype>
 #include "Stack.h"
 
 using namespace std;
