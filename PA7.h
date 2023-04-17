@@ -2,10 +2,10 @@
 #define PA7_H
 
 #include <iostream>
-#include <fstream>
 #include "Calculator.h"
 
 using namespace std;
 
+void runPA7();
 
 #endif

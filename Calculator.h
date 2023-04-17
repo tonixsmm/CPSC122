@@ -29,13 +29,13 @@ class Calculator {
 
 		void getSymbolTable() const;
 
-		void readFromFile();
 		void processSymbolTable();
 		void processStringValue(ifstream&);
 		void processINFIX(ifstream&);
 		bool isOperator(char);
 		long processMath(string, string, string);
 		long computeMath(bool, long, long, string);
+		bool checkOperandIsDigit(string);
 };
 
 #endif
