@@ -1,9 +1,9 @@
 /*
 Name: Tony Nguyen
 Class: CPSC 122 01
-Date: April 4, 2023
-Programming Assignment: PA6
-Description: This program implements several tasks required by PA6
+Date: April 17, 2023
+Programming Assignment: PA7
+Description: This program implements several tasks required by PA7
 */
 
 #ifndef STACK_H
