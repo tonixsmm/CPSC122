@@ -1,3 +1,11 @@
+/*
+Name: Tony Nguyen
+Class: CPSC 122 01
+Date: April 4, 2023
+Programming Assignment: PA6
+Description: This program implements several tasks required by PA6
+*/
+
 #ifndef CALCULATOR_H
 #define CALCULATOR_H
 
@@ -28,7 +36,6 @@ class Calculator {
 		string evaluatePostfix(string);
 
 		void getSymbolTable() const;
-
 		void processSymbolTable();
 		void processStringValue(ifstream&);
 		void processINFIX(ifstream&);
@@ -36,6 +43,7 @@ class Calculator {
 		long processMath(string, string, string);
 		long computeMath(bool, long, long, string);
 		bool checkOperandIsDigit(string);
+		string getValFromSymTable(string) const;
 };
 
 #endif

@@ -1,5 +1,23 @@
+/*
+Name: Tony Nguyen
+Class: CPSC 122 01
+Date: April 4, 2023
+Programming Assignment: PA6
+Description: This program implements several tasks required by PA6
+*/
+
 #include "PA7.h"
 
+/*
+Function: runPA7()
+ * Date Created: 04/17/2023
+ * Date Last Modified: 04/17/2023
+ * Description: This is the driver function to perform PA7
+ * Input parameters: None
+ * Returns: None
+ * Pre: None
+ * Post: None
+*/
 void runPA7(){
     ifstream inFile;
     Calculator cal;

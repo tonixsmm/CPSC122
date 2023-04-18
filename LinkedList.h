@@ -1,3 +1,11 @@
+/*
+Name: Tony Nguyen
+Class: CPSC 122 01
+Date: April 17, 2023
+Programming Assignment: PA7
+Description: This program implements several tasks required by PA7
+*/
+
 #ifndef LINKEDLIST_H
 #define LINKEDLIST_H
 

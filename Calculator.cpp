@@ -1,11 +1,41 @@
+/*
+Name: Tony Nguyen
+Class: CPSC 122 01
+Date: April 4, 2023
+Programming Assignment: PA6
+Description: This program implements several tasks required by PA6
+*/
+
 #include "Calculator.h"
 
+/*
+Calculator()
+ * Date Created: 04/17/2023
+ * Date Last Modified: 04/17/2023
+ * Description: This is the default value constructor of the Calculator class
+ * Input parameters: None
+ * Returns: None
+ * Pre: None
+ * Post: None
+ * Note: This is a Calculator class member function
+*/
 Calculator::Calculator(){
 	for (int i = 0; i < 'Z' + 1; i++){
 		symbolTable[i] = "NULL";
 	}
 }
 
+/*
+Function: getSymbolTable()
+ * Date Created: 04/15/2023
+ * Date Last Modified: 04/15/2023
+ * Description: This function prints out the symbolTable of the Calculator class
+ * Input parameters: None
+ * Returns: None
+ * Pre: None
+ * Post: None
+ * Note: This is a Calculator class member function
+*/
 void Calculator::getSymbolTable() const{
 	for (int i = 'A'; i < 'Z' + 1; i++){
 		cout << static_cast<char>(i) << " ";
@@ -13,6 +43,17 @@ void Calculator::getSymbolTable() const{
 	}
 }
 
+/*
+Function: getSymbolTable()
+ * Date Created: 04/13/2023
+ * Date Last Modified: 04/17/2023
+ * Description: This function copys over another array's values to symbolTable array
+ * Input parameters: A string array
+ * Returns: None
+ * Pre: None
+ * Post: None
+ * Note: This is a Calculator class member function
+*/
 void Calculator::setSymbolTable(string newSymbolTable[]) {
 	// copy over since can't assign one array to the other
 	for (int i = 'A'; i <= 'Z'; i++) {
@@ -22,8 +63,17 @@ void Calculator::setSymbolTable(string newSymbolTable[]) {
 	}
 }	
 
-// TODO: finish this function
-bool checkOperatorOnStackPrecedence(string operatorOnStack, string currentOperator) {
+/*
+Function: checkOperatorOnStackPrecedence()
+ * Date Created: 04/13/2023
+ * Date Last Modified: 04/15/2023
+ * Description: This function checks if the first operator passed into the function has a higher precedence than the second one
+ * Input parameters: Two strings
+ * Returns: Bool
+ * Pre: None
+ * Post: None
+ * Note: This is a Calculator class member function
+*/bool checkOperatorOnStackPrecedence(string operatorOnStack, string currentOperator) {
 	string tempString = "";
 	int precedenceValOnStack = -2, precedenceValCurrItem = -2;
 	int precedenceTable[3][8];
@@ -45,6 +95,7 @@ bool checkOperatorOnStackPrecedence(string operatorOnStack, string currentOperat
 	}
 
 	// Comparison algorithm
+	// Find the associated precedence value
 	for (int i = 0; i < 8; i++){ // "on stack"
 		tempString = static_cast<char>(precedenceTable[0][i]);
 		if (operatorOnStack == tempString){
@@ -57,7 +108,7 @@ bool checkOperatorOnStackPrecedence(string operatorOnStack, string currentOperat
 			precedenceValCurrItem = precedenceTable[2][i];
 		}
 	}
-
+	// Compare precedence value
 	if (precedenceValOnStack > precedenceValCurrItem){
 		return true;
 	}
@@ -66,7 +117,17 @@ bool checkOperatorOnStackPrecedence(string operatorOnStack, string currentOperat
 	}
 }
 
-// TODO: finish this function
+/*
+Function: convertInfixToPostfix()
+ * Date Created: 04/13/2023
+ * Date Last Modified: 04/16/2023
+ * Description: This function converts an infix expression to postfix
+ * Input parameters: A string
+ * Returns: A string
+ * Pre: None
+ * Post: None
+ * Note: This is a Calculator class member function
+*/
 string Calculator::convertInfixToPostfix(string infix) {
 	istringstream iss;
 	string postfixString = "", tempString = "", word = "";
@@ -109,7 +170,17 @@ string Calculator::convertInfixToPostfix(string infix) {
 	return postfixString;
 }
 
-// TODO: finish this function
+/*
+Function: evaluatePostfix()
+ * Date Created: 04/13/2023
+ * Date Last Modified: 04/17/2023
+ * Description: This function evaluates the value of the postfix string using the symbolTable
+ * Input parameters: A string
+ * Returns: A string
+ * Pre: None
+ * Post: "ERROR" means the postfix expression cannot be evaluated
+ * Note: This is a Calculator class member function
+*/
 string Calculator::evaluatePostfix(string postfix) {
 	istringstream iss;
 	string word = "", tempString = "", operandLeft = "", operandRight = "", ops = "", result = "";
@@ -135,10 +206,12 @@ string Calculator::evaluatePostfix(string postfix) {
 		}
 	}
 	result = stack.pop();
-	if (result == "5916446"){
+
+	// Result handling
+	if (result == "5916446"){ // 5916446 is an arbitrary value to denotes NULL value
 		return "ERROR";
 	}
-	else if (checkOperandIsDigit(result) == false){
+	else if (checkOperandIsDigit(result) == false){ // If the expression does not have an operator, returns the operand value
 		result = symbolTable[static_cast<int>(result[0])];
 		return result;
 	}
@@ -168,6 +241,17 @@ void openFile(ifstream& inFile, string fileName){
 	}
 }
 
+/*
+Function: processStringValue()
+ * Date Created: 04/13/2023
+ * Date Last Modified: 04/15/2023
+ * Description: This function reads from file the value associated with each character and saves it to the symbolTable array
+ * Input parameters: File stream object
+ * Returns: None
+ * Pre: None
+ * Post: None
+ * Note: This is a Calculator class member function
+*/
 void Calculator::processStringValue(ifstream& inFile){
 	istringstream iss;
 	string line = "", numericValue = "";
@@ -184,12 +268,24 @@ void Calculator::processStringValue(ifstream& inFile){
 				iss >> alphabetChar;
 				iss >> numericValue;
 
+				// Save to symbolTable array
 				symbolTable[static_cast<int>(alphabetChar)] = numericValue;
 			}
 		}
 	}
 }
 
+/*
+Function: processINFIX()
+ * Date Created: 04/15/2023
+ * Date Last Modified: 04/17/2023
+ * Description: This function reads in the infix expression, converts to postfix, evaluates its value, and prints everything to the console
+ * Input parameters: File stream object
+ * Returns: None
+ * Pre: None
+ * Post: None
+ * Note: This is a Calculator class member function
+*/
 void Calculator::processINFIX(ifstream& inFile){
 	istringstream iss;
 	string line = "", postfix = "";
@@ -206,6 +302,17 @@ void Calculator::processINFIX(ifstream& inFile){
 	}
 }
 
+/*
+Function: isOperator()
+ * Date Created: 04/16/2023
+ * Date Last Modified: 04/16/2023
+ * Description: This function checks if a character is an operator
+ * Input parameters: A character
+ * Returns: Bool
+ * Pre: None
+ * Post: None
+ * Note: This is a Calculator class member function
+*/
 bool Calculator::isOperator(char c){
 	char operatorArr[8] = {'(', ')', '^', '*', '/', '%', '+', '-'};
 	for (int i = 0; i < 8; i++){
@@ -216,10 +323,21 @@ bool Calculator::isOperator(char c){
 	return false;
 }
 
+/*
+Function: checkOperandIsDigit()
+ * Date Created: 04/17/2023
+ * Date Last Modified: 04/17/2023
+ * Description: This function checks if a string represents a number
+ * Input parameters: A string
+ * Returns: Bool
+ * Pre: None
+ * Post: None
+ * Note: This is a Calculator class member function
+*/
 bool Calculator::checkOperandIsDigit(string operand){
 	int i = 0;
 	while (operand[i] != '\0'){
-		if (operand[i] == '-' || (operand[i] >= 48 && operand[i] <= 57)){ // ASCII value of 0-9
+		if (operand[i] == '-' || (operand[i] >= 48 && operand[i] <= 57)){ // ASCII value of 0-9. '-' for negative values
 			return true;
 		}
 		i++;
@@ -227,13 +345,42 @@ bool Calculator::checkOperandIsDigit(string operand){
 	return false;
 }
 
+/*
+Function: getValFromSymTable()
+ * Date Created: 04/17/2023
+ * Date Last Modified: 04/17/2023
+ * Description: This function returns the value of a symbolTable object (represented by ASCII values of characters)
+ * Input parameters: A string
+ * Returns: A string
+ * Pre: None
+ * Post: None
+ * Note: This is a Calculator class member function
+*/
+string Calculator::getValFromSymTable(string s) const{
+	string tempString = "";
+	tempString = symbolTable[static_cast<int>(s[0])];
+	return tempString;
+}
+
+/*
+Function: processMath()
+ * Date Created: 04/16/2023
+ * Date Last Modified: 04/17/2023
+ * Description: This function checks the conditions of the operands and performs necessary value conversion to make sure mathematic evaluation is only performed when valid values are passed in
+ * Input parameters: Three strings
+ * Returns: A long int
+ * Pre: None
+ * Post: 5916446 denotes NULL values (ERROR)
+ * Note: This is a Calculator class member function
+*/
 long Calculator::processMath(string operandRight, string operandLeft, string ops){
 	long opRightLong = -1, opLeftLong = -1, result = 5916446; // // Arbitrary number to denote "ERROR" value
 	bool proceed = false;
 
-	if ((checkOperandIsDigit(operandRight) == false && symbolTable[static_cast<int>(operandRight[0])] != "NULL") && (checkOperandIsDigit(operandLeft) == false && symbolTable[static_cast<int>(operandLeft[0])] != "NULL")){
-		opRightLong = stol(symbolTable[static_cast<int>(operandRight[0])]);
-		opLeftLong = stol(symbolTable[static_cast<int>(operandLeft[0])]);
+	// Condition checking
+	if ((checkOperandIsDigit(operandRight) == false && getValFromSymTable(operandRight) != "NULL") && (checkOperandIsDigit(operandLeft) == false && getValFromSymTable(operandLeft) != "NULL")){
+		opRightLong = stol(getValFromSymTable(operandRight));
+		opLeftLong = stol(getValFromSymTable(operandLeft));
 		proceed = true;
 	}
 	else if ((checkOperandIsDigit(operandRight) && operandRight != "5916446") && (checkOperandIsDigit(operandLeft) && operandLeft != "5916446")){
@@ -241,17 +388,18 @@ long Calculator::processMath(string operandRight, string operandLeft, string ops
 		opLeftLong = stol(operandLeft);
 		proceed = true;
 	}
-	else if ((checkOperandIsDigit(operandRight) && operandRight != "5916446") && (checkOperandIsDigit(operandLeft) == false && symbolTable[static_cast<int>(operandLeft[0])] != "NULL")){
+	else if ((checkOperandIsDigit(operandRight) && operandRight != "5916446") && (checkOperandIsDigit(operandLeft) == false && getValFromSymTable(operandLeft) != "NULL")){
 		opRightLong = stol(operandRight);
-		opLeftLong = stol(symbolTable[static_cast<int>(operandLeft[0])]);
+		opLeftLong = stol(getValFromSymTable(operandLeft));
 		proceed = true;
 	}
-	else if ((checkOperandIsDigit(operandRight) == false && symbolTable[static_cast<int>(operandRight[0])] != "NULL") && (checkOperandIsDigit(operandLeft) && operandLeft != "5916446")){
-		opRightLong = stol(symbolTable[static_cast<int>(operandRight[0])]);
+	else if ((checkOperandIsDigit(operandRight) == false && getValFromSymTable(operandRight) != "NULL") && (checkOperandIsDigit(operandLeft) && operandLeft != "5916446")){
+		opRightLong = stol(getValFromSymTable(operandRight));
 		opLeftLong = stol(operandLeft);
 		proceed = true;
 	}
 	
+	// Decide if the conditions are met. If so, allows mathematic evaluation to perform
 	if (proceed == true){
 		result = computeMath(proceed, opRightLong, opLeftLong, ops);
 		return result;
@@ -259,6 +407,17 @@ long Calculator::processMath(string operandRight, string operandLeft, string ops
 	return result;
 }
 
+/*
+Function: computeMath()
+ * Date Created: 04/16/2023
+ * Date Last Modified: 04/16/2023
+ * Description: This function computes mathematic evaluation by handling special operator cases
+ * Input parameters: A bool, two long ints, and a string
+ * Returns: A long int
+ * Pre: None
+ * Post: 5916446 denotes NULL value (ERROR)
+ * Note: This is a Calculator class member function
+*/
 long Calculator::computeMath(bool proceed, long opRightLong, long opLeftLong, string ops){
 	if (ops == "+"){
 		return opLeftLong + opRightLong;
