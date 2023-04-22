@@ -11,29 +11,31 @@ void DoublyLinkedQueue::displayQueue() {
 	cout << endl;
 }
 
-// TODO: finish this function
 void DoublyLinkedQueue::enqueue(int newValue) {
-
+	addToEnd(newValue);
 }
 
-// TODO: finish this function
 int DoublyLinkedQueue::dequeue() {
-	return -1; // TODO: fix this
+	return deleteAtFront();
 }
 
-// TODO: finish this function
 void DoublyLinkedQueue::clear() {
-
+	destroyList();
 }
 
-// TODO: finish this function
 bool DoublyLinkedQueue::isEmpty() {
-	return false; // TODO: fix this
+	return head == NULL;
 }
 
-// TODO: finish this function
 int DoublyLinkedQueue::size() {
-	return -1;  // TODO: fix this
+	int count = 0;
+	Node * curr = head;
+
+	while (curr != NULL){
+		curr = curr->next;
+		count++;
+	}
+	return count;
 }
 
 // TODO: finish this function
