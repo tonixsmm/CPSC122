@@ -1,0 +1,27 @@
+name: Auto Review Generator
+on: [workflow_dispatch]
+
+jobs:
+  Generate-Review:
+    name: "Generate Review"
+    runs-on: [self-hosted, linux, GUART]
+    container: localhost:5000/guart:latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - name: "Execute Review Generation"
+        run: genReview.sh .autoReviewFiles /tmp/pa8review
+      - name: "Show review output"
+        run: cat /tmp/pa8review.md
+      - name: "Show files generated"
+        run: ls -la /tmp/
+      - name: "Save built review files"
+        uses: actions/upload-artifact@v3
+        with:
+          name: ART Review Documents
+          path: |
+            /tmp/pa8review.pdf
+            /tmp/pa8review.md
+      - name: "Add report summary to workflow"
+        run: cat /tmp/pa8review.md >> $GITHUB_STEP_SUMMARY

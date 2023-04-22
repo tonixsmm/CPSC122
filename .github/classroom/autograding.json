@@ -1,0 +1,64 @@
+{
+  "tests": [
+    {
+      "name": "Compile code",
+      "run": "mkdir build; cd build; cmake ..; make;",
+      "timeout": 5,
+      "points": 0
+    },
+    {
+      "name": "Test1_DoublyLinkedList.addToEnd",
+      "run": "cd build; ./test/runTests --gtest_filter=Test1_DoublyLinkedList.addToEnd",
+      "timeout": 5,
+      "points": 5
+    },
+    {
+      "name": "Test2_DoublyLinkedList.deleteAtFront",
+      "run": "cd build; ./test/runTests --gtest_filter=Test2_DoublyLinkedList.deleteAtFront",
+      "timeout": 5,
+      "points": 5
+    },
+    {
+      "name": "Test3_DoublyLinkedList.deleteNode",
+      "run": "cd build; ./test/runTests --gtest_filter=Test3_DoublyLinkedList.deleteNode",
+      "timeout": 5,
+      "points": 5
+    },
+    {
+      "name": "Test4_DoublyLinkedQueue.StandardQueueOps",
+      "run": "cd build; ./test/runTests --gtest_filter=Test4_DoublyLinkedQueue.StandardQueueOps",
+      "timeout": 5,
+      "points": 15
+    },
+    {
+      "name": "Test5_DoublyLinkedQueue.removeDivisibleBy",
+      "run": "cd build; ./test/runTests --gtest_filter=Test5_DoublyLinkedQueue.removeDivisibleBy",
+      "timeout": 5,
+      "points": 15
+    },
+    {
+      "name": "Test6_Sieve.computePrimes",
+      "run": "cd build; ./test/runTests --gtest_filter=Test6_Sieve.computePrimes",
+      "timeout": 5,
+      "points": 15
+    },
+    {
+      "name": "BONUSTest7_DoublyLinkedList.BONUSAddToFront",
+      "run": "cd build; ./test/runTests --gtest_filter=BONUSTest7_DoublyLinkedList.BONUSAddToFront",
+      "timeout": 5,
+      "points": 3
+    },
+    {
+      "name": "BONUSTest8_DoublyLinkedList.BONUSDeleteAtEnd",
+      "run": "cd build; ./test/runTests --gtest_filter=BONUSTest8_DoublyLinkedList.BONUSDeleteAtEnd",
+      "timeout": 5,
+      "points": 3
+    },
+    {
+      "name": "BONUSTest9_DoublyLinkedList.BONUSInsertInOrder",
+      "run": "cd build; ./test/runTests --gtest_filter=BONUSTest9_DoublyLinkedList.BONUSInsertInOrder",
+      "timeout": 5,
+      "points": 4
+    }
+  ]
+}
