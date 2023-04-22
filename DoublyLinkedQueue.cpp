@@ -40,6 +40,13 @@ int DoublyLinkedQueue::size() {
 
 // TODO: finish this function
 void DoublyLinkedQueue::removeDivisibleBy(int p) {
-	
+	Node * curr = head;
+	while (curr != NULL){
+		Node * nextNode = curr->next;
+		if (curr->value % p == 0){
+			deleteNode(curr->value);
+		}
+		curr = nextNode;
+	}
 }
 
