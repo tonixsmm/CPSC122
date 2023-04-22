@@ -59,32 +59,147 @@ void DoublyLinkedList::displayList() {
 	}
 }
 
-// TODO: finish this function
 void DoublyLinkedList::addToEnd(int newValue) {
-	
+	Node * newNode = new Node;
+	newNode->value = newValue;
+	newNode->next = NULL;
+	newNode->prev = NULL;
+
+	if (head == NULL){
+		head = newNode;
+		tail = newNode;
+	}
+	else {
+		tail->next = newNode;
+		newNode->prev = tail;
+		tail = newNode;
+	}
 }
 
-// TODO: finish this function
 int DoublyLinkedList::deleteAtFront() {
-	return -1; // TODO: fix this
+	int value = -1;
+	if (head != NULL){
+		Node * nodeToDelete = head;
+		head = head->next;
+
+		if (head != NULL){
+			head->prev = NULL;
+		}
+		else{
+			tail = NULL;
+		}
+		value = nodeToDelete->value;
+		delete nodeToDelete;
+	}
+	return value; 
 }
 
-// TODO: finish this function
 int DoublyLinkedList::deleteNode(int targetValue) {
-	return -1; // TODO: fix this
+	int value = -1;
+	if (head != NULL) {
+        Node * currNode = head;
+
+        if (head->value == targetValue){
+            head = head->next;
+            if (head != NULL){
+                head->prev = NULL;
+            }
+            else {
+                tail = NULL;
+            }
+			value = currNode->value;
+            delete currNode;
+        }
+        else {
+            while (currNode != NULL && currNode->value != targetValue){
+                currNode = currNode->next;
+            }
+        
+            if (currNode != NULL){
+                currNode->prev->next = currNode->next;
+                if (currNode->next != NULL){
+                    currNode->next->prev = currNode->prev;
+                }
+                else {
+                    tail = currNode->prev;
+                }
+				value = currNode->value;
+                delete currNode;
+            }
+        }
+    }
+	return value;
 }
 
-// TODO: BONUS ONLY finish this function
 void DoublyLinkedList::addToFront(int newValue) {
-	
+    Node * newNode = new Node;
+    newNode->value = newValue;
+    newNode->next = NULL;
+    newNode->prev = NULL;
+
+    // 2 case
+    if (head == NULL){
+        head = newNode;
+		tail = newNode;
+    }
+    else {
+        newNode->next = head;
+        head->prev = newNode;
+        head = newNode;
+    }
 }
 
-// TODO: BONUS ONLY finish this function
 int DoublyLinkedList::deleteAtEnd() {
-	return -1; // TODO: BONUS ONLY fix this
+	int value = -1;
+	if (head != NULL) {
+        if (head == tail){
+			value = head->value;
+            delete head;
+            head = NULL;
+			tail = NULL;
+        }
+        else {
+			Node * nodeToDelete = tail;
+            tail->prev->next = NULL;
+			tail = tail->prev;
+			value = nodeToDelete->value;
+			delete nodeToDelete;
+        }
+    }
+	return value;
 }
 
-// TODO: BONUS ONLY finish this function
 void DoublyLinkedList::insertInOrder(int newValue) {
-	
+    Node * newNode = new Node;
+    newNode->value = newValue;
+    newNode->next = NULL;
+    newNode->prev = NULL;
+
+    if (head == NULL){
+        head = newNode;
+		tail = newNode;
+    }
+    else {
+        Node * currNode = head;
+        while (currNode != NULL && currNode->value < newValue){
+            currNode = currNode->next;
+        }
+        
+        if (currNode == head){
+            currNode->prev = newNode;
+            head = newNode;
+			newNode->next = currNode;
+        }
+		else if (currNode == NULL){
+			tail->next = newNode;
+			newNode->prev = tail;
+			tail = newNode;
+		}
+        else {
+            currNode->prev->next = newNode;
+            newNode->prev = currNode->prev;
+            currNode->prev = newNode;
+			newNode->next = currNode;
+        }
+    }
 }
