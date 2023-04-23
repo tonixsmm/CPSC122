@@ -25,7 +25,17 @@ void Sieve::setN(int nParam) {
 
 // TODO: finish this function
 void Sieve::computePrimes() {
+	int p = -1;
+	createNumQueue();
 	
+	do{
+		p = numsQ->dequeue();
+		primesQ->enqueue(p);
+		numsQ->removeDivisibleBy(p);
+	} while(p < sqrt(n));
+	transferQueue();
+
+	numsQ->clear();
 }
 
 int Sieve::reportResults(double& primePercent) {
@@ -36,6 +46,7 @@ int Sieve::reportResults(double& primePercent) {
 	
 	numPrimes = primesQ->size();
 	primePercent = static_cast<double>(numPrimes) / n * 100;
+	primesQ->clear();
 	
 	return numPrimes;
 }
@@ -47,4 +58,20 @@ void Sieve::run() {
 	computePrimes();
 	numPrimes = reportResults(primePercent);
 	cout << numPrimes << " / " << n << " = " << primePercent << "% primes" << endl;
+}
+
+void Sieve::createNumQueue(){
+	for (int i = 2; i <= n; i++){
+		numsQ->enqueue(i);
+	}
+}
+
+void Sieve::transferQueue(){
+	int temp = -1;
+	Node * curr = numsQ->getHead();
+	while (curr != NULL){
+		temp = curr->value;
+		primesQ->enqueue(temp);
+		curr = curr->next;
+	}
 }

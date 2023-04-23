@@ -21,6 +21,8 @@ class Sieve {
 		void computePrimes();
 		int reportResults(double&);
 		void run();
+		void createNumQueue();
+		void transferQueue();
 };
 
 #endif
