@@ -1,0 +1,55 @@
+@tonixsmm ➜ /workspaces/pa8-tonixsmm/build (master) $ valgrind --leak-check=yes ./runPA8
+==5656== Memcheck, a memory error detector
+==5656== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==5656== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==5656== Command: ./runPA8
+==5656== 
+This program computes all prime numbers up to a maximum using the Sieve of Eratosthenes.
+
+Please enter n, where n is max value to show primes up to and including (-1 to quit): 20
+Primes up to 20 are as follows: 
+2 3 5 7 11 13 17 19 
+8 / 20 = 40% primes
+
+Please enter n, where n is max value to show primes up to and including (-1 to quit): 10
+Primes up to 10 are as follows: 
+2 3 5 7 
+4 / 10 = 40% primes
+
+Please enter n, where n is max value to show primes up to and including (-1 to quit): 14
+Primes up to 14 are as follows: 
+2 3 5 7 11 13 
+6 / 14 = 42.8571% primes
+
+Please enter n, where n is max value to show primes up to and including (-1 to quit): 100
+Primes up to 100 are as follows: 
+2 3 5 7 11 13 17 19 23 29 31 37 41 43 47 53 59 61 67 71 73 79 83 89 97 
+25 / 100 = 25% primes
+
+Please enter n, where n is max value to show primes up to and including (-1 to quit): 84
+Primes up to 84 are as follows: 
+2 3 5 7 11 13 17 19 23 29 31 37 41 43 47 53 59 61 67 71 73 79 83 
+23 / 84 = 27.381% primes
+
+Please enter n, where n is max value to show primes up to and including (-1 to quit): 24
+Primes up to 24 are as follows: 
+2 3 5 7 11 13 17 19 23 
+9 / 24 = 37.5% primes
+
+Please enter n, where n is max value to show primes up to and including (-1 to quit): 533
+Primes up to 533 are as follows: 
+2 3 5 7 11 13 17 19 23 29 31 37 41 43 47 53 59 61 67 71 73 79 83 89 97 101 103 107 109 113 127 131 137 139 149 151 157 163 167 173 179 181 191 193 197 199 211 223 227 229 233 239 241 251 257 263 269 271 277 281 283 293 307 311 313 317 331 337 347 349 353 359 367 373 379 383 389 397 401 409 419 421 431 433 439 443 449 457 461 463 467 479 487 491 499 503 509 521 523 
+99 / 533 = 18.5741% primes
+
+Please enter n, where n is max value to show primes up to and including (-1 to quit): 1000
+Primes up to 1000 are as follows: 
+2 3 5 7 11 13 17 19 23 29 31 37 41 43 47 53 59 61 67 71 73 79 83 89 97 101 103 107 109 113 127 131 137 139 149 151 157 163 167 173 179 181 191 193 197 199 211 223 227 229 233 239 241 251 257 263 269 271 277 281 283 293 307 311 313 317 331 337 347 349 353 359 367 373 379 383 389 397 401 409 419 421 431 433 439 443 449 457 461 463 467 479 487 491 499 503 509 521 523 541 547 557 563 569 571 577 587 593 599 601 607 613 617 619 631 641 643 647 653 659 661 673 677 683 691 701 709 719 727 733 739 743 751 757 761 769 773 787 797 809 811 821 823 827 829 839 853 857 859 863 877 881 883 887 907 911 919 929 937 941 947 953 967 971 977 983 991 997 
+168 / 1000 = 16.8% primes
+
+Please enter n, where n is max value to show primes up to and including (-1 to quit): -1
+==5656== 
+==5656== HEAP SUMMARY:
+==5656==     in use at exit: 0 bytes in 0 blocks
+==5656==   total heap usage: 2,124 allocs, 2,124 frees, 125,640 bytes allocated
+==5656== 
+==5656== All heap blocks were freed -- no leaks are possible
