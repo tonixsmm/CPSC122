@@ -2,22 +2,78 @@
 
 // TODO: finish this function
 int countDigits(string s) {
-	return -1; // TODO: fix this
+	int count = 0;
+	// Base case
+	if (s.length() == 0){
+		return 0;
+	}
+
+	// Count digits
+	if (isdigit(s.at(0))){
+		count++;
+	}
+
+	// Recursive step
+	count += countDigits(s.substr(1, s.length() - 1));
+	return count; // TODO: fix this
 }
 
 // TODO: finish this function by testing countDigits()
 void runTask1() {
+	string input = "";
+	int result = -1;
 
+	cout << "TASK 1: Counting Digits" << endl;
+	cout << "-----------------------" << endl;
+
+	cout << "Please enter a string to count its digit (if any): ";
+	cin >> input;
+
+	result = countDigits(input);
+
+	if (result == -1){
+		cout << "There are no digits in the given string!" << endl;
+	}
+	else {
+		cout << "There is/are " << result << " digit(s) in the given string!" << endl;
+	}
 }
 
 // TODO: finish this function
 int sumDigits(int num) {
-	return -1; // TODO: fix this
+	int sum = 0;
+	string s = to_string(num);
+
+	// Base case
+	if (s.length() == 1){
+		return stoi(s);
+	}
+
+	// Check condition & Sum digits 
+	if (s.at(0) != '-'){
+		sum += stoi(s.substr(0, 1));
+	}
+
+	// Recursive step
+	sum += sumDigits(stoi(s.substr(1, s.length() - 1)));
+
+	return sum; // TODO: fix this
 }
 
 // TODO: finish this function by testing sumDigits()
 void runTask2() {
+	int input = -1;
+	int result = -1;
 
+	cout << endl << "TASK 2: Sum Digits" << endl;
+	cout << "------------------" << endl;
+
+	cout << "Please enter a number to count its digit (if any): ";
+	cin >> input;
+
+	result = sumDigits(input);
+
+	cout << "The sum of the digits in the given number is " << result << endl;
 }
 
 // TODO: finish this function

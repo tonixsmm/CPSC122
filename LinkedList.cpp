@@ -48,6 +48,7 @@ void LinkedList::appendNode(int newValue) {
 
 // TODO: finish this function
 int LinkedList::getMaxValueHelper(Node *nodePtr, int largest) {	
+	
 	return -1;  // TODO: fix this
 }
 

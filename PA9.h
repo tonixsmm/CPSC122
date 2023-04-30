@@ -13,6 +13,7 @@ using namespace std;
 
 // task 1 prototypes
 int countDigits(string);
+int countDigits(string, int);
 void runTask1();
 
 // task 2 prototypes
