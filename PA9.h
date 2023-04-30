@@ -23,6 +23,7 @@ void runTask2();
 // task 3 prototypes
 bool isPalindrome(string);
 void runTask3();
+string stringCleaning(string);
 
 // task 4 prototypes
 void runTask4();

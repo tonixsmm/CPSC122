@@ -27,7 +27,7 @@ void runTask1() {
 	cout << "-----------------------" << endl;
 
 	cout << "Please enter a string to count its digit (if any): ";
-	cin >> input;
+	getline(cin, input);
 
 	result = countDigits(input);
 
@@ -76,19 +76,87 @@ void runTask2() {
 	cout << "The sum of the digits in the given number is " << result << endl;
 }
 
+string stringCleaning(string s){
+	string tempString = "";
+	for (int i = 0; i < s.length(); i++){
+		if(!isspace(s.at(i))){
+			tempString += tolower(s.at(i));
+		}
+	}
+	return tempString;
+}
+
 // TODO: finish this function
 bool isPalindrome(string s) {
-	return false; // TODO: fix this
+	bool conditionMet = false;;
+	string tempString = "";
+	tempString = stringCleaning(s);
+
+	// Base case
+	if (tempString.length() == 0){
+		conditionMet = true;
+		return true;
+	}
+	
+	// Recursive step
+	if (tempString.substr(0, 1) == tempString.substr(tempString.length() - 1, -1)){
+		conditionMet = isPalindrome(tempString.substr(1, tempString.length() - 2));
+	}
+	else {
+		conditionMet = false;
+		return false;
+	}
+
+	return conditionMet; // TODO: fix this
 }
 	
 // TODO: finish this function by testing isPalindrome()
 void runTask3() {
+	string input = "";
+	bool result = false;
 
+	cout << endl << "TASK 3: Palindrome" << endl;
+	cout << "------------------" << endl;
+
+	cout << "Please enter a string to check for Palindrome: ";
+	getline(cin, input);
+
+	result = isPalindrome(input);
+
+	if (result == true){
+		cout << input << " is a Palindrome!" << endl;
+	}
+	else {
+		cout << input << " is not a Palindrome!" << endl;
+	}
 }
 
 // TODO: finish this function by testing getMaxValue() and getMaxValueHelper()
 void runTask4() {
+	int input = -1, result = -1;
 
+	cout << endl << "TASK 4: LinkedList Max Value" << endl;
+	cout << "----------------------------" << endl;
+
+	LinkedList list;
+
+	do{
+		cout << "Please enter a number to add to the linked list (-1 to finish adding): ";
+		cin >> input;
+
+		if (input != -1){
+			list.appendNode(input);
+		}	
+	} while (input != -1);
+	
+	result = list.getMaxValue();
+
+	if (result == -1){
+		cout << "The list is empty!" << endl;
+	}
+	else {
+		cout << result << " is the max value of the list!" << endl;
+	}
 }
 
 // TODO: finish this function

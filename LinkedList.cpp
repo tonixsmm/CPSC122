@@ -47,13 +47,31 @@ void LinkedList::appendNode(int newValue) {
 
 
 // TODO: finish this function
-int LinkedList::getMaxValueHelper(Node *nodePtr, int largest) {	
-	
-	return -1;  // TODO: fix this
+int LinkedList::getMaxValueHelper(Node *nodePtr, int largest) {
+	if (head == NULL){
+		return -1;
+	}
+
+	// Base case	
+	if (nodePtr == NULL){
+		return largest;
+	}
+
+	// Check condition
+	if (nodePtr->value > largest){
+		largest = nodePtr->value;
+	}
+
+	// Recursive step
+	largest = getMaxValueHelper(nodePtr->next, largest);
+
+	return largest;  // TODO: fix this
 }
 
 
 // TODO: finish this function
 int LinkedList::getMaxValue() {
-	return -1; // TODO: fix this
+	int largest = -1;
+	largest = getMaxValueHelper(head, largest);
+	return largest; // TODO: fix this
 }
