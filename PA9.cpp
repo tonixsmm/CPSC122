@@ -134,11 +134,10 @@ void runTask3() {
 // TODO: finish this function by testing getMaxValue() and getMaxValueHelper()
 void runTask4() {
 	int input = -1, result = -1;
-
+	LinkedList list;
+	
 	cout << endl << "TASK 4: LinkedList Max Value" << endl;
 	cout << "----------------------------" << endl;
-
-	LinkedList list;
 
 	do{
 		cout << "Please enter a number to add to the linked list (-1 to finish adding): ";
@@ -196,12 +195,21 @@ void generateSubstrings(string s, vector<string>& substrings) {
 
 // TODO: finish this function by testing generateSubstrings()
 void runTask5() {
+	string input = "";
 	vector<string> substrings;
-	generateSubstrings("bird", substrings);
+	
+	cout << endl << "TASK 5: Substrings Generator" << endl;
+	cout << "----------------------------" << endl;
+	cout << "Please enter a string to produce its substrings: ";
+	cin >> input;
 
-	for (int i = 0; i < substrings.size(); i++){
-		cout << substrings[i] << endl;
+	generateSubstrings(input, substrings);
+
+	cout << "Substrings: ";
+	for (int i = 0; i < substrings.size() - 1; i++){
+		cout << "'" << substrings[i] << "', ";
 	}
+	cout << "'" << substrings[-1] << "'" << endl;
 }
 
 // BONUS ONLY: utility function for BONUS task
