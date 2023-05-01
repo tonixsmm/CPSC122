@@ -31,6 +31,8 @@ void runTask4();
 // task 5 prototypes
 void generateSubstrings(string, vector<string>&);
 void runTask5();
+void removeFront(string, vector<string>&);
+void removeBack(string, vector<string>&);
 
 // BONUS ONLY struct definition and prototypes
 struct Coordinates {

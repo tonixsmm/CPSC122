@@ -159,14 +159,49 @@ void runTask4() {
 	}
 }
 
+void removeFront(string s, vector<string>& substrings){
+	// Base case
+	if (s.length() == 1){
+		substrings.push_back(s);
+		substrings.push_back("");
+		return;
+	}
+
+	substrings.push_back(s);
+	removeBack(s, substrings);
+	// Recursive step
+	removeFront(s.substr(1, s.length() - 1), substrings);
+}
+
+void removeBack(string s, vector<string>& substrings){
+	// Base case
+	if (s.length() == 1){
+		return;
+	}
+
+	substrings.push_back(s.substr(0, s.length() - 1));
+	// Recursive step
+	removeBack(s.substr(0, s.length() - 1), substrings);
+}
+
 // TODO: finish this function
 void generateSubstrings(string s, vector<string>& substrings) {
-
+	if (s != ""){
+		removeFront(s, substrings);
+	}
+	else{
+		substrings.push_back("");
+	}
 }
 
 // TODO: finish this function by testing generateSubstrings()
 void runTask5() {
+	vector<string> substrings;
+	generateSubstrings("bird", substrings);
 
+	for (int i = 0; i < substrings.size(); i++){
+		cout << substrings[i] << endl;
+	}
 }
 
 // BONUS ONLY: utility function for BONUS task
