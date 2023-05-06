@@ -11,11 +11,11 @@ I attempted the ART Review Bonus
 
 // no need for any changes here
 int main() {
-	// runTask1();
-	// runTask2();
+	runTask1();
+	runTask2();
 	runTask3();
-	// runTask4();
-	// runTask5();
+	runTask4();
+	runTask5();
 	
 	// runBONUSTask();
 
