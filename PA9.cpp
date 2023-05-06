@@ -1,6 +1,24 @@
+/*
+Name: Tony Nguyen
+Class: CPSC 122 01
+Date: April 30, 2023
+Programming Assignment: PA9
+Description: This program implements several tasks required by PA9
+I attempted the ART Review Bonus
+*/
+
 #include "PA9.h"
 
-// TODO: finish this function
+/*
+Function: countDigits()
+ * Date Created: 04/30/2023
+ * Date Last Modified: 04/30/2023
+ * Description: This function counts how many digits in a given string
+ * Input parameters: A string
+ * Returns: An int
+ * Pre: None
+ * Post: None
+*/
 int countDigits(string s) {
 	int count = 0;
 	// Base case
@@ -15,10 +33,19 @@ int countDigits(string s) {
 
 	// Recursive step
 	count += countDigits(s.substr(1, s.length() - 1));
-	return count; // TODO: fix this
+	return count;
 }
 
-// TODO: finish this function by testing countDigits()
+/*
+Function: runTask1()
+ * Date Created: 04/30/2023
+ * Date Last Modified: 04/30/2023
+ * Description: This is a driver function for Task 1
+ * Input parameters: None
+ * Returns: None
+ * Pre: None
+ * Post: None
+*/
 void runTask1() {
 	string input = "";
 	int result = -1;
@@ -39,7 +66,16 @@ void runTask1() {
 	}
 }
 
-// TODO: finish this function
+/*
+Function: countDigits()
+ * Date Created: 04/30/2023
+ * Date Last Modified: 04/30/2023
+ * Description: This function sums up the digits of an integer value
+ * Input parameters: An int
+ * Returns: An int
+ * Pre: None
+ * Post: None
+*/
 int sumDigits(int num) {
 	int sum = 0;
 	string s = to_string(num);
@@ -50,17 +86,26 @@ int sumDigits(int num) {
 	}
 
 	// Check condition & Sum digits 
-	if (s.at(0) != '-'){
+	if (s.at(0) != '-'){ // In case of negative values
 		sum += stoi(s.substr(0, 1));
 	}
 
 	// Recursive step
 	sum += sumDigits(stoi(s.substr(1, s.length() - 1)));
 
-	return sum; // TODO: fix this
+	return sum;
 }
 
-// TODO: finish this function by testing sumDigits()
+/*
+Function: runTask2()
+ * Date Created: 04/30/2023
+ * Date Last Modified: 04/30/2023
+ * Description: This is a driver function for Task 2
+ * Input parameters: None
+ * Returns: None
+ * Pre: None
+ * Post: None
+*/
 void runTask2() {
 	int input = -1;
 	int result = -1;
@@ -76,6 +121,16 @@ void runTask2() {
 	cout << "The sum of the digits in the given number is " << result << endl;
 }
 
+/*
+Function: stringCleaning()
+ * Date Created: 04/30/2023
+ * Date Last Modified: 04/30/2023
+ * Description: This function removes all white space in a given string and converts them to lower case
+ * Input parameters: A string
+ * Returns: A string
+ * Pre: None
+ * Post: None
+*/
 string stringCleaning(string s){
 	string tempString = "";
 	for (int i = 0; i < s.length(); i++){
@@ -86,10 +141,21 @@ string stringCleaning(string s){
 	return tempString;
 }
 
-// TODO: finish this function
+/*
+Function: isPalindrome()
+ * Date Created: 04/30/2023
+ * Date Last Modified: 04/30/2023
+ * Description: This function checks if a given string is a palindrome
+ * Input parameters: A bool
+ * Returns: A string
+ * Pre: None
+ * Post: None
+*/
 bool isPalindrome(string s) {
 	bool conditionMet = false;;
 	string tempString = "";
+
+	// Clean the string to remove all white space and convert all characters to lower case
 	tempString = stringCleaning(s);
 
 	// Base case
@@ -107,31 +173,49 @@ bool isPalindrome(string s) {
 		return false;
 	}
 
-	return conditionMet; // TODO: fix this
+	return conditionMet;
 }
 	
-// TODO: finish this function by testing isPalindrome()
+/*
+Function: runTask3()
+ * Date Created: 04/30/2023
+ * Date Last Modified: 04/30/2023
+ * Description: This is a driver function for Task 3
+ * Input parameters: None
+ * Returns: None
+ * Pre: None
+ * Post: None
+*/
 void runTask3() {
-	string input = "";
+	string userInput = "";
 	bool result = false;
 
 	cout << endl << "TASK 3: Palindrome" << endl;
 	cout << "------------------" << endl;
 
 	cout << "Please enter a string to check for Palindrome: ";
-	getline(cin, input);
+	getline(cin, userInput);
 
-	result = isPalindrome(input);
+	result = isPalindrome(userInput);
 
 	if (result == true){
-		cout << input << " is a Palindrome!" << endl;
+		cout << userInput << " is a Palindrome!" << endl;
 	}
 	else {
-		cout << input << " is not a Palindrome!" << endl;
+		cout << userInput << " is not a Palindrome!" << endl;
 	}
 }
 
-// TODO: finish this function by testing getMaxValue() and getMaxValueHelper()
+/*
+Function: runTask4()
+ * Date Created: 04/30/2023
+ * Date Last Modified: 04/30/2023
+ * Description: This is a driver function for Task 4
+ * Input parameters: None
+ * Returns: None
+ * Pre: None
+ * Post: None
+*/
 void runTask4() {
 	int input = -1, result = -1;
 	LinkedList list;
@@ -158,6 +242,18 @@ void runTask4() {
 	}
 }
 
+/*
+Function: removeFront()
+ * Date Created: 04/30/2023
+ * Date Last Modified: 04/30/2023
+ * Description: This function removes the first character in a given string and pushes the remaining characters to a vector
+  				With each new sub-string it generates, the function calls removeBack() to removes the last character in the string
+  				and pushes the remaining to a vector
+ * Input parameters: A string, a pass-by-reference string vector
+ * Returns: None
+ * Pre: None
+ * Post: None
+*/
 void removeFront(string s, vector<string>& substrings){
 	// Base case
 	if (s.length() == 1){
@@ -166,24 +262,47 @@ void removeFront(string s, vector<string>& substrings){
 		return;
 	}
 
+	// Push to vector & call removeBack()
 	substrings.push_back(s);
 	removeBack(s, substrings);
+
 	// Recursive step
 	removeFront(s.substr(1, s.length() - 1), substrings);
 }
 
+/*
+Function: removeBack()
+ * Date Created: 04/30/2023
+ * Date Last Modified: 04/30/2023
+ * Description: This function removes the last character in a given string and pushes the remaining characters to a vector
+ * Input parameters: A string, a pass-by-reference string vector
+ * Returns: None
+ * Pre: None
+ * Post: None
+*/
 void removeBack(string s, vector<string>& substrings){
 	// Base case
 	if (s.length() == 1){
 		return;
 	}
 
+	// Push to vector
 	substrings.push_back(s.substr(0, s.length() - 1));
+
 	// Recursive step
 	removeBack(s.substr(0, s.length() - 1), substrings);
 }
 
-// TODO: finish this function
+/*
+Function: generateSubstrings()
+ * Date Created: 04/30/2023
+ * Date Last Modified: 04/30/2023
+ * Description: This function calls removeFront() to begin generate sub-strings
+ * Input parameters: A string, a pass-by-reference string vector
+ * Returns: None
+ * Pre: None
+ * Post: None
+*/
 void generateSubstrings(string s, vector<string>& substrings) {
 	if (s != ""){
 		removeFront(s, substrings);
@@ -193,7 +312,16 @@ void generateSubstrings(string s, vector<string>& substrings) {
 	}
 }
 
-// TODO: finish this function by testing generateSubstrings()
+/*
+Function: runTask5()
+ * Date Created: 04/30/2023
+ * Date Last Modified: 04/30/2023
+ * Description: This is a driver function for Task 5
+ * Input parameters: None
+ * Returns: None
+ * Pre: None
+ * Post: None
+*/
 void runTask5() {
 	string input = "";
 	vector<string> substrings;

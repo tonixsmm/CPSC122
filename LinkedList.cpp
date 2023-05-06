@@ -1,3 +1,12 @@
+/*
+Name: Tony Nguyen
+Class: CPSC 122 01
+Date: April 30, 2023
+Programming Assignment: PA9
+Description: This program implements several tasks required by PA9
+I attempted the ART Review Bonus
+*/
+
 #include "LinkedList.h"
 
 LinkedList::LinkedList() {
@@ -45,8 +54,17 @@ void LinkedList::appendNode(int newValue) {
 	}
 }
 
-
-// TODO: finish this function
+/*
+Function: getMaxValueHelper()
+ * Date Created: 04/30/2023
+ * Date Last Modified: 04/30/2023
+ * Description: This function returns the largest value in a doubly-linked list
+ * Input parameters: An int, a Node pointer
+ * Returns: An int
+ * Pre: None
+ * Post: None
+ * Note: This is a DoublyLinkedList class member function. This is a helper function of LinkedList::getMaxValue()
+*/
 int LinkedList::getMaxValueHelper(Node *nodePtr, int largest) {
 	if (head == NULL){
 		return -1;
@@ -65,13 +83,24 @@ int LinkedList::getMaxValueHelper(Node *nodePtr, int largest) {
 	// Recursive step
 	largest = getMaxValueHelper(nodePtr->next, largest);
 
-	return largest;  // TODO: fix this
+	return largest;
 }
 
-
-// TODO: finish this function
+/*
+Function: getMaxValue()
+ * Date Created: 04/30/2023
+ * Date Last Modified: 04/30/2023
+ * Description: This function returns the largest value in a doubly-linked list
+ * Input parameters: None
+ * Returns: An int
+ * Pre: None
+ * Post: None
+ * Note: This is a DoublyLinkedList class member function
+*/
 int LinkedList::getMaxValue() {
 	int largest = -1;
+
 	largest = getMaxValueHelper(head, largest);
-	return largest; // TODO: fix this
+	
+	return largest;
 }
