@@ -107,6 +107,7 @@ Function: runTask2()
  * Post: None
 */
 void runTask2() {
+	string userInput = "";
 	int input = -1;
 	int result = -1;
 
@@ -114,7 +115,9 @@ void runTask2() {
 	cout << "------------------" << endl;
 
 	cout << "Please enter a number to count its digit (if any): ";
-	cin >> input;
+	getline(cin, userInput);
+
+	input = stoi(userInput);
 
 	result = sumDigits(input);
 
