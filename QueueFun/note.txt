@@ -1,0 +1,32 @@
+class Song{
+    private:
+        string title;
+        string title;
+        string genre;
+        int rating;
+        Song * next;
+};
+
+class SongLibrary{
+    private:
+        Song * head;
+};
+
+class LinkedList{
+    public:
+        struct Node{
+            int value;
+            struct Node * next;
+        };
+        Node * head;
+};
+
+struct Node{
+    int value;
+    struct Node * next;
+};
+
+class LinkedList{
+    private:
+        Node * head;
+}

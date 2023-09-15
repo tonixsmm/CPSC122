@@ -1,0 +1,1 @@
+/usr/bin/clang++  -g -O0 -Wall -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/RecursionFun.dir/main.cpp.o -o RecursionFun 
